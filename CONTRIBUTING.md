@@ -6,7 +6,8 @@
 4. 만약 해당 commit이 여러 체크리스트 항목에 영향을 주는 경우, 영향을 주는 모든 체크리스트 항목에 작업내용 문구 마지막에 commit 번호를 삽입합니다.
 
 ## Pull request 규칙 ##
-1. Pull request시 생성되는 양식을 따릅니다.
+1. Pull request시 생성되는 양식을 따릅니다. </br>
+https://github.com/AntiCaffe/TechTitan/blob/main/pull_request_template.md
 
 ## Commit Msg 규칙 ##
 1. 기본적으로 커밋의 형태는 다음을 따릅니다.
