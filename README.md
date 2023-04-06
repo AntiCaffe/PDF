@@ -13,3 +13,10 @@
 공정을 자동화하여 관리자가 내역을 확인할 수 있는 시스템을 개발하고자 합니다.<br/>
 
 https://github.com/AntiCaffe/TechTitan/wiki
+
+
+***
+
+### 기여 방법
+https://github.com/AntiCaffe/TechTitan/blob/main/CONTRIBUTING.md <br/>
+Contributing.md 문서를 참조하세요
