@@ -8,6 +8,8 @@
 ## Pull request 규칙 ##
 1. Pull request시 생성되는 양식을 따릅니다. </br>
 https://github.com/AntiCaffe/TechTitan/blob/main/pull_request_template.md
+2. 만일 코드의 변화에 파악하기 힘드나 중요한 부분이 있다면 명시해주어야 합니다. </br>
+3. 기여자들의 과반수가 approve에 찬성해야 merge가 가능합니다. </br>
 
 ## Commit Msg 규칙 ##
 1. 기본적으로 커밋의 형태는 다음을 따릅니다.
@@ -20,7 +22,7 @@ https://github.com/AntiCaffe/TechTitan/blob/main/pull_request_template.md
  - 코드를 보고 파악하기 힘든 내용도 적습니다.
 
 ## 기여 규칙 ##
-1. Master 브랜치는 직접 수정하지 않아야합니다. 단, 아래와 같은 경우는 예외로 한다.
+1. Master 브랜치는 직접 수정하지 않아야합니다. 단, 아래와 같은 경우는 예외로 합니다.
 1.1. 매우 큰 충돌범위의 충돌이 발생하여 자동 Merge가 불가능하여 해당 충돌의 조치를 위해 Master를 수정해야(덮어써야 or 강제로 Merge 해야)되는 경우
 1.2A. 오프라인 회의에서 이미 내용이 완전히 확정된 Document를 추가할 때. Document에는 Issue 양식, PR 양식, 컨트리뷰팅 규칙, README.md 등이 해당됩니다.
 1.3. 프로젝트 생성시 파일 초기 업로드는 1. 규칙의 예외로 합니다.
