@@ -21,8 +21,13 @@ public class Item {
     private String imDate;  // 사진 찍힌 날짜
     private String resolution;
     private String depth;
-    private boolean adCheck;
-    private String itemType;
+
+    @Enumerated(EnumType.STRING)
+    private AdminCheck adCheck;
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType;
+    @Enumerated(EnumType.STRING)
+    private ItemDefect defect;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();

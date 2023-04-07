@@ -18,6 +18,9 @@ public class Box {
     private String boxcorners;
     private String ansize;
 
+    @Enumerated(EnumType.STRING)
+    private BoxDefect defect;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
