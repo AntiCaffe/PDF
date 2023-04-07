@@ -24,4 +24,8 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public Comment(String content) {
+        this.content = content;
+    }
 }
