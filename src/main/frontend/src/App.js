@@ -1,47 +1,23 @@
-//import logo from './logo.svg';
-//import './App.css';
-//
-//function App() {
-//  return (
-//    <div className="App">
-//      <header className="App-header">
-//        <img src={logo} className="App-logo" alt="logo" />
-//        <p>
-//          Edit <code>src/App.js</code> and save to reload.
-//        </p>
-//        <a
-//          className="App-link"
-//          href="https://reactjs.org"
-//          target="_blank"
-//          rel="noopener noreferrer"
-//        >
-//          Learn React
-//        </a>
-//      </header>
-//    </div>
-//  );
-//}
-//
-//export default App;
+import React, { useState, useEffect } from "react";
 
+// @mui material 컴포넌트 (아직 적용 하지 않았음)
+//import { ThemeProvider } from "@mui/material/styles"; 추후 다크모드 추가시 사용할 예정입니다
+//import CssBaseLine from "@mui/material/CssBaseline";
 
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import SignIn from "layouts/authentication/sign-in";
+import MainPage from "layouts/dashboard/main-page";
 
-function App() {
-   const [hello, setHello] = useState('')
-
-    useEffect(() => {
-        axios.get('/api/hello')
-        .then(response => setHello(response.data))
-        .catch(error => console.log(error))
-    }, []);
-
-    return (
-        <div>
-            백엔드에서 가져온 데이터입니다 : {hello}
-        </div>
-    );
+export default function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+          <Route path={"/authentication/sign-in"} element={<SignIn />}></Route>
+          <Route path={"/dashboard/main-page"} element={<MainPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
-
-export default App;
