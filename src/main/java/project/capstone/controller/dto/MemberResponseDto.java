@@ -1,7 +1,5 @@
 package project.capstone.controller.dto;
 
-import com.querydsl.core.annotations.QueryProjection;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,11 +8,10 @@ import lombok.NoArgsConstructor;
 public class MemberResponseDto {
 
     private String nickname;
-    private String password;
+    private String pw;
 
-    @QueryProjection
-    public MemberResponseDto(String nickname, String password) {
+    public MemberResponseDto(String nickname, String pw) {
         this.nickname = nickname;
-        this.password = password;
+        this.pw = pw;
     }
 }

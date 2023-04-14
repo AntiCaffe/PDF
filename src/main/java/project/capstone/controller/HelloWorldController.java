@@ -1,41 +1,39 @@
 package project.capstone.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.capstone.controller.dto.MemberResponseDto;
 import project.capstone.entity.Member;
 import project.capstone.repository.MemberRepository;
-import project.capstone.repository.MemberRepositoryCustom;
-
-import java.util.List;
 
 // @CrossOrigin(origins = "*")
-@RestController
+@Controller
 public class HelloWorldController {
 
     @Autowired
     MemberRepository memberRepository;
-    @Autowired
-    MemberRepositoryCustom memberRepositoryCustom;  /* 
-    @GetMapping("/authentication/sign-in")
-    public String test() {
-        return "hello";
-    }
-    */
 
     @PostMapping("/authentication/sign-in")
-    public MemberResponseDto login(@RequestBody final MemberResponseDto param) {
+    @ResponseBody
+    public Member login(@RequestBody MemberResponseDto param) {
         String nickname = param.getNickname();
-        String password = param.getPassword();
+        String password = param.getPw();
 
-        MemberResponseDto member = memberRepositoryCustom.findByNicknameAndPassword(nickname, password);
+        System.out.println("nickname = " + nickname);
+        System.out.println("password = " + password);
 
-        return member;
+        Member member = memberRepository.findByNicknameAndPassword(nickname, password);
+
+        if(member != null)
+            return member;
+        else
+            return new Member();
     }
-    /*
-    @GetMapping("/test/members")
-    public List<Member> memberList() {
-        return memberRepository.findAll();
+
+    @GetMapping("/authentication/sign-in")
+    public String test() {
+         return "redirect:/";
     }
-    */
 }
+

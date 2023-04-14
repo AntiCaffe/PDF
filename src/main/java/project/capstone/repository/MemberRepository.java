@@ -5,5 +5,5 @@ import project.capstone.controller.dto.MemberResponseDto;
 import project.capstone.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-
+    Member findByNicknameAndPassword(String nickname, String password);
 }

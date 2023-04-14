@@ -8,7 +8,7 @@ function Dashboard() {
   const [imageList, setImageList] = useState([]);
 
   // fetch data from backend and update the state
-  useEffect(() => {
+  /*useEffect(() => {
     fetch("backend-url") // replace with your backend URL
       .then((response) => response.json())
       .then((data) => {
@@ -18,7 +18,7 @@ function Dashboard() {
         setImageList(data.images || []); // add null check for images
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, []);*/
 
   // handle image click
   function handleImageClick(imageUrl) {
