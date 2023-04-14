@@ -16,8 +16,7 @@ public class HelloWorldController {
     @Autowired
     MemberRepository memberRepository;
     @Autowired
-    MemberRepositoryCustom memberRepositoryCustom;
-/* 
+    MemberRepositoryCustom memberRepositoryCustom;  /* 
     @GetMapping("/authentication/sign-in")
     public String test() {
         return "hello";
@@ -33,8 +32,10 @@ public class HelloWorldController {
 
         return member;
     }
+    /*
     @GetMapping("/test/members")
     public List<Member> memberList() {
         return memberRepository.findAll();
     }
+    */
 }

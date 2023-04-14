@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 import "./index.css";
-//import Dashboard from "layouts/dashboard/main-page";
 
 export default function SignIn() {
   const [id, setId] = useState("");
@@ -48,9 +47,7 @@ export default function SignIn() {
           movePage("/dashboard/main-page"); //페이지 이동처리
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch();
   };
 
   const [isHovered, setIsHovered] = useState(false);
@@ -153,7 +150,7 @@ export default function SignIn() {
             <p style={{ margin: "10px", textAlign: "center" }}>
               아직 회원이 아니신가요?{" "}
               <span
-                class="signup-link"
+                className="signup-link"
                 style={{
                   color: "blue",
                   cursor: "pointer",
@@ -168,7 +165,9 @@ export default function SignIn() {
               </span>
               {showSignUp && (
                 <div //sign-up
-                  class={hideSignUp ? "slide-out-opacity" : "slide-in-opacity"}
+                  className={
+                    hideSignUp ? "slide-out-opacity" : "slide-in-opacity"
+                  }
                   style={{
                     position: "absolute",
                     right: showSignUp ? "0" : "-100%",
