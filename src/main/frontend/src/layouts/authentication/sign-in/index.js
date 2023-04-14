@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "assets/images/TaeApril22.jpg";
 import axios from "axios";
-import { Button, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 import "./index.css";
 //import Dashboard from "layouts/dashboard/main-page";
@@ -15,7 +16,6 @@ export default function SignIn() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);
 
-  /*
   const onClickLogin = () => {
     console.log("click login");
     console.log("ID : ", id);
@@ -51,7 +51,7 @@ export default function SignIn() {
       })
       .catch();
   };
-*/
+
   const handleLogin = (e) => {
     e.preventDefault();
     if (!id || !password) {
@@ -128,7 +128,7 @@ export default function SignIn() {
             Sign In
           </h1>
 
-          <TextField
+          <input
             id="id-input"
             label="ID"
             value={id}
@@ -139,7 +139,7 @@ export default function SignIn() {
             sx={{ zIndex: 0 }}
           />
 
-          <TextField
+          <input
             id="password-input"
             label="Password"
             type="password"
@@ -151,7 +151,7 @@ export default function SignIn() {
             sx={{ zIndex: 0 }}
           />
 
-          <Button
+          <button
             type="submit"
             variant="contained"
             style={{
@@ -164,7 +164,8 @@ export default function SignIn() {
             //onClick={onClickLogin}
           >
             Sign In
-          </Button>
+          </button>
+
           <div
             style={{
               display: "flex",
@@ -226,18 +227,7 @@ export default function SignIn() {
                       &times;
                     </span>
                   </div>
-                  <div>
-                    <TextField
-                      id="id-input"
-                      label="ID"
-                      value={id}
-                      onChange={(e) => setId(e.target.value)}
-                      variant="standard"
-                      margin="normal"
-                      fullWidth
-                      sx={{ zIndex: 0 }}
-                    />
-                  </div>
+                  <div></div>
                 </div>
               )}
             </p>
@@ -247,5 +237,3 @@ export default function SignIn() {
     </div>
   );
 }
-
-//json으로 data -> login, singup 당 주소 다르게해서 넘기기 (body)
