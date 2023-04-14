@@ -8,17 +8,13 @@ import project.capstone.repository.MemberRepository;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+// @CrossOrigin(origins = "*")
 @RestController
 public class HelloWorldController {
 
     @Autowired
     MemberRepository memberRepository;
 
-    @GetMapping("/authentication/sing-in")
-    public String test() {
-        return "Hello, world!";
-    }
 
     @PostMapping("/authentication/sign-in")
     public MemberResponseDto login(@RequestBody final MemberResponseDto param) {
