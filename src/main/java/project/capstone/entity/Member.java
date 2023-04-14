@@ -32,9 +32,11 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    public Member(String adminId, String name, String phone, String email) {
+    public Member(String adminId, String name, String nickname, String password, String phone, String email) {
         this.adminId = adminId;
         this.name = name;
+        this.nickname = nickname;
+        this.password = password;
         this.phone = phone;
         this.email = email;
     }
