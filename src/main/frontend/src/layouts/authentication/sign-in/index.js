@@ -18,64 +18,41 @@ export default function SignIn() {
 
   const onClickLogin = () => {
     console.log("click login");
-    console.log("ID : ", id);
+    console.log("nickname : ", id);
     console.log("PW : ", password);
     axios
       .post("http://localhost:8080/authentication/sign-in", {
-        id: id,
+        nickname: id,
         pw: password,
       })
       .then((res) => {
         console.log(res);
         console.log("res.data.userId :: ", res.data.userId);
         console.log("res.data.msg :: ", res.data.msg);
-        if (res.data.id === undefined) {
+        if (res.data.nickname === undefined) {
           // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
           console.log("======================", res.data.msg);
           alert("입력하신 id 가 일치하지 않습니다.");
-        } else if (res.data.id === null) {
+        } else if (res.data.nickname === null) {
           // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
           console.log(
             "======================",
             "입력하신 비밀번호 가 일치하지 않습니다."
           );
           alert("입력하신 비밀번호 가 일치하지 않습니다.");
-        } else if (res.data.id === id) {
+        } else if (res.data.nickname === id) {
           // id, pw 모두 일치 userId = userId1, msg = undefined
           console.log("======================", "로그인 성공");
           sessionStorage.setItem("user_id", id); // sessionStorage에 id를 user_id라는 key 값으로 저장
           sessionStorage.setItem("name", res.data.name); // sessionStorage에 id를 user_id라는 key 값으로 저장
+          movePage("/dashboard/main-page"); //페이지 이동처리
         }
-        // 작업 완료 되면 페이지 이동(새로고침)
-        document.location.href = "dashboard/main-page";
       })
-      .catch();
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (!id || !password) {
-      alert("ID, 비밀번호를 입력해주세요!");
-    } else {
-      axios
-        .post("/api/login", { id, password })
-        .then((response) => {
-          // 로그인 성공 처리
-          movePage("/");
-        })
-        .catch((error) => {
-          // 로그인 실패 처리
-          alert("잘못된 ID 또는 비밀번호입니다.");
-          console.error(error);
-        });
-    }
-  };
-
-  /*
-  const handleSignup = () => {
-    movePage("/authentication/sign-up");
-  };
- */
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -112,7 +89,6 @@ export default function SignIn() {
             height: "300px",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
           }}
-          onSubmit={handleLogin}
         >
           <h1
             style={{
@@ -161,7 +137,7 @@ export default function SignIn() {
               backgroundColor: "#1976d2",
               color: "white",
             }}
-            //onClick={onClickLogin}
+            onClick={onClickLogin}
           >
             Sign In
           </button>

@@ -17,11 +17,12 @@ public class HelloWorldController {
     MemberRepository memberRepository;
     @Autowired
     MemberRepositoryCustom memberRepositoryCustom;
-
+/* 
     @GetMapping("/authentication/sign-in")
     public String test() {
         return "hello";
     }
+    */
 
     @PostMapping("/authentication/sign-in")
     public MemberResponseDto login(@RequestBody final MemberResponseDto param) {
