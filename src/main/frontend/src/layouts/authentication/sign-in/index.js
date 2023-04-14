@@ -10,7 +10,6 @@ import "./index.css";
 export default function SignIn() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [loginText, setLoginText] = useState(""); // loginText변수는 로그인 placeholder로 합니다.
   const movePage = useNavigate();
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);
@@ -26,28 +25,21 @@ export default function SignIn() {
       })
       .then((res) => {
         console.log(res);
-        console.log("res.data.userId :: ", res.data.userId);
-        console.log("res.data.msg :: ", res.data.msg);
         if (res.data.nickname === undefined) {
           // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-          console.log("======================", res.data.msg);
           alert("입력하신 id 가 일치하지 않습니다.");
         } else if (res.data.nickname === null) {
           // id는 있지만, pw 는 다른 경우 userId = null , msg = undefined
-          console.log(
-            "======================",
-            "입력하신 비밀번호 가 일치하지 않습니다."
-          );
           alert("입력하신 비밀번호 가 일치하지 않습니다.");
         } else if (res.data.nickname === id) {
-          // id, pw 모두 일치 userId = userId1, msg = undefined
-          console.log("======================", "로그인 성공");
           sessionStorage.setItem("user_id", id); // sessionStorage에 id를 user_id라는 key 값으로 저장
-          sessionStorage.setItem("name", res.data.name); // sessionStorage에 id를 user_id라는 key 값으로 저장
-          movePage("/dashboard/main-page"); //페이지 이동처리
+          movePage("/dashboard/main-page");
         }
       })
-      .catch();
+      .catch((error) => {
+        console.error("API 호출 중 오류가 발생했습니다.", error);
+        alert("로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+      });
   };
 
   const [isHovered, setIsHovered] = useState(false);
@@ -125,7 +117,7 @@ export default function SignIn() {
           />
 
           <button
-            type="submit"
+            type="button"
             variant="contained"
             style={{
               margin: "15px 0",
