@@ -33,7 +33,7 @@ public class HelloWorldController {
 
     @GetMapping("/authentication/sign-in")
     public String test() {
-         return "redirect:/";
+
+        return "redirect:/";
     }
 }
-
