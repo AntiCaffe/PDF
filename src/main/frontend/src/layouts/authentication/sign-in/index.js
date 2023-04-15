@@ -141,7 +141,7 @@ export default function SignIn() {
           >
             <p style={{ margin: "10px", textAlign: "center" }}>
               아직 회원이 아니신가요?{" "}
-              <span
+              <a
                 className="signup-link"
                 style={{
                   color: "blue",
@@ -154,7 +154,7 @@ export default function SignIn() {
                 onClick={() => setShowSignUp(true)}
               >
                 회원가입
-              </span>
+              </a>
               {showSignUp && (
                 <div //sign-up
                   className={
@@ -194,7 +194,44 @@ export default function SignIn() {
                       &times;
                     </span>
                   </div>
-                  <div></div>
+                  <div>
+                    <h1 style={{}}>관리자 계정을 만들어주세요!</h1>
+                  </div>
+                  <div
+                    style={{
+                      ddisplay: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <label>ID</label>
+                    <input />
+                    <label>PW</label>
+                    <input />
+                    <label>Emai</label>
+                    <input />
+                    <label>Phone</label>
+                    <input />
+                    <button>Sign Up</button>
+                  </div>
+                  <hr />
+                  <div>
+                    Already have an account?
+                    <a
+                      className="signup-link"
+                      style={{
+                        color: "blue",
+                        cursor: "pointer",
+                        fontSize: isHovered ? "1.1em" : "1em",
+                        transition: "font-size 0.2s ease-in-out",
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => movePage("/authentication/")} //있으면 로그인으로 돌아가도록
+                    >
+                      로그인
+                    </a>
+                  </div>
                 </div>
               )}
             </p>
