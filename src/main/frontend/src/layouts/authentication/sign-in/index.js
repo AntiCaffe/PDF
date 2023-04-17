@@ -53,45 +53,10 @@ export default function SignIn() {
   };
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "cover",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "rgba(0, 0, 0, 0)",
-      }}
-    >
+    <div className="bg-image" style={{ backgroundImage: `url(${bgImage})` }}>
       <div>
-        <form
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            backgroundColor: "rgba(250, 250, 250, 0.9)",
-            borderRadius: "10px",
-            padding: "20px",
-            width: "350px",
-            height: "300px",
-            boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          <h1
-            style={{
-              textAlign: "center",
-              backgroundColor: "green",
-              color: "white",
-              borderRadius: "10px",
-              margin: "-55px auto 0 auto",
-              padding: "15px",
-              width: "180px",
-            }}
-          >
-            Sign In
-          </h1>
+        <form className="signin-form-style">
+          <h1 className="banner-center">Sign In</h1>
 
           <input
             id="id-input"
@@ -142,13 +107,7 @@ export default function SignIn() {
             <p style={{ margin: "10px", textAlign: "center" }}>
               아직 회원이 아니신가요?{" "}
               <a
-                className="signup-link"
-                style={{
-                  color: "blue",
-                  cursor: "pointer",
-                  fontSize: isHovered ? "1.1em" : "1em",
-                  transition: "font-size 0.2s ease-in-out",
-                }}
+                className="blue-emphasis"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={() => setShowSignUp(true)}
@@ -156,21 +115,14 @@ export default function SignIn() {
                 회원가입
               </a>
               {showSignUp && (
-                <div //sign-up
-                  className={
-                    hideSignUp ? "slide-out-opacity" : "slide-in-opacity"
-                  }
-                  style={{
-                    position: "absolute",
-                    right: showSignUp ? "0" : "-100%",
-                    top: "0",
-                    height: "100%",
-                    width: "90%",
-                    backgroundColor: "white",
-                    borderRadius: "10px",
-                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.4)",
-                    padding: "20px",
-                  }}
+                <div
+                  className={`sign-up ${
+                    hideSignUp
+                      ? "slide-out-opacity"
+                      : showSignUp
+                      ? "slide-in-opacity"
+                      : ""
+                  }`}
                   onAnimationEnd={() => {
                     if (hideSignUp) {
                       setShowSignUp(false);
@@ -186,7 +138,7 @@ export default function SignIn() {
                     }}
                   >
                     <span
-                      style={{ cursor: "pointer", fontSize: "1.5em" }}
+                      className="close-btn"
                       onClick={() => {
                         setHideSignUp(true);
                       }}
@@ -199,7 +151,7 @@ export default function SignIn() {
                   </div>
                   <div
                     style={{
-                      ddisplay: "flex",
+                      display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
@@ -208,7 +160,7 @@ export default function SignIn() {
                     <input />
                     <label>PW</label>
                     <input />
-                    <label>Emai</label>
+                    <label>Email</label>
                     <input />
                     <label>Phone</label>
                     <input />
@@ -218,13 +170,7 @@ export default function SignIn() {
                   <div>
                     Already have an account?
                     <a
-                      className="signup-link"
-                      style={{
-                        color: "blue",
-                        cursor: "pointer",
-                        fontSize: isHovered ? "1.1em" : "1em",
-                        transition: "font-size 0.2s ease-in-out",
-                      }}
+                      className="blue-emphasis"
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                       onClick={() => movePage("/authentication/")} //있으면 로그인으로 돌아가도록
