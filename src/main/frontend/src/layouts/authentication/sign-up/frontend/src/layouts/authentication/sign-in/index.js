@@ -10,11 +10,6 @@ import "./index.css";
 export default function SignIn() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-
-  const [su_id, setSignupId] = useState("");
-  const [su_pw, setSignupPw] = useState("");
-  const [su_email, setSignupEm] = useState("");
-  const [su_phone, setSignupPh] = useState("");
   const movePage = useNavigate();
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);
@@ -89,10 +84,16 @@ export default function SignIn() {
           <Button
             type="button"
             variant="contained"
+            style={{
+              margin: "15px 0",
+              padding: "10px",
+              borderRadius: "5px",
+              backgroundColor: "#1976d2",
+              color: "white",
+            }}
             onClick={onClickLogin}
-            sx={{ marginTop: 2 }}
           >
-            로그인
+            Sign In
           </Button>
 
           <div
@@ -104,7 +105,7 @@ export default function SignIn() {
             }}
           >
             <p style={{ margin: "10px", textAlign: "center" }}>
-              아직 회원이 아니신가요? &nbsp;
+              아직 회원이 아니신가요?{" "}
               <a
                 className="blue-emphasis"
                 onMouseEnter={handleMouseEnter}
@@ -145,71 +146,37 @@ export default function SignIn() {
                       &times;
                     </span>
                   </div>
-                  <div style={{ marginTop: "100px" }}>
-                    <h1>관리자 계정을 만들어주세요!</h1>
-                    <div className="signup-form-style">
-                      <TextField
-                        id="setID"
-                        label="ID"
-                        value={su_id}
-                        onChange={(e) => setSignupId(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
-                      <TextField
-                        id="setPW"
-                        label="Password"
-                        type="password"
-                        value={su_pw}
-                        onChange={(e) => setSignupPw(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
-                      <TextField
-                        id="setEmail"
-                        label="E-mail"
-                        value={su_email}
-                        onChange={(e) => setSignupEm(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
-                      <TextField
-                        id="setPhone"
-                        label="Phone"
-                        value={su_phone}
-                        onChange={(e) => setSignupPh(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
-                      <Button
-                        type="button"
-                        variant="contained"
-                        //onClick={onClickLogin}
-                        sx={{ marginTop: 4, width: "100%" }}
-                      >
-                        회원가입
-                      </Button>
-                      <hr />
-                      <div style={{ marginTop: "20px" }}>
-                        Already have an account? &nbsp;
-                        <a
-                          className="blue-emphasis"
-                          onMouseEnter={handleMouseEnter}
-                          onMouseLeave={handleMouseLeave}
-                          onClick={() => movePage("/authentication/")} //있으면 로그인으로 돌아가도록
-                        >
-                          로그인
-                        </a>
-                      </div>
-                    </div>
+                  <div>
+                    <h1 style={{}}>관리자 계정을 만들어주세요!</h1>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <label>ID</label>
+                    <input />
+                    <label>PW</label>
+                    <input />
+                    <label>Email</label>
+                    <input />
+                    <label>Phone</label>
+                    <input />
+                    <button>Sign Up</button>
+                  </div>
+                  <hr />
+                  <div>
+                    Already have an account?
+                    <a
+                      className="blue-emphasis"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={() => movePage("/authentication/")} //있으면 로그인으로 돌아가도록
+                    >
+                      로그인
+                    </a>
                   </div>
                 </div>
               )}
