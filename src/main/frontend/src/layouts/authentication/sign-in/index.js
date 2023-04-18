@@ -58,7 +58,7 @@ export default function SignIn() {
         <form className="signin-form-style">
           <h1 className="banner-center">Sign In</h1>
 
-          <input
+          <TextField
             id="id-input"
             label="ID"
             value={id}
@@ -69,7 +69,7 @@ export default function SignIn() {
             sx={{ zIndex: 0 }}
           />
 
-          <input
+          <TextField
             id="password-input"
             label="Password"
             type="password"
@@ -81,7 +81,7 @@ export default function SignIn() {
             sx={{ zIndex: 0 }}
           />
 
-          <button
+          <Button
             type="button"
             variant="contained"
             style={{
@@ -94,7 +94,7 @@ export default function SignIn() {
             onClick={onClickLogin}
           >
             Sign In
-          </button>
+          </Button>
 
           <div
             style={{
