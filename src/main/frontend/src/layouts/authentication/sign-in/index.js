@@ -7,8 +7,10 @@ import { TextField, Grid, Box } from "@mui/material"; // 반응형 위해 mui의
 import { InputAdornment } from "@mui/material/";
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import ToglePasswordField from "components/toglePassword/";
+import BadgeIcon from "@mui/icons-material/Badge";
+
 import EmailField from "components/emailField/";
+import ToglePasswordField from "components/toglePassword/";
 
 import "./index.css";
 
@@ -17,8 +19,11 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
 
   const [su_id, setSignupId] = useState("");
-
+  const [su_pw, setSignupPw] = useState("");
+  const [su_email, setSignupEm] = useState("");
+  const [su_ad, setSignupAdid] = useState("");
   const [su_phone, setSignupPh] = useState("");
+
   const movePage = useNavigate();
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);
@@ -51,6 +56,27 @@ export default function SignIn() {
       });
   };
 
+  const onClickSignup = () => {
+    console.log("click signup");
+    console.log("ID : ", su_id);
+    console.log("PW : ", su_pw);
+    console.log("Email: ", su_email);
+    console.log("Phone : ", su_phone);
+    axios
+      .post("http://localhost:8080/authentication/sign-up", {
+        nickname: su_id,
+        pw: su_pw,
+        admin: su_ad,
+        email: su_email,
+        phone: su_phone,
+      })
+      .then((res) => {})
+      .catch((error) => {
+        console.error("API 호출 중 오류가 발생했습니다.", error);
+        alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+      });
+  };
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -59,6 +85,14 @@ export default function SignIn() {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const handlePwValue = (event) => {
+    setSignupPw(event.target.value);
+  };
+
+  const handleEmailValue = (event) => {
+    setSignupEm(event.target.value);
   };
 
   return (
@@ -175,9 +209,32 @@ export default function SignIn() {
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
 
-                      <ToglePasswordField />
+                      <ToglePasswordField
+                        su_pw={su_pw}
+                        handleChange={handlePwValue}
+                      />
 
-                      <EmailField />
+                      <TextField
+                        id="setAdminID"
+                        label="관리자 ID"
+                        value={su_ad}
+                        onChange={(e) => setSignupAdid(e.target.value)}
+                        variant="standard"
+                        margin="normal"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <BadgeIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                        sx={{ width: "80%", marginBottom: "1vh" }}
+                      />
+
+                      <EmailField
+                        su_email={su_email}
+                        handleChange={handleEmailValue}
+                      />
 
                       <TextField
                         id="setPhone"
@@ -199,7 +256,7 @@ export default function SignIn() {
                       <Button
                         type="button"
                         variant="contained"
-                        //onClick={onClickLogin}
+                        onClick={onClickSignup}
                         sx={{ width: "80%", marginTop: "4vh" }}
                       >
                         회원가입
