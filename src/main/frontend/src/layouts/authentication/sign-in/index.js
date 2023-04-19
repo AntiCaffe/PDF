@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import bgImage from "assets/images/TaeApril22.jpg";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import { TextField, Grid, Box } from "@mui/material"; // 반응형 위해 mui의 Grid
+import ToglePasswordField from "components/toglePassword/";
+import EmailField from "components/emailField/";
 
 import "./index.css";
 
@@ -12,8 +14,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
 
   const [su_id, setSignupId] = useState("");
-  const [su_pw, setSignupPw] = useState("");
-  const [su_email, setSignupEm] = useState("");
+
   const [su_phone, setSignupPh] = useState("");
   const movePage = useNavigate();
   const [showSignUp, setShowSignUp] = useState(false);
@@ -58,11 +59,12 @@ export default function SignIn() {
   };
 
   return (
-    <div className="bg-image" style={{ backgroundImage: `url(${bgImage})` }}>
-      <div>
-        <form className="signin-form-style">
+    <Box className="bg-image" style={{ backgroundImage: `url(${bgImage})` }}>
+      <Grid className="signin-form-style">
+        <Grid item>
           <h1 className="banner-center">Sign In</h1>
-
+        </Grid>
+        <Grid item sx={{ marginTop: "2vh" }}>
           <TextField
             id="id-input"
             label="ID"
@@ -73,7 +75,8 @@ export default function SignIn() {
             fullWidth
             sx={{ zIndex: 0 }}
           />
-
+        </Grid>
+        <Grid item sx={{ marginTop: "1vh" }}>
           <TextField
             id="password-input"
             label="Password"
@@ -85,25 +88,27 @@ export default function SignIn() {
             fullWidth
             sx={{ zIndex: 0 }}
           />
-
+        </Grid>
+        <Grid item sx={{ marginTop: "2.5vh" }}>
           <Button
             type="button"
             variant="contained"
             onClick={onClickLogin}
-            sx={{ marginTop: 2 }}
+            sx={{ width: "100%" }}
           >
             로그인
           </Button>
+        </Grid>
 
-          <div
-            style={{
+        <Grid item sx={{ marginTop: "1vh" }}>
+          <Box
+            sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "flex-end",
-              height: "100%",
             }}
           >
-            <p style={{ margin: "10px", textAlign: "center" }}>
+            <p style={{ margin: "1.5vh", textAlign: "center" }}>
               아직 회원이 아니신가요? &nbsp;
               <a
                 className="blue-emphasis"
@@ -145,8 +150,10 @@ export default function SignIn() {
                       &times;
                     </span>
                   </div>
-                  <div style={{ marginTop: "100px" }}>
-                    <h1>관리자 계정을 만들어주세요!</h1>
+                  <div style={{ marginTop: "10vh" }}>
+                    <h2 className="response-header">
+                      관리자 계정을 만들어주세요!
+                    </h2>
                     <div className="signup-form-style">
                       <TextField
                         id="setID"
@@ -155,30 +162,13 @@ export default function SignIn() {
                         onChange={(e) => setSignupId(e.target.value)}
                         variant="standard"
                         margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
+                        sx={{ width: "80%", marginBottom: "1vh" }}
                       />
-                      <TextField
-                        id="setPW"
-                        label="Password"
-                        type="password"
-                        value={su_pw}
-                        onChange={(e) => setSignupPw(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
-                      <TextField
-                        id="setEmail"
-                        label="E-mail"
-                        value={su_email}
-                        onChange={(e) => setSignupEm(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        fullWidth
-                        sx={{ zIndex: 0 }}
-                      />
+
+                      <ToglePasswordField />
+
+                      <EmailField />
+
                       <TextField
                         id="setPhone"
                         label="Phone"
@@ -187,18 +177,19 @@ export default function SignIn() {
                         variant="standard"
                         margin="normal"
                         fullWidth
-                        sx={{ zIndex: 0 }}
+                        sx={{ width: "80%", marginBottom: "1vh" }}
                       />
+
                       <Button
                         type="button"
                         variant="contained"
                         //onClick={onClickLogin}
-                        sx={{ marginTop: 4, width: "100%" }}
+                        sx={{ width: "80%", marginTop: "4vh" }}
                       >
                         회원가입
                       </Button>
                       <hr />
-                      <div style={{ marginTop: "20px" }}>
+                      <div style={{ marginTop: "3vh" }}>
                         Already have an account? &nbsp;
                         <a
                           className="blue-emphasis"
@@ -214,9 +205,9 @@ export default function SignIn() {
                 </div>
               )}
             </p>
-          </div>
-        </form>
-      </div>
-    </div>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
