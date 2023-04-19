@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import LockIcon from "@mui/icons-material/Lock";
 
 function ToglePasswordField() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +26,11 @@ function ToglePasswordField() {
       variant="standard"
       sx={{ width: "80%", marginBottom: "1vh" }}
       InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <LockIcon />
+          </InputAdornment>
+        ),
         endAdornment: (
           <InputAdornment position="end">
             <IconButton onClick={handlePasswordVisibility}>

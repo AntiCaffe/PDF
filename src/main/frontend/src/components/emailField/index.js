@@ -1,5 +1,6 @@
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
+import { TextField, InputAdornment } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
 
 const EmailField = () => {
   const [su_email, setSignupEm] = useState("");
@@ -29,6 +30,13 @@ const EmailField = () => {
       margin="normal"
       error={emailError}
       helperText={emailError ? "유효한 이메일 주소를 입력하세요." : ""}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <EmailIcon />
+          </InputAdornment>
+        ),
+      }}
       sx={{ width: "80%", marginBottom: "1vh" }}
     />
   );
