@@ -4,6 +4,9 @@ import bgImage from "assets/images/TaeApril22.jpg";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { TextField, Grid, Box } from "@mui/material"; // 반응형 위해 mui의 Grid
+import { InputAdornment } from "@mui/material/";
+import PersonIcon from "@mui/icons-material/Person";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import ToglePasswordField from "components/toglePassword/";
 import EmailField from "components/emailField/";
 
@@ -150,7 +153,7 @@ export default function SignIn() {
                       &times;
                     </span>
                   </div>
-                  <div style={{ marginTop: "10vh" }}>
+                  <div style={{ marginTop: "8vh" }}>
                     <h2 className="response-header">
                       관리자 계정을 만들어주세요!
                     </h2>
@@ -162,6 +165,13 @@ export default function SignIn() {
                         onChange={(e) => setSignupId(e.target.value)}
                         variant="standard"
                         margin="normal"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PersonIcon />
+                            </InputAdornment>
+                          ),
+                        }}
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
 
@@ -176,7 +186,13 @@ export default function SignIn() {
                         onChange={(e) => setSignupPh(e.target.value)}
                         variant="standard"
                         margin="normal"
-                        fullWidth
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PhoneIphoneIcon />
+                            </InputAdornment>
+                          ),
+                        }}
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
 

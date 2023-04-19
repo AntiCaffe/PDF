@@ -58,7 +58,7 @@
   position: absolute;
   right: -100%;
   top: 0;
-  height: 100%;
+  height: 100vh;
   width: 90%;
   background-color: rgb(250, 250, 250);
   border-radius: 10px;
@@ -109,9 +109,9 @@
 /* 종료 버튼 커서 ( X == times ) */
 .close-btn {
   cursor: pointer;
-  font-size: 2.5em;
+  font-size: 2em;
   color: rgb(102, 102, 102);
-  padding: 20px;
+  padding: 20px 30px;
 }
 
 hr {
