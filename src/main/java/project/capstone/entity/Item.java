@@ -1,16 +1,20 @@
 package project.capstone.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Item {
+public class Item extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "item_id")
@@ -28,6 +32,8 @@ public class Item {
     private ItemType itemType;
     @Enumerated(EnumType.STRING)
     private ItemDefect defect;
+
+
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();

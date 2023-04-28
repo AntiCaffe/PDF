@@ -32,7 +32,6 @@ class HelloWorldControllerTest {
     @Test
     @Rollback(value = false)
     public void initDB() {
-        memberRepository.save(new Member("admin1", "name1","nickname1", "password1", "010-1111-2222", "test@naver.com"));
-        memberRepository.save(new Member("admin2", "name2", "nickname2", "password2", "010-1111-3333", "test@naver.com"));
+
     }
 }

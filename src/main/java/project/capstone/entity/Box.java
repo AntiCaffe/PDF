@@ -1,14 +1,18 @@
 package project.capstone.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Box {
+public class Box extends BaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "box_id")
@@ -24,6 +28,8 @@ public class Box {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+
 
     public Box(String type, String boxcorners, String ansize, BoxDefect defect) {
         this.type = type;
