@@ -2,18 +2,19 @@ import { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 
-const EmailField = () => {
+function EmailField({ onChange }) {
   const [su_email, setSignupEm] = useState("");
   const [emailError, setEmailError] = useState(false);
 
-  const handleEmailChange = (e) => {
-    const email = e.target.value;
-    setSignupEm(email);
+  const handleEmailChange = (event) => {
+    const value = event.target.value;
+    setSignupEm(value);
+    onChange(value);
 
     // 이메일 유효성 검사를 위한 정규표현식
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
 
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(value)) {
       setEmailError(true);
     } else {
       setEmailError(false);
@@ -40,6 +41,6 @@ const EmailField = () => {
       sx={{ width: "80%", marginBottom: "1vh" }}
     />
   );
-};
+}
 
 export default EmailField;
