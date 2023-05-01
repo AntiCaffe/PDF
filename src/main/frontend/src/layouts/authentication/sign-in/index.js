@@ -232,40 +232,6 @@ export default function SignIn() {
 
                       <ToglePasswordField onChange={handlePwValue} />
 
-                      <TextField
-                        id="setName"
-                        label="Name"
-                        value={su_name}
-                        onChange={(e) => setSignupName(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PhoneIphoneIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                        sx={{ width: "80%", marginBottom: "1vh" }}
-                      />
-
-                      <TextField
-                        id="setAdminID"
-                        label="관리자 ID"
-                        value={su_ad}
-                        onChange={(e) => setSignupAdid(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <BadgeIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                        sx={{ width: "80%", marginBottom: "1vh" }}
-                      />
-
                       <EmailField onChange={handleEmailValue} />
 
                       <TextField
@@ -284,6 +250,30 @@ export default function SignIn() {
                         }}
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
+                      <Grid container spacing={1} alignItems="flex-end">
+                        <Grid item xs={6}>
+                          <TextField
+                            id="setName"
+                            label="Name"
+                            value={su_name}
+                            onChange={(e) => setSignupName(e.target.value)}
+                            variant="standard"
+                            margin="normal"
+                            sx={{ width: "100%", marginBottom: "1vh" }}
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            id="setAdminID"
+                            label="관리자 ID"
+                            value={su_ad}
+                            onChange={(e) => setSignupAdid(e.target.value)}
+                            variant="standard"
+                            margin="normal"
+                            sx={{ width: "100%", marginBottom: "1vh" }}
+                          />
+                        </Grid>
+                      </Grid>
 
                       <Button
                         type="button"
