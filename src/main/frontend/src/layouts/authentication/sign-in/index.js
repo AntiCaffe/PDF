@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import bgImage from "assets/images/TaeApril22.jpg";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import { TextField, Grid, Box } from "@mui/material"; // 반응형 위해 mui의 Grid
-import { InputAdornment } from "@mui/material/";
-import PersonIcon from "@mui/icons-material/Person";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import BadgeIcon from "@mui/icons-material/Badge";
-
-import EmailField from "components/emailField/";
-import ToglePasswordField from "components/toglePassword/";
-
+import { TextField, Grid, Box, InputAdornment } from "@mui/material";
+import {
+  Person as PersonIcon,
+  PhoneIphone as PhoneIphoneIcon,
+  Badge as BadgeIcon,
+} from "@mui/icons-material";
+import EmailField from "components/emailField";
+import ToglePasswordField from "components/toglePassword";
+import bgImage from "assets/images/TaeApril22.jpg";
 import "./index.css";
 
 export default function SignIn() {
@@ -20,6 +19,7 @@ export default function SignIn() {
 
   const [su_id, setSignupId] = useState("");
   const [su_pw, setSignupPw] = useState("");
+  const [su_name, setSignupName] = useState("");
   const [su_email, setSignupEm] = useState("");
   const [su_ad, setSignupAdid] = useState("");
   const [su_phone, setSignupPh] = useState("");
@@ -60,17 +60,38 @@ export default function SignIn() {
     console.log("click signup");
     console.log("ID : ", su_id);
     console.log("PW : ", su_pw);
+    console.log("Name : ", su_name);
+    console.log("Admin : ", su_ad);
     console.log("Email: ", su_email);
     console.log("Phone : ", su_phone);
     axios
       .post("http://localhost:8080/authentication/sign-up", {
-        nickname: su_id,
-        pw: su_pw,
-        admin: su_ad,
-        email: su_email,
-        phone: su_phone,
+        su_nickname: su_id,
+        su_pw: su_pw,
+        su_name: su_name,
+        su_adminId: su_ad,
+        su_email: su_email,
+        su_phone: su_phone,
       })
-      .then((res) => {})
+      .then((res) => {
+        console.log("Response : ", res);
+        if (res.data.su_nickname === null && res.data.su_adminId !== null) {
+          alert("이미 등록되어있거나 올바르지 않은 아이디입니다.");
+        } else if (
+          res.data.su_nickname !== null &&
+          res.data.su_adminId === null
+        ) {
+          alert("올바르지 않은 관리자 번호입니다.");
+        } else if (
+          res.data.su_nickname === null &&
+          res.data.su_adminId === null
+        ) {
+          alert("올바르지 않은 아이디, 관리자 번호입니다.");
+        } else {
+          alert("회원가입이 완료되었습니다.");
+          movePage("/authentication/");
+        }
+      })
       .catch((error) => {
         console.error("API 호출 중 오류가 발생했습니다.", error);
         alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
@@ -87,12 +108,12 @@ export default function SignIn() {
     setIsHovered(false);
   };
 
-  const handlePwValue = (event) => {
-    setSignupPw(event.target.value);
+  const handlePwValue = (value) => {
+    setSignupPw(value);
   };
 
-  const handleEmailValue = (event) => {
-    setSignupEm(event.target.value);
+  const handleEmailValue = (value) => {
+    setSignupEm(value);
   };
 
   return (
@@ -209,32 +230,9 @@ export default function SignIn() {
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
 
-                      <ToglePasswordField
-                        su_pw={su_pw}
-                        handleChange={handlePwValue}
-                      />
+                      <ToglePasswordField onChange={handlePwValue} />
 
-                      <TextField
-                        id="setAdminID"
-                        label="관리자 ID"
-                        value={su_ad}
-                        onChange={(e) => setSignupAdid(e.target.value)}
-                        variant="standard"
-                        margin="normal"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <BadgeIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                        sx={{ width: "80%", marginBottom: "1vh" }}
-                      />
-
-                      <EmailField
-                        su_email={su_email}
-                        handleChange={handleEmailValue}
-                      />
+                      <EmailField onChange={handleEmailValue} />
 
                       <TextField
                         id="setPhone"
@@ -252,6 +250,30 @@ export default function SignIn() {
                         }}
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
+                      <Grid container spacing={1} alignItems="flex-end">
+                        <Grid item xs={6}>
+                          <TextField
+                            id="setName"
+                            label="Name"
+                            value={su_name}
+                            onChange={(e) => setSignupName(e.target.value)}
+                            variant="standard"
+                            margin="normal"
+                            sx={{ width: "100%", marginBottom: "1vh" }}
+                          />
+                        </Grid>
+                        <Grid item xs={6}>
+                          <TextField
+                            id="setAdminID"
+                            label="관리자 ID"
+                            value={su_ad}
+                            onChange={(e) => setSignupAdid(e.target.value)}
+                            variant="standard"
+                            margin="normal"
+                            sx={{ width: "100%", marginBottom: "1vh" }}
+                          />
+                        </Grid>
+                      </Grid>
 
                       <Button
                         type="button"

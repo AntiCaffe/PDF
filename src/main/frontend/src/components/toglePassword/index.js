@@ -3,7 +3,7 @@ import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LockIcon from "@mui/icons-material/Lock";
 
-function ToglePasswordField() {
+function ToglePasswordField({ onChange }) {
   const [showPassword, setShowPassword] = useState(false);
   const [su_pw, setSignupPw] = useState("");
 
@@ -12,16 +12,18 @@ function ToglePasswordField() {
   };
 
   const handleChangePassword = (event) => {
-    setSignupPw(event.target.value);
+    const value = event.target.value;
+    setSignupPw(value);
+    onChange(value);
   };
 
   return (
     <TextField
       id="setPW"
       label="Password"
-      type={showPassword ? "text" : "password"}
       value={su_pw}
       onChange={handleChangePassword}
+      type={showPassword ? "text" : "password"}
       margin="normal"
       variant="standard"
       sx={{ width: "80%", marginBottom: "1vh" }}
