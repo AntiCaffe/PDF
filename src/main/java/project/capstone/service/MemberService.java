@@ -42,7 +42,7 @@ public class MemberService {
             if (!validateAdmin(signUpDto)) {
                 return new SignUpResponseDto(nickname, null);
             }
-            else
+
                 return new SignUpResponseDto(nickname, admin.getAdminId());
         }
     }
@@ -58,7 +58,7 @@ public class MemberService {
     /**
      * adminId 가 존재하지 않거나 해당 Id가 이미 가입이 되어 있는 상태라면 false
      */
-    private boolean validateAdmin(MemberSignUpDto signUpDto) {
+    public boolean validateAdmin(MemberSignUpDto signUpDto) {
         Admin admin = adminRepository.findByAdminId(signUpDto.getSu_adminId());
         if (admin == null || admin.getSignCheck().equals(SignCheck.SIGNED)) {
             System.out.println("validateAdmin 실패!");

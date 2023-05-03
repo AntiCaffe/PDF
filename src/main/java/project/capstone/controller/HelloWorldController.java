@@ -50,6 +50,7 @@ public class HelloWorldController {
     @ResponseBody
     public SignUpResponseDto signUp(@RequestBody MemberSignUpDto param) {
         System.out.println("param = " + param.getSu_nickname());
+        System.out.println("param.getSu_adminId() = " + param.getSu_adminId());
         return memberService.signUp(param);
     }
 
