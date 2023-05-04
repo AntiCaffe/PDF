@@ -67,7 +67,7 @@ export default function SignIn() {
     axios
       .post("http://localhost:8080/authentication/sign-up", {
         su_nickname: su_id,
-        su_pw: su_pw,
+        su_password: su_pw,
         su_name: su_name,
         su_adminId: su_ad,
         su_email: su_email,
@@ -250,7 +250,13 @@ export default function SignIn() {
                         }}
                         sx={{ width: "80%", marginBottom: "1vh" }}
                       />
-                      <Grid container spacing={1} alignItems="flex-end">
+                      <Grid
+                        container
+                        spacing={1}
+                        alignItems="center"
+                        sx={{ width: "82%", marginBottom: "1vh" }}
+                        // width %로 위의 textField와 가로 길이 맞추었음
+                      >
                         <Grid item xs={6}>
                           <TextField
                             id="setName"
@@ -259,7 +265,6 @@ export default function SignIn() {
                             onChange={(e) => setSignupName(e.target.value)}
                             variant="standard"
                             margin="normal"
-                            sx={{ width: "100%", marginBottom: "1vh" }}
                           />
                         </Grid>
                         <Grid item xs={6}>
@@ -270,7 +275,6 @@ export default function SignIn() {
                             onChange={(e) => setSignupAdid(e.target.value)}
                             variant="standard"
                             margin="normal"
-                            sx={{ width: "100%", marginBottom: "1vh" }}
                           />
                         </Grid>
                       </Grid>
@@ -285,7 +289,7 @@ export default function SignIn() {
                       </Button>
                       <hr />
                       <div style={{ marginTop: "3vh" }}>
-                        Already have an account? &nbsp;
+                        이미 회원가입을 하셨나요? &nbsp;
                         <a
                           className="blue-emphasis"
                           onMouseEnter={handleMouseEnter}
