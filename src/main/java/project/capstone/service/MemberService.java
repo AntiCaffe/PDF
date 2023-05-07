@@ -3,7 +3,9 @@ package project.capstone.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.capstone.controller.dto.MemberSignUpDto;
+import project.capstone.controller.dto.SignInRequestDto;
+import project.capstone.controller.dto.SignUpRequestDto;
+import project.capstone.controller.dto.SignInDto;
 import project.capstone.controller.dto.SignUpResponseDto;
 import project.capstone.entity.Admin;
 import project.capstone.entity.Member;
@@ -21,7 +23,7 @@ public class MemberService {
     private final AdminRepository adminRepository;
 
     @Transactional
-    public SignUpResponseDto signUp(MemberSignUpDto signUpDto) {
+    public SignUpResponseDto signUp(SignUpRequestDto signUpDto) {
 //        회원가입 성공
         if (validateSignUp(signUpDto)) {
             Admin admin = adminRepository.findByAdminId(signUpDto.getSu_adminId());
@@ -47,8 +49,18 @@ public class MemberService {
         }
     }
 
+    public SignInDto signIn(SignInRequestDto requestDto) {
+        String nickname = requestDto.getNickname();
+        String pw = requestDto.getPw();
 
-    private boolean validateSignUp(MemberSignUpDto signUpDto) {
+        Member member = memberRepository.findByNicknameAndPassword(nickname, pw);
+        if (member != null) {
+            return new SignInDto(nickname, pw);
+        }
+        else return new SignInDto();
+    }
+
+    private boolean validateSignUp(SignUpRequestDto signUpDto) {
         if(validateMember(signUpDto) && validateAdmin(signUpDto))
             return true;
         else
@@ -58,7 +70,7 @@ public class MemberService {
     /**
      * adminId 가 존재하지 않거나 해당 Id가 이미 가입이 되어 있는 상태라면 false
      */
-    public boolean validateAdmin(MemberSignUpDto signUpDto) {
+    public boolean validateAdmin(SignUpRequestDto signUpDto) {
         Admin admin = adminRepository.findByAdminId(signUpDto.getSu_adminId());
         if (admin == null || admin.getSignCheck().equals(SignCheck.SIGNED)) {
             System.out.println("validateAdmin 실패!");
@@ -72,7 +84,7 @@ public class MemberService {
     /**
      * 가입하고자 하는 nickname이 존재하면 false
      */
-    private boolean validateMember(MemberSignUpDto signUpDto) {
+    private boolean validateMember(SignUpRequestDto signUpDto) {
         List<Member> members = memberRepository.findByNickname(signUpDto.getSu_nickname());
         if (members.isEmpty()) {
             System.out.println("validateMember 실패!");
