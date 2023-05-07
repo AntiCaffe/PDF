@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+.DS_Store
 
 # dependencies
 /node_modules
