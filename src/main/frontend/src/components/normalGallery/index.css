@@ -1,0 +1,9 @@
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-content {
+  text-align: center;
+}
