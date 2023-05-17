@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import logo from "assets/images/logo.png";
+import "./index.css";
+import { IconButton } from "@mui/material";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import { animateScroll as scroll } from "react-scroll";
+import NormalImageGallery from "components/normalGallery";
+import DefectImageGallery from "components/defectGallery";
 
 function Dashboard() {
   const [total, setTotal] = useState(0);
@@ -7,113 +14,91 @@ function Dashboard() {
   const [bad, setBad] = useState(0);
   const [imageList, setImageList] = useState([]);
 
-  // fetch data from backend and update the state
-  /*useEffect(() => {
-    fetch("backend-url") // replace with your backend URL
-      .then((response) => response.json())
-      .then((data) => {
-        setTotal(data.total);
-        setNormal(data.normal);
-        setBad(data.bad);
-        setImageList(data.images || []); // add null check for images
-      })
-      .catch((error) => console.error(error));
-  }, []);*/
+  const normalRef = useRef(null);
+  const defectRef = useRef(null);
 
-  // handle image click
-  function handleImageClick(imageUrl) {
-    // show the image in a modal or popup
-    console.log(imageUrl);
-  }
+  const handleScrollToNormal = () => {
+    const offset = window.innerHeight / 2; // 중간에 보이도록 스크롤
+    scroll.scrollTo(normalRef.current.offsetTop - offset, {
+      duration: 500,
+      smooth: true,
+    });
+  };
+
+  const handleScrollToDefect = () => {
+    scroll.scrollTo(defectRef.current.offsetTop, {
+      duration: 500,
+      smooth: true,
+    });
+  };
 
   return (
     <div>
-      {/* Top banner */}
-      {/* 1. White banner with text and sidebar */}
-      <div
-        style={{
-          backgroundColor: "white",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: 50,
-        }}
-      >
-        <div style={{ marginLeft: 20 }}>PDF project proto</div>
-        <div style={{ marginRight: 20 }}>
-          <button>Profile</button>
-          <button>Defect Page</button>
-          <Link to="/authentication/sign-in">
-            <button>Logout</button>
-          </Link>
+      <div className="menu-bar">
+        <div className="menu-set">
+          <a className="menu-item" onClick={handleScrollToNormal}>
+            정상항목
+          </a>
+          <a className="menu-item" onClick={handleScrollToDefect}>
+            결함항목
+          </a>
         </div>
       </div>
-
-      {/* Mint-colored box */}
-      <div
-        style={{
-          backgroundColor: "#F5F9F8",
-          borderRadius: "10px",
-          padding: "20px",
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {/* Rounded square */}
-        <div
-          style={{
-            backgroundColor: "grey",
-            borderRadius: "20px",
-            padding: "10px",
-            color: "white",
-            fontSize: "18px",
-          }}
-        >
-          Total: {total}, Normal: {normal}, Bad: {bad}
+      <div className="container position-relative">
+        <img
+          className="logo"
+          src={logo}
+          alt="PDF Logo"
+          title="PCB 결함 탐지 서비스"
+        ></img>
+        <div className="menu-selector">
+          <button>logout</button>
         </div>
       </div>
-
-      {/* Image list */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "20px",
-        }}
-      >
-        <div style={{ width: "30%" }}>
-          <div style={{ fontWeight: "bold", marginBottom: "10px" }}>
-            Item List
+      <div className="hero"></div>
+      <h1 className="color-set">
+        PCB 결함 탐지 <br /> 실시간 상황판
+      </h1>
+      <div className="container">
+        <p className="color-set text-center">
+          <span className="last-updated">
+            마지막 업데이트: 2023. 5. 16 오전 09:40
+            <IconButton>
+              <RefreshIcon className="refresh-icon" />
+            </IconButton>
+          </span>
+        </p>
+      </div>
+      <div className="top container">
+        <h2>상태 현황</h2>
+        <div className="row">
+          <div className="text-box text-center">
+            <p className="number">50,000</p>
+            <p>Total</p>
           </div>
-          <div
-            style={{
-              overflowY: "scroll",
-              height: "300px",
-              border: "1px solid #eee",
-              borderRadius: "10px",
-              padding: "10px",
-            }}
-          >
-            {imageList.map((image, index) => (
-              <div
-                key={index}
-                style={{ marginBottom: "10px", cursor: "pointer" }}
-                onClick={() => handleImageClick(image.url)}
-              >
-                {image.name}
-              </div>
-            ))}
+          <div className="text-box text-center">
+            <p className="number red">7</p>
+            <p>Defect</p>
+          </div>
+          <div className="text-box text-center">
+            <p className="number green">4,993</p>
+            <p>Normal</p>
           </div>
         </div>
-
-        {/* Selected image */}
-        <div style={{ width: "60%" }}>
-          <div style={{ fontWeight: "bold", marginBottom: "10px" }}>
-            Selected Image
+      </div>
+      <div className="alert-top">
+        <div className="container">
+          <div className="new-feature">
+            <div class="alert alert-defect">신규 발견 결함품: +2</div>
           </div>
-          <div>{/* show the selected image here */}</div>
         </div>
+      </div>
+      <div ref={normalRef}>
+        <NormalImageGallery />
+      </div>
+      <div className="divider"></div>
+      <div ref={defectRef}>
+        <DefectImageGallery />
       </div>
     </div>
   );
