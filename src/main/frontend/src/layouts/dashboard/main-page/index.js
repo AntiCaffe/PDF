@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "assets/images/logo.png";
 import "./index.css";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { animateScroll as scroll } from "react-scroll";
 import NormalImageGallery from "components/normalGallery";
@@ -52,7 +52,28 @@ function Dashboard() {
           title="PCB 결함 탐지 서비스"
         ></img>
         <div className="menu-selector">
-          <button>logout</button>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              color: "white",
+              borderColor: "white",
+              margin: "0 10px",
+            }}
+          >
+            logout
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              color: "white",
+              borderColor: "white",
+              margin: "0 10px",
+            }}
+          >
+            profile
+          </Button>
         </div>
       </div>
       <div className="hero"></div>
