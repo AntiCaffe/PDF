@@ -2,10 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .centered-content {
   text-align: center;
+  padding: 10px;
 }
 
 .bottom-padding {

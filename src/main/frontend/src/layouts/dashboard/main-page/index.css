@@ -13,13 +13,13 @@
 .logo {
   width: 40px;
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 1px;
 }
 
 .menu-selector {
   position: absolute;
-  top: 10;
+  top: 8px;
   right: 0;
   padding: 10px 8px;
 }

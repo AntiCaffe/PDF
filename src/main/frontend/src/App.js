@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import SignIn from "layouts/authentication/sign-in";
 import MainPage from "layouts/dashboard/main-page";
+import ProfilePage from "layouts/profile";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
           <Route path={"/authentication/sign-in"} element={<SignIn />}></Route>
           <Route path={"/dashboard/main-page"} element={<MainPage />}></Route>
+          <Route path={"/profile"} element={<ProfilePage />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

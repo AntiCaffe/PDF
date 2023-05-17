@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "assets/images/logo.png";
 import "./index.css";
 import { IconButton, Button } from "@mui/material";
@@ -8,11 +8,18 @@ import { animateScroll as scroll } from "react-scroll";
 import NormalImageGallery from "components/normalGallery";
 import DefectImageGallery from "components/defectGallery";
 
+function handleLogout() {
+  // 로그아웃 기능 구현
+  // 필요한 로직을 추가해야 합니다.
+}
+
 function Dashboard() {
   const [total, setTotal] = useState(0);
   const [normal, setNormal] = useState(0);
   const [bad, setBad] = useState(0);
   const [imageList, setImageList] = useState([]);
+
+  const movePage = useNavigate();
 
   const normalRef = useRef(null);
   const defectRef = useRef(null);
@@ -59,7 +66,12 @@ function Dashboard() {
               color: "white",
               borderColor: "white",
               margin: "0 10px",
+              "&:hover": {
+                borderColor: "white",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+              },
             }}
+            onClick={handleLogout}
           >
             logout
           </Button>
@@ -70,7 +82,12 @@ function Dashboard() {
               color: "white",
               borderColor: "white",
               margin: "0 10px",
+              "&:hover": {
+                borderColor: "white",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+              },
             }}
+            onClick={() => movePage("/profile")} //있으면 로그인으로 돌아가도록
           >
             profile
           </Button>
@@ -102,7 +119,7 @@ function Dashboard() {
             <p>Defect</p>
           </div>
           <div className="text-box text-center">
-            <p className="number green">4,993</p>
+            <p className="number green">49,993</p>
             <p>Normal</p>
           </div>
         </div>
