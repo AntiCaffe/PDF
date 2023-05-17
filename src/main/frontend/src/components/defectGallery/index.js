@@ -15,7 +15,7 @@ function App() {
     <div>
       <h2>결함품목</h2>
       <div className="centered-div bottom-padding">
-        <div>
+        <div className="centered-content">
           {selectedImage ? (
             <img
               src={require(`assets/images/${selectedImage}`).default}
@@ -24,8 +24,6 @@ function App() {
           ) : (
             <img src={fault} alt="No Image" />
           )}
-        </div>
-        <div className="centered-content ">
           <MemoDiv />
         </div>
       </div>

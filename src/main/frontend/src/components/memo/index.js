@@ -10,14 +10,11 @@ const MemoDiv = () => {
   return (
     <div>
       <textarea
+        className="postIt"
         value={memo}
         onChange={handleChange}
         placeholder="메모를 입력하세요."
       />
-      <div className="postIt">
-        <h3>메모 내용:</h3>
-        <p>{memo}</p>
-      </div>
     </div>
   );
 };
