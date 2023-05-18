@@ -41,7 +41,7 @@ function Dashboard() {
   };
 
   return (
-    <div>
+    <div className="main-page">
       <div className="menu-bar">
         <div className="menu-set">
           <a className="menu-item" onClick={handleScrollToNormal}>
@@ -96,7 +96,7 @@ function Dashboard() {
         </div>
       </div>
       <div className="hero-main"></div>
-      <h1 className="color-set disable-select">
+      <h1 className=" color-set disable-select">
         PCB 결함 탐지 <br /> 실시간 상황판
       </h1>
       <div className="container">
@@ -110,7 +110,7 @@ function Dashboard() {
         </p>
       </div>
       <div className="top container">
-        <h2 className=" disable-select">상태 현황</h2>
+        <h2 className="disable-select">상태 현황</h2>
         <div className="row">
           <div className="text-box text-center">
             <p className="number">50,000</p>

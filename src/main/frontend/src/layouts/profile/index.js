@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 import bgImage from "src/assets/images/wave-blue-1.png";
-import { TextField, Grid, Box } from "@mui/material";
+import { TextField, Grid, Box, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Button } from "@mui/material";
 
@@ -29,7 +29,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div>
+    <div className="set-maxheight">
       <div>
         <div className="icon-container">
           <IconButton
@@ -62,6 +62,14 @@ const ProfilePage = () => {
       <div>
         <div className="background-hero"></div>
         <img className="disable-select" src={bgImage}></img>
+      </div>
+      <div className="set-top">
+        <div className="top profile-container">
+          <div>
+            <h1>홍길동님</h1>
+            <h2>안녕하세요!</h2>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -38,15 +38,15 @@
   color: white;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+.main-page h1,
+.main-page h2,
+.main-page h3,
+.main-page h4,
+.main-page h5 {
   text-align: center;
 }
 
-h1 {
+.main-page h1 {
   display: block;
   padding-top: 60px;
   margin-top: 0;
@@ -57,7 +57,7 @@ h1 {
   box-sizing: border-box;
 }
 
-h2 {
+.main-page h2 {
   display: block;
   font-size: 1.9em;
   margin-block-start: 0.83em;
@@ -156,7 +156,7 @@ h2 {
   justify-content: center !important;
 }
 
-a {
+.main-page a {
   text-decoration: none;
   cursor: pointer;
   background-color: transparent;
