@@ -1,7 +1,9 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import bgImage from "src/assets/images/wave-blue-1.png";
-import { TextField, Grid, Box } from "@mui/material";
+import { TextField, Grid, Box, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Button } from "@mui/material";
 
@@ -19,11 +21,24 @@ const ProfilePage = () => {
     email: "이메일",
   };
 
+  const movePage = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    movePage("/dashboard/main-page/");
+  };
+
   return (
-    <div>
+    <div className="set-maxheight">
       <div>
-        <div>
-          <ArrowBackIcon />
+        <div className="icon-container">
+          <IconButton
+            aria-label="back"
+            sx={{ color: "white" }}
+            onClick={handleClick}
+          >
+            <ArrowBackIcon />
+          </IconButton>
         </div>
         <div className="menu-selector">
           <Button
@@ -46,7 +61,21 @@ const ProfilePage = () => {
       </div>
       <div>
         <div className="background-hero"></div>
-        <img src={bgImage}></img>
+        <img className="disable-select" src={bgImage}></img>
+      </div>
+      <div className="set-top">
+        <div className="top profile-container">
+          <div className="name-id-text">
+            <h1>홍길동님</h1>
+            <p>( testid1 )</p>
+          </div>
+          <h2>안녕하세요 !</h2>
+          <div>
+            <Typography>Email</Typography>
+            <Typography>Phone</Typography>
+          </div>
+          <Button sx={{ color: "black" }}>회원정보 수정</Button>
+        </div>
       </div>
     </div>
   );

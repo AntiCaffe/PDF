@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <h2>정상품목</h2>
+      <h2 className="disable-select">정상품목</h2>
       <div className="centered-div">
         {selectedImage ? (
           <img
