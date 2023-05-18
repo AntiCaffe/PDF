@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import bgImage from "src/assets/images/wave-blue-1.png";
 import { TextField, Grid, Box } from "@mui/material";
@@ -19,11 +21,24 @@ const ProfilePage = () => {
     email: "이메일",
   };
 
+  const movePage = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    movePage("/dashboard/main-page/");
+  };
+
   return (
     <div>
       <div>
-        <div>
-          <ArrowBackIcon />
+        <div className="icon-container">
+          <IconButton
+            aria-label="back"
+            sx={{ color: "white" }}
+            onClick={handleClick}
+          >
+            <ArrowBackIcon />
+          </IconButton>
         </div>
         <div className="menu-selector">
           <Button
@@ -46,7 +61,7 @@ const ProfilePage = () => {
       </div>
       <div>
         <div className="background-hero"></div>
-        <img src={bgImage}></img>
+        <img className="disable-select" src={bgImage}></img>
       </div>
     </div>
   );

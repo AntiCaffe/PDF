@@ -16,5 +16,16 @@
   width: 100%;
   height: 100px;
   z-index: -99;
-  margin-top: -45px;
+  margin-top: -60px;
+}
+
+.icon-container {
+  margin-top: 12px;
+  margin-left: 12px;
+  color: white;
+}
+
+.disable-select {
+  user-select: none;
+  pointer-events: none;
 }

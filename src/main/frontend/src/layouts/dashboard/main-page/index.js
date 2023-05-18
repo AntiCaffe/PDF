@@ -96,12 +96,12 @@ function Dashboard() {
         </div>
       </div>
       <div className="hero-main"></div>
-      <h1 className="color-set">
+      <h1 className="color-set disable-select">
         PCB 결함 탐지 <br /> 실시간 상황판
       </h1>
       <div className="container">
         <p className="color-set text-center">
-          <span className="last-updated">
+          <span className="last-updated ">
             마지막 업데이트: 2023. 5. 16 오전 09:40
             <IconButton>
               <RefreshIcon className="refresh-icon" />
@@ -110,26 +110,28 @@ function Dashboard() {
         </p>
       </div>
       <div className="top container">
-        <h2>상태 현황</h2>
+        <h2 className=" disable-select">상태 현황</h2>
         <div className="row">
           <div className="text-box text-center">
             <p className="number">50,000</p>
-            <p>Total</p>
+            <p className="disable-select">Total</p>
           </div>
           <div className="text-box text-center">
             <p className="number red">7</p>
-            <p>Defect</p>
+            <p className="disable-select">Defect</p>
           </div>
           <div className="text-box text-center">
             <p className="number green">49,993</p>
-            <p>Normal</p>
+            <p className="disable-select">Normal</p>
           </div>
         </div>
       </div>
       <div className="alert-top">
         <div className="container">
           <div className="new-feature">
-            <div class="alert alert-defect">신규 발견 결함품: +2</div>
+            <div class="alert alert-defect disable-select">
+              신규 발견 결함품: +2
+            </div>
           </div>
         </div>
       </div>

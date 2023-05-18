@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <h2>결함품목</h2>
+      <h2 className="disable-select">결함품목</h2>
       <div className="centered-div bottom-padding">
         <div className="centered-content">
           {selectedImage ? (
