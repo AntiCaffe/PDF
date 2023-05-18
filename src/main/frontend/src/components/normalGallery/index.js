@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fault from "assets/images/no_img.jpg";
+import fault from "src/assets/images/no_img.jpg";
 import "./index.css";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <div className="centered-div">
         {selectedImage ? (
           <img
-            src={require(`assets/images/${selectedImage}`).default}
+            src={require(`src/assets/images/${selectedImage}`).default}
             alt={selectedImage}
           />
         ) : (

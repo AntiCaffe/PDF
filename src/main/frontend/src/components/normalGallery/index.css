@@ -1,9 +1,32 @@
-.centered-div {
+.normal-gallery {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-list {
+  flex: 1;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.image-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.image-item.selected {
+  background-color: lightgray;
+}
+
+.selected-image {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.centered-content {
-  text-align: center;
+.default-image {
+  width: 200px;
+  height: 200px;
+  background-color: gray;
 }

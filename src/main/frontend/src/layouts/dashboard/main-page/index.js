@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "assets/images/logo.png";
+import logo from "src/assets/images/logo.png";
 import "./index.css";
 import { IconButton, Button } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { animateScroll as scroll } from "react-scroll";
-import NormalImageGallery from "components/normalGallery";
-import DefectImageGallery from "components/defectGallery";
+import NormalImageGallery from "src/components/normalGallery";
+import DefectImageGallery from "src/components/defectGallery";
 
 function handleLogout() {
   // 로그아웃 기능 구현
@@ -93,7 +93,7 @@ function Dashboard() {
           </Button>
         </div>
       </div>
-      <div className="hero"></div>
+      <div className="hero-main"></div>
       <h1 className="color-set">
         PCB 결함 탐지 <br /> 실시간 상황판
       </h1>
