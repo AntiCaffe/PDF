@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "src/assets/images/logo.png";
+import ImageUpload from "src/components/imgUpload";
 import "./index.css";
 import { IconButton, Button } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -50,6 +51,7 @@ function Dashboard() {
             결함항목
           </a>
         </div>
+        <ImageUpload />
       </div>
       <div className="container position-relative">
         <img
