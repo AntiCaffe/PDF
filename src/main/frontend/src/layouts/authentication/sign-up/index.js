@@ -8,8 +8,8 @@ import {
   Badge as BadgeIcon,
 } from "@mui/icons-material";
 import Button from "@mui/material/Button";
-import EmailtextField from "components/emailField";
-import ToglePasswordtextField from "components/toglePassword";
+import EmailtextField from "src/components/emailField";
+import ToglePasswordtextField from "src/components/toglePassword";
 
 export default function SignUp() {
   const [su_id, setSignupId] = useState("");

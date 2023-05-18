@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import { TextField, Grid, Box } from "@mui/material";
-import SignUpWindow from "layouts/authentication/sign-up";
-import bgImage from "assets/images/TaeApril22.jpg";
+import SignUpWindow from "src/layouts/authentication/sign-up";
+import bgImage from "src/assets/images/TaeApril22.jpg";
 import "./index.css";
 
 export default function SignIn() {

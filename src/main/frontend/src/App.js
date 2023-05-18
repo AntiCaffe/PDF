@@ -5,9 +5,9 @@ import React, { useState, useEffect } from "react";
 //import CssBaseLine from "@mui/material/CssBaseline";
 
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import SignIn from "layouts/authentication/sign-in";
-import MainPage from "layouts/dashboard/main-page";
-import ProfilePage from "layouts/profile";
+import SignIn from "src/layouts/authentication/sign-in";
+import MainPage from "src/layouts/dashboard/main-page";
+import ProfilePage from "src/layouts/profile";
 
 export default function App() {
   return (
