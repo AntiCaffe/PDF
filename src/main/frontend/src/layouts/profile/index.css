@@ -31,20 +31,40 @@
 }
 
 .profile-container {
-  max-width: 70%;
-  width: 100%;
+  max-width: 700px;
+  min-width: 300px;
+  width: 70%;
   height: 700px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
 }
-
+.profile-container > * {
+  margin-left: 5vw;
+}
 .set-top {
   top: -430px;
   position: relative;
 }
+.set-top h2 {
+  margin-top: 4px;
+}
 
 .set-maxheight {
   max-height: 900px;
+}
+
+.name-id-text {
+  margin-top: 20px;
+}
+
+.name-id-text h1 {
+  display: inline;
+  margin-right: 30px;
+}
+
+.name-id-text p {
+  display: inline;
+  color: gray;
 }

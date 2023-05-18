@@ -65,10 +65,16 @@ const ProfilePage = () => {
       </div>
       <div className="set-top">
         <div className="top profile-container">
-          <div>
+          <div className="name-id-text">
             <h1>홍길동님</h1>
-            <h2>안녕하세요!</h2>
+            <p>( testid1 )</p>
           </div>
+          <h2>안녕하세요 !</h2>
+          <div>
+            <Typography>Email</Typography>
+            <Typography>Phone</Typography>
+          </div>
+          <Button sx={{ color: "black" }}>회원정보 수정</Button>
         </div>
       </div>
     </div>

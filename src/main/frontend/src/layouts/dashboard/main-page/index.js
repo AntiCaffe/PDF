@@ -95,8 +95,8 @@ function Dashboard() {
           </Button>
         </div>
       </div>
-      <div className="hero-main"></div>
-      <h1 className=" color-set disable-select">
+      <div className="hero-main "></div>
+      <h1 className="color-set disable-select">
         PCB 결함 탐지 <br /> 실시간 상황판
       </h1>
       <div className="container">
