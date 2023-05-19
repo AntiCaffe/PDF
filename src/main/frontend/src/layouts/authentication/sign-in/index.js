@@ -10,7 +10,9 @@ import { AuthContext } from "src/contexts/AuthContext";
 
 export default function SignIn() {
   const { id, setId, password, setPassword } = useContext(AuthContext);
+
   const movePage = useNavigate();
+
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);
 

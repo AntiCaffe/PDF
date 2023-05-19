@@ -50,6 +50,7 @@
 }
 .profile-container > * {
   margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .title-container {
@@ -120,4 +121,18 @@
 
 .typo-container {
   margin-top: 30px;
+}
+
+.set-to-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.set-to-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  margin-bottom: 20px;
 }

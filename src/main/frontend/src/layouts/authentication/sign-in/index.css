@@ -124,4 +124,5 @@ hr {
 
 .response-header {
   font-size: calc(1rem + ((400vw - 300px) / 300));
+  margin-top: -1.5vw;
 }
