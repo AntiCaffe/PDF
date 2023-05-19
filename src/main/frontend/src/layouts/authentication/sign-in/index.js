@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -6,11 +6,10 @@ import { TextField, Grid, Box } from "@mui/material";
 import SignUpWindow from "src/layouts/authentication/sign-up";
 import bgImage from "src/assets/images/TaeApril22.jpg";
 import "./index.css";
+import { AuthContext } from "src/contexts/AuthContext";
 
 export default function SignIn() {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-
+  const { id, setId, password, setPassword } = useContext(AuthContext);
   const movePage = useNavigate();
   const [showSignUp, setShowSignUp] = useState(false);
   const [hideSignUp, setHideSignUp] = useState(false);

@@ -42,7 +42,7 @@
   max-width: 700px;
   min-width: 300px;
   width: 70%;
-  height: 700px;
+  height: 455px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -74,7 +74,7 @@
 }
 
 .set-maxheight {
-  max-height: 900px;
+  max-height: 500px;
 }
 
 .name-id-text {
@@ -105,4 +105,19 @@
   .name-id-text h2 {
     text-align: center;
   }
+
+  .profile-container {
+    max-width: 700px;
+    min-width: 300px;
+    width: 70%;
+    height: 400px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.typo-container {
+  margin-top: 30px;
 }
