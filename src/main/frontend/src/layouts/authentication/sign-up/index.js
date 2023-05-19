@@ -81,7 +81,7 @@ export default function SignUp() {
   };
 
   return (
-    <div style={{ marginTop: "8vh" }}>
+    <div style={{ marginTop: "20px" }}>
       <h2 className="response-header">관리자 계정을 만들어주세요!</h2>
       <div className="signup-form-style">
         <TextField
