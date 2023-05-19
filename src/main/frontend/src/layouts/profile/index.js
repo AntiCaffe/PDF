@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
@@ -6,6 +6,7 @@ import bgImage from "src/assets/images/wave-blue-1.png";
 import { TextField, Grid, Box, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Button } from "@mui/material";
+import { AuthContext } from "src/contexts/AuthContext";
 
 function handleLogout() {
   // 로그아웃 기능 구현
@@ -14,12 +15,7 @@ function handleLogout() {
 
 const ProfilePage = () => {
   // 프로필 정보
-  const profile = {
-    name: "이름",
-    username: "아이디",
-    phoneNumber: "전화번호",
-    email: "이메일",
-  };
+  const { id, password } = useContext(AuthContext);
 
   const movePage = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -61,16 +57,24 @@ const ProfilePage = () => {
       </div>
       <div>
         <div className="background-hero"></div>
-        <img className="disable-select" src={bgImage}></img>
+        <div className="image-container">
+          <img
+            className="background-img disable-select"
+            src={bgImage}
+            alt="Background Image"
+          ></img>
+        </div>
       </div>
       <div className="set-top">
-        <div className="top profile-container">
+        <div className="title-container">
           <div className="name-id-text">
             <h1>홍길동님</h1>
-            <p>( testid1 )</p>
+            <h2>안녕하세요 !</h2>
           </div>
-          <h2>안녕하세요 !</h2>
-          <div>
+        </div>
+        <div className="top profile-container">
+          <div className="typo-container">
+            <Typography>ID: {id}</Typography>
             <Typography>Email</Typography>
             <Typography>Phone</Typography>
           </div>

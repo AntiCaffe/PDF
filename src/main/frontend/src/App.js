@@ -8,17 +8,26 @@ import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import SignIn from "src/layouts/authentication/sign-in";
 import MainPage from "src/layouts/dashboard/main-page";
 import ProfilePage from "src/layouts/profile";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
-          <Route path={"/authentication/sign-in"} element={<SignIn />}></Route>
-          <Route path={"/dashboard/main-page"} element={<MainPage />}></Route>
-          <Route path={"/profile"} element={<ProfilePage />}></Route>
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route
+              path="*"
+              element={<Navigate to="/authentication/sign-in" />}
+            />
+            <Route
+              path={"/authentication/sign-in"}
+              element={<SignIn />}
+            ></Route>
+            <Route path={"/dashboard/main-page"} element={<MainPage />}></Route>
+            <Route path={"/profile"} element={<ProfilePage />}></Route>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
