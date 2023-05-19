@@ -41,8 +41,6 @@ public class Member extends BaseEntity{
     @JoinColumn(name = "ad_id")
     private Admin admin;
 
-
-
     public Member(String name, String nickname, String password, String phone, String email, Admin admin) {
         this.name = name;
         this.nickname = nickname;
@@ -51,4 +49,5 @@ public class Member extends BaseEntity{
         this.email = email;
         this.admin = admin;
     }
+
 }

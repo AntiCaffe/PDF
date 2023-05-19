@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @Transactional
 @Slf4j
-class HelloWorldControllerTest {
+class MainPageControllerTest {
 
     @Autowired
     MemberRepository memberRepository;

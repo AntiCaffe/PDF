@@ -16,7 +16,7 @@ public class InitDB {
 
     private final InitService initService;
 
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         initService.create10AdminId();
     }
@@ -32,6 +32,8 @@ public class InitDB {
                 String generateKey = generateRandomKey();
                 adminRepository.save(new Admin(generateKey));
             }
+            adminRepository.save(new Admin("test_admin1"));
+            adminRepository.save(new Admin("test_admin2"));
         }
 
         private String generateRandomKey() {
