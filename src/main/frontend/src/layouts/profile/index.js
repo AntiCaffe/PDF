@@ -61,15 +61,22 @@ const ProfilePage = () => {
       </div>
       <div>
         <div className="background-hero"></div>
-        <img className="disable-select" src={bgImage}></img>
+        <div className="image-container">
+          <img
+            className="background-img disable-select"
+            src={bgImage}
+            alt="Background Image"
+          ></img>
+        </div>
       </div>
       <div className="set-top">
-        <div className="top profile-container">
+        <div className="title-container">
           <div className="name-id-text">
             <h1>홍길동님</h1>
-            <p>( testid1 )</p>
+            <h2>안녕하세요 !</h2>
           </div>
-          <h2>안녕하세요 !</h2>
+        </div>
+        <div className="top profile-container">
           <div>
             <Typography>Email</Typography>
             <Typography>Phone</Typography>
