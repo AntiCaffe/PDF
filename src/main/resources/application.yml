@@ -2,25 +2,25 @@
 #
 
 
-##aws 서버 환경
-#spring:
-#  datasource:
-#    url: jdbc:mariadb://52.79.78.43:3306/capstone?createDatabaseIfNotExist=true&characterEncoding=utf8
-#    username: root
-#    password: 1234
-#    driver-class-name: org.mariadb.jdbc.Driver
-#
-#  jpa:
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        #show_sql:true
-#        format_sql: true
-#
-#logging.level:
-#  org.hibernate.SQL: debug
+#aws 서버 환경
+spring:
+  datasource:
+    url: jdbc:mariadb://52.79.78.43:3306/capstone?createDatabaseIfNotExist=true&characterEncoding=utf8
+    username: root
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql:true
+        format_sql: true
+
+logging.level:
+  org.hibernate.SQL: debug
 
 cloud:
   aws:
