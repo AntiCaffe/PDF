@@ -25,16 +25,16 @@ function Dashboard() {
   const normalRef = useRef(null);
   const defectRef = useRef(null);
 
+  //const offset = window.innerHeight / 2; // 중간에 보이도록 스크롤
   const handleScrollToNormal = () => {
-    const offset = window.innerHeight / 2; // 중간에 보이도록 스크롤
-    scroll.scrollTo(normalRef.current.offsetTop - offset, {
+    scroll.scrollTo(normalRef.current.offsetTop - 50, {
       duration: 500,
       smooth: true,
     });
   };
 
   const handleScrollToDefect = () => {
-    scroll.scrollTo(defectRef.current.offsetTop, {
+    scroll.scrollTo(defectRef.current.offsetTop - 50, {
       duration: 500,
       smooth: true,
     });
