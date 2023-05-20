@@ -120,7 +120,7 @@
 }
 
 .typo-container {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .set-to-center {
@@ -137,17 +137,25 @@
   margin-bottom: 20px;
 }
 
+.info-text {
+  display: flex;
+  align-items: center;
+}
+
 .info-text p {
-  display: inline;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .font-body {
   color: gray;
   font-size: medium;
+  flex-grow: 1;
+  margin-left: 5vw; /* 왼쪽에서 5vw 만큼 떨어지도록 추가 */
 }
 
 .font-title {
   font-weight: bold;
   font-size: large;
+  width: 100px; /* 시작점을 일정하게 유지하기 위한 너비 설정 */
 }

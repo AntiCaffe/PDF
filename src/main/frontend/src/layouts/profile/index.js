@@ -20,7 +20,7 @@ const ProfilePage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [admin, setIsAdmin] = useState("");
+  const [adminId, setIsAdmin] = useState("");
 
   const movePage = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -53,8 +53,6 @@ const ProfilePage = () => {
   }, [id]);
 
   const [showFullNumber, setShowFullNumber] = useState(false);
-  const adminId = "xDfw5Ertya";
-  const testphone = "01033439987";
   const handleToggleVisibility = () => {
     setShowFullNumber(!showFullNumber);
   };
@@ -110,29 +108,31 @@ const ProfilePage = () => {
         <div className="top profile-container">
           <div className="typo-container">
             <div className="info-text">
-              <p className="font-title">아이디: </p>
-              <p className="font-body">flash246</p>
+              <p className="font-title">아이디</p>
+              <p className="font-body">{id}</p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-title">이메일: </p>
-              <p className="font-body">flash246@naver.com</p>
+              <p className="font-title">이메일</p>
+              <p className="font-body">{email}</p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-title">전화번호: </p>
+              <p className="font-title">전화번호</p>
               <p className="font-body">
-                {testphone.slice(0, 3)}-{testphone.slice(3, 7)}-
-                {testphone.slice(7)}
+                {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
               </p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-title">관리자 번호: </p>
+              <p className="font-title">관리자 번호</p>
               <p className="font-body">
                 {showFullNumber
                   ? adminId
-                  : adminId.substr(0, 4) + "*".repeat(adminId.length - 4)}
+                  : adminId.substr(0, 4) +
+                    (adminId.length > 4
+                      ? "*".repeat(adminId.length - 4)
+                      : "no admin id")}
               </p>
 
               <span
