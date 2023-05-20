@@ -8,7 +8,7 @@ import { TextField, Grid, Box, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Button } from "@mui/material";
 import { AuthContext } from "src/contexts/AuthContext";
-
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 function handleLogout() {
   // 로그아웃 기능 구현
   // 필요한 로직을 추가해야 합니다.
@@ -20,7 +20,7 @@ const ProfilePage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [admin, setIsAdmin] = useState("");
+  const [adminId, setIsAdmin] = useState("");
 
   const movePage = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -51,6 +51,11 @@ const ProfilePage = () => {
 
     fetchData();
   }, [id]);
+
+  const [showFullNumber, setShowFullNumber] = useState(false);
+  const handleToggleVisibility = () => {
+    setShowFullNumber(!showFullNumber);
+  };
 
   return (
     <div className="set-maxheight">
@@ -103,23 +108,39 @@ const ProfilePage = () => {
         <div className="top profile-container">
           <div className="typo-container">
             <div className="info-text">
-              <p className="font-bold">아이디: </p>
-              <p className="font-gray">{id}</p>
+              <p className="font-title">아이디</p>
+              <p className="font-body">{id}</p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-bold">이메일: </p>
-              <p className="font-gray">{email}</p>
+              <p className="font-title">이메일</p>
+              <p className="font-body">{email}</p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-bold">전화번호: </p>
-              <p className="font-gray">{phone}</p>
+              <p className="font-title">전화번호</p>
+              <p className="font-body">
+                {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
+              </p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
-              <p className="font-bold">관리자 번호: </p>
-              <p className="font-gray">{admin}</p>
+              <p className="font-title">관리자 번호</p>
+              <p className="font-body">
+                {showFullNumber
+                  ? adminId
+                  : adminId.substr(0, 4) +
+                    (adminId.length > 4
+                      ? "*".repeat(adminId.length - 4)
+                      : "no admin id")}
+              </p>
+
+              <span
+                style={{ float: "right", cursor: "pointer", color: "gray" }}
+                onClick={handleToggleVisibility}
+              >
+                {showFullNumber ? <VisibilityOff /> : <Visibility />}
+              </span>
             </div>
             <div className="divider"></div>
           </div>
