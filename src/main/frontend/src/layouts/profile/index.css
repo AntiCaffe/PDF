@@ -142,12 +142,12 @@
   margin: 0;
 }
 
-.font-gray {
+.font-body {
   color: gray;
   font-size: medium;
 }
 
-.font-bold {
+.font-title {
   font-weight: bold;
   font-size: large;
 }
