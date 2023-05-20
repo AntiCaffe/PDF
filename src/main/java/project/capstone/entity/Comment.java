@@ -27,7 +27,8 @@ public class Comment extends BaseEntity{
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = LAZY)
+    // OneToOne 으로 수정!!!!
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 

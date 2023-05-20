@@ -1,21 +1,18 @@
 package project.capstone.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import project.capstone.controller.dto.SignInDto;
 import project.capstone.controller.dto.SignInRequestDto;
 import project.capstone.controller.dto.SignUpRequestDto;
 import project.capstone.controller.dto.SignUpResponseDto;
-import project.capstone.entity.Member;
-import project.capstone.repository.MemberRepository;
 import project.capstone.service.MemberService;
 
 // @CrossOrigin(origins = "*")
 @Controller
 @RequiredArgsConstructor
-public class HelloWorldController {
+public class MainPageController {
 
     private final MemberService memberService;
 

@@ -34,12 +34,14 @@ public class Item extends BaseEntity{
     private ItemDefect defect;
 
 
-
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    private Comment comment;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Box> boxes = new ArrayList<>();
+
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    private ItemFile itemFile;
 
     public Item(String identifier, String imSize, String imDate, String resolution, String depth, AdminCheck adCheck, ItemType itemType, ItemDefect defect) {
         this.identifier = identifier;
