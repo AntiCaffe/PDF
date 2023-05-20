@@ -32,15 +32,20 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`/dashboard/profile/${id}`);
-        const data = response.data;
-        // 받아온 데이터를 변수에 저장합니다.
-        setName(data.name);
-        setEmail(data.email);
-        setPhone(data.phone);
-        setIsAdmin(data.admin);
+        const response = await axios.get(`/dashboard/profile/${id}`);
+        const { data } = response;
+
+        console.log(data); // 서버의 response 확인
+
+        // name, phone, email, adminId만 추출하여 변수에 저장
+        const { name, phone, email, adminId } = data;
+
+        setName(name);
+        setEmail(email);
+        setPhone(phone);
+        setIsAdmin(adminId);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.log(error);
       }
     };
 
@@ -91,35 +96,30 @@ const ProfilePage = () => {
       <div className="set-top">
         <div className="title-container">
           <div className="name-id-text">
-            <h1>홍길동님</h1>
+            <h1>{name}님</h1>
             <h2>안녕하세요 !</h2>
           </div>
         </div>
         <div className="top profile-container">
           <div className="typo-container">
-            <div>
-              <p>아이디: </p>
-              <p>{id}</p>
+            <div className="info-text">
+              <p className="font-bold">아이디: </p>
+              <p className="font-gray">{id}</p>
             </div>
             <div className="divider"></div>
-            <div>
-              <p>이름: </p>
-              <p>{name}</p>
+            <div className="info-text">
+              <p className="font-bold">이메일: </p>
+              <p className="font-gray">{email}</p>
             </div>
             <div className="divider"></div>
-            <div>
-              <p>이메일: </p>
-              <p>{email}</p>
+            <div className="info-text">
+              <p className="font-bold">전화번호: </p>
+              <p className="font-gray">{phone}</p>
             </div>
             <div className="divider"></div>
-            <div>
-              <p>전화번호: </p>
-              <p>{phone}</p>
-            </div>
-            <div className="divider"></div>
-            <div>
-              <p>관리자 번호: </p>
-              <p>{admin}</p>
+            <div className="info-text">
+              <p className="font-bold">관리자 번호: </p>
+              <p className="font-gray">{admin}</p>
             </div>
             <div className="divider"></div>
           </div>

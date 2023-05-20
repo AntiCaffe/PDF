@@ -136,3 +136,18 @@
   display: flex;
   margin-bottom: 20px;
 }
+
+.info-text p {
+  display: inline;
+  margin: 0;
+}
+
+.font-gray {
+  color: gray;
+  font-size: medium;
+}
+
+.font-bold {
+  font-weight: bold;
+  font-size: large;
+}
