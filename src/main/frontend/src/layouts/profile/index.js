@@ -54,7 +54,7 @@ const ProfilePage = () => {
 
   const [showFullNumber, setShowFullNumber] = useState(false);
   const adminId = "xDfw5Ertya";
-
+  const testphone = "01033439987";
   const handleToggleVisibility = () => {
     setShowFullNumber(!showFullNumber);
   };
@@ -121,7 +121,10 @@ const ProfilePage = () => {
             <div className="divider"></div>
             <div className="info-text">
               <p className="font-title">전화번호: </p>
-              <p className="font-body">01051606270</p>
+              <p className="font-body">
+                {testphone.slice(0, 3)}-{testphone.slice(3, 7)}-
+                {testphone.slice(7)}
+              </p>
             </div>
             <div className="divider"></div>
             <div className="info-text">
