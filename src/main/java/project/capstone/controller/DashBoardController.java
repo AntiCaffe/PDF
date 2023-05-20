@@ -5,13 +5,12 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.capstone.controller.dto.NewItemDto;
 import project.capstone.controller.dto.ProfileDto;
-import project.capstone.entity.ItemFile;
-import project.capstone.entity.ItemFileType;
-import project.capstone.service.FileStoreService;
+import project.capstone.service.ItemService;
 import project.capstone.service.ProfileService;
-import project.capstone.service.S3UploaderService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -19,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class DashBoardController {
 
-    private final S3UploaderService s3UploaderService;
+    private final ItemService itemService;
     private final ProfileService profileService;
 
     @ResponseBody
@@ -30,7 +29,14 @@ public class DashBoardController {
         return profileDto;
     }
 
-//    @ResponseBody
-//    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Long saveItem(HttpServletRequest request, @RequestParam(value = "image") MultipartFile image, NewItemDto dto) throws IOException {
+        System.out.println("saveItemController");
+        System.out.println(image);
+        System.out.println(dto);
+        return itemService.saveItem(dto, image);
+    }
+
 
 }

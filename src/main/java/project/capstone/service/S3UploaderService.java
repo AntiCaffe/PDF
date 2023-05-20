@@ -23,12 +23,13 @@ public class S3UploaderService {
 
     private final AmazonS3Client amazonS3Client;
 
-    @Value("&{cloud.aws.s3.bucket}")
+    @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
     public String upload(MultipartFile multipartFile, String dirName) throws IOException {
         File uploadFile = convert(multipartFile)
                 .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File 전환 실패!"));
+//        File uploadFile = multipartToFile(multipartFile);
         return upload(uploadFile, dirName);
     }
 
@@ -68,5 +69,9 @@ public class S3UploaderService {
         return Optional.empty();
     }
 
-
+    public File multipartToFile(MultipartFile mfile) throws IOException {
+        File file = new File(mfile.getOriginalFilename());
+        mfile.transferTo(file);
+        return file;
+    }
 }

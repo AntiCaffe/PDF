@@ -7,7 +7,6 @@ import project.capstone.entity.Admin;
 import project.capstone.repository.AdminRepository;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 import java.util.Random;
 
 @Component

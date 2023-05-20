@@ -1,6 +1,7 @@
 package project.capstone.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,6 +26,7 @@ public class Item extends BaseEntity{
     private String imDate;  // 사진 찍힌 날짜
     private String resolution;
     private String depth;
+    private String imageUrl;
 
     @Enumerated(EnumType.STRING)
     private AdminCheck adCheck;
@@ -43,7 +45,8 @@ public class Item extends BaseEntity{
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
     private ItemFile itemFile;
 
-    public Item(String identifier, String imSize, String imDate, String resolution, String depth, AdminCheck adCheck, ItemType itemType, ItemDefect defect) {
+    @Builder
+    public Item(String identifier, String imSize, String imDate, String imageUrl, String resolution, String depth, AdminCheck adCheck, ItemType itemType, ItemDefect defect) {
         this.identifier = identifier;
         this.imSize = imSize;
         this.imDate = imDate;
@@ -52,5 +55,9 @@ public class Item extends BaseEntity{
         this.adCheck = adCheck;
         this.itemType = itemType;
         this.defect = defect;
+    }
+
+    public void setImageUrl(String url) {
+        this.imageUrl = url;
     }
 }
