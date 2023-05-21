@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "src/assets/images/logo.png";
 import ImageUpload from "src/components/imgUpload";
 import "./index.css";
-import { IconButton, Button } from "@mui/material";
+import { IconButton, Button, Modal, Typography } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { animateScroll as scroll } from "react-scroll";
 import NormalImageGallery from "src/components/normalGallery";
@@ -19,6 +19,19 @@ function Dashboard() {
   const [normal, setNormal] = useState(0);
   const [bad, setBad] = useState(0);
   const [imageList, setImageList] = useState([]);
+
+  //for modal
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // for modal end
 
   const movePage = useNavigate();
 
@@ -40,6 +53,16 @@ function Dashboard() {
     });
   };
 
+  const buttonStyle = {
+    color: "white",
+    borderColor: "white",
+    margin: "0 10px",
+    "&:hover": {
+      borderColor: "white",
+      backgroundColor: "rgba(255, 255, 255, 0.5)",
+    },
+  };
+
   return (
     <div className="main-page">
       <div className="menu-bar">
@@ -51,7 +74,6 @@ function Dashboard() {
             결함항목
           </a>
         </div>
-        <ImageUpload />
       </div>
       <div className="container position-relative">
         <img
@@ -64,15 +86,7 @@ function Dashboard() {
           <Button
             variant="outlined"
             size="small"
-            sx={{
-              color: "white",
-              borderColor: "white",
-              margin: "0 10px",
-              "&:hover": {
-                borderColor: "white",
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-              },
-            }}
+            style={buttonStyle}
             onClick={handleLogout}
           >
             logout
@@ -80,15 +94,7 @@ function Dashboard() {
           <Button
             variant="outlined"
             size="small"
-            sx={{
-              color: "white",
-              borderColor: "white",
-              margin: "0 10px",
-              "&:hover": {
-                borderColor: "white",
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-              },
-            }}
+            style={buttonStyle}
             onClick={() => movePage("/profile")} //있으면 로그인으로 돌아가도록
           >
             profile
@@ -108,6 +114,29 @@ function Dashboard() {
             </IconButton>
           </span>
         </p>
+        <div>
+          <p className="color-set text-center">
+            <span>부품 데이터를 직접 넣으시고 싶으신가요?</span>
+            <Button
+              variant="outlined"
+              onClick={handleOpen}
+              size="small"
+              style={buttonStyle}
+            >
+              업로드
+            </Button>
+            <Modal open={open} onClose={handleClose}>
+              {/* 모달 내용을 여기에 작성하세요 */}
+              <div className="modal-container">
+                <div className="modal-header">
+                  <h3 className="modal-title">새 PCB 이미지 파일 첨부</h3>
+                  <div className="divider"></div>
+                </div>
+                <ImageUpload onClose={handleClose} />
+              </div>
+            </Modal>
+          </p>
+        </div>
       </div>
       <div className="top container">
         <h2 className="disable-select">상태 현황</h2>
@@ -138,7 +167,7 @@ function Dashboard() {
       <div ref={normalRef}>
         <NormalImageGallery />
       </div>
-      <div className="divider"></div>
+
       <div ref={defectRef}>
         <DefectImageGallery />
       </div>
