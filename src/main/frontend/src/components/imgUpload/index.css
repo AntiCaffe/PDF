@@ -1,0 +1,28 @@
+.font-gray {
+  color: gray;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.upload-text-container {
+  margin: 50px 10px 50px 10px;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.button-container Button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.modal-img {
+  max-width: 80vw;
+  max-height: 55vh; /* 이미지의 최대 높이를 80vh로 지정합니다 */
+  object-fit: contain;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
