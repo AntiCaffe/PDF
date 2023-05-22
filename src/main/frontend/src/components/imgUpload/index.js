@@ -2,10 +2,37 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import "./index.css";
+
 function ImageUpload({ onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [detectedBoxes, setDetectedBoxes] = useState([]);
+
+  const colors = {
+    "Normal MultiScrew1": "#80ff00",
+    "Normal MultiScrew2": "#40ff00",
+    "Normal Screw": "#00ff80",
+    "Normal Connector1": "#00ffff",
+    "Normal Connector2": "#00bfff",
+    "Normal Connector3": "#2e9afe",
+    "Normal Connector4": "#58acfa",
+    "Normal Support1": "#d0fa58",
+    "Normal Support2": "#bef781",
+    "Normal Support3": "#81f7be",
+    "Normal Support4": "#81f7d8",
+    "Defect MultiScrew1": "#FA5858",
+    "Defect MultiScrew2": "#FF0000",
+    "Defect Screw": "#FF4000",
+    "Defect Connector1": "#FF8000",
+    "Defect Connector2": "#FFBF00",
+    "Defect Connector3": "#DBA901",
+    "Defect Connector4": "#FE2E9A",
+    "Defect Support1": "#FF00FF",
+    "Defect Support2": "#F7819F",
+    "Defect Support3": "#CC2EFA",
+    "Defect Support4": "#8000FF",
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -22,17 +49,32 @@ function ImageUpload({ onClose }) {
   };
 
   const customButtonStyle = {
-    backgroundColor: "#4452a0", // 배경색 설정
-    color: "#fff", // 텍스트 색상 설정
-    padding: "5px 20px", // 패딩 설정
-    borderRadius: "5px", // 테두리 반경 설정
-    border: "none", // 테두리 제거
-    cursor: "pointer", // 커서 모양 변경
+    backgroundColor: "#4452a0",
+    color: "#fff",
+    padding: "5px 20px",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer",
   };
 
-  const handleAnalyzing = () => {
-    setIsAnalyzing(true);
+  const handleAnalyzing = async () => {
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:2000/v1/object-detection/yolov5",
+        formData
+      );
+      // 분석 결과를 받아와서 처리하는 로직 작성
+      console.log("분석 결과:", response.data);
+      setIsAnalyzing(true);
+      setDetectedBoxes(response.data);
+    } catch (error) {
+      console.error("전송 실패:", error);
+    }
   };
+
   const handleCancel = () => {
     setSelectedFile(null);
     setUploadedImage(null);
@@ -57,6 +99,39 @@ function ImageUpload({ onClose }) {
       });
   };
 
+  const renderDetectedBoxes = () => {
+    if (uploadedImage) {
+      const img = new Image();
+      img.src = uploadedImage;
+      const { naturalWidth, naturalHeight } = img;
+
+      return detectedBoxes.map((box, index) => {
+        const { xmin, ymin, xmax, ymax, name } = box;
+
+        const color = colors[name] || "white";
+
+        const style = {
+          position: "absolute",
+          left: `${(xmin * 100) / naturalWidth}%`,
+          top: `${(ymin * 100) / naturalHeight}%`,
+          width: `${((xmax - xmin) * 100) / naturalWidth}%`,
+          height: `${((ymax - ymin) * 100) / naturalHeight}%`,
+          border: `2px solid ${color}`,
+        };
+
+        return (
+          <div key={index} style={style}>
+            <div className="part-name" style={{ color: color }}>
+              {name}
+            </div>
+          </div>
+        );
+      });
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div className="text-center">
       {!selectedFile && !isAnalyzing && (
@@ -73,6 +148,7 @@ function ImageUpload({ onClose }) {
         <div>
           <div style={{ width: "100%" }}>
             <img src={uploadedImage} alt="Uploaded" className="modal-img" />
+            {renderDetectedBoxes()}
           </div>
         </div>
       )}
@@ -88,15 +164,7 @@ function ImageUpload({ onClose }) {
             component="span"
             variant="contained"
             size="small"
-            style={{
-              margin: "0 10px",
-              backgroundColor: "#4452a0",
-              color: "#fff",
-              padding: "5px 20px",
-              borderRadius: "5px",
-              border: "none",
-              cursor: "pointer",
-            }}
+            style={customButtonStyle}
           >
             파일첨부
           </Button>
@@ -110,15 +178,7 @@ function ImageUpload({ onClose }) {
             variant="contained"
             color="primary"
             size="small"
-            style={{
-              margin: "0 10px",
-              backgroundColor: "#4452a0",
-              color: "#fff",
-              padding: "5px 20px",
-              borderRadius: "5px",
-              border: "none",
-              cursor: "pointer",
-            }}
+            style={customButtonStyle}
             onClick={handleAnalyzing}
           >
             분석하기
@@ -128,6 +188,10 @@ function ImageUpload({ onClose }) {
 
       {isAnalyzing && selectedFile && (
         <div>
+          <div style={{ width: "100%" }}>
+            <img src={uploadedImage} alt="Uploaded" className="modal-img" />
+            {renderDetectedBoxes()}
+          </div>
           <div className="divider"></div>
           <div className="button-container">
             <Button
