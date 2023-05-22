@@ -82,7 +82,80 @@ function ImageUpload({ onClose }) {
 
       return detectedBoxes.map((box, index) => {
         const { xmin, ymin, xmax, ymax, name } = box;
-        const color = getRandomColor();
+
+        let color;
+        switch (name) {
+          case "Normal MultiScrew1":
+            color = "#80ff00"; // 빨간색
+            break;
+          case "Normal MultiScrew2":
+            color = "#40ff00"; // 초록색
+            break;
+          case "Normal Screw":
+            color = "#00ff80"; // 파란색
+            break;
+          case "Normal Connector1":
+            color = "#00ffff"; // 빨간색
+            break;
+          case "Normal Connector2":
+            color = "#00bfff"; // 초록색
+            break;
+          case " Normal Connector3":
+            color = "#2e9afe"; // 파란색
+            break;
+          case "Normal Connector4":
+            color = "#58acfa"; // 빨간색
+            break;
+          case "Normal Support1":
+            color = "#d0fa58"; // 초록색
+            break;
+          case " Normal Support2":
+            color = "#bef781"; // 파란색
+            break;
+          case "Normal Support3":
+            color = "#81f7be"; // 빨간색
+            break;
+          case "Normal Support4":
+            color = "#81f7d8"; // 초록색
+            break;
+          case "Defect MultiScrew1":
+            color = "#FA5858"; // 파란색
+            break;
+          case "Defect MultiScrew2":
+            color = "#FF0000"; // 빨간색
+            break;
+          case "Defect Screw":
+            color = "#FF4000"; // 초록색
+            break;
+          case "Defect Connector1":
+            color = "#FF8000"; // 파란색
+            break;
+          case "Defect Connector2":
+            color = "#FFBF00"; // 빨간색
+            break;
+          case "Defect Connector3":
+            color = "#DBA901"; // 초록색
+            break;
+          case "Defect Connector4":
+            color = "#FE2E9A"; // 파란색
+            break;
+          case "Defect Support1":
+            color = "#FF00FF"; // 빨간색
+            break;
+          case "Defect Support2":
+            color = "#F7819F"; // 초록색
+            break;
+          case "Defect Support3":
+            color = "#CC2EFA"; // 파란색
+            break;
+          case "Defect Support4":
+            color = "#8000FF"; // 파란색
+            break;
+          default:
+            color = "white";
+            break;
+        }
+
         const style = {
           position: "absolute",
           left: `${(xmin * 100) / naturalWidth}%`,
@@ -92,12 +165,10 @@ function ImageUpload({ onClose }) {
           border: `2px solid ${color}`,
         };
 
-        const displayName = name.split(" ").slice(1).join(" ");
-
         return (
           <div key={index} style={style}>
             <div className="part-name" style={{ color: color }}>
-              {displayName}
+              {name}
             </div>
           </div>
         );
@@ -105,15 +176,6 @@ function ImageUpload({ onClose }) {
     } else {
       return null;
     }
-  };
-
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
   };
 
   return (
