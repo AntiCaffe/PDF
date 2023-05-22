@@ -5,6 +5,7 @@ import "./index.css";
 function ImageUpload({ onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -29,6 +30,9 @@ function ImageUpload({ onClose }) {
     cursor: "pointer", // 커서 모양 변경
   };
 
+  const handleAnalyzing = () => {
+    setIsAnalyzing(true);
+  };
   const handleCancel = () => {
     setSelectedFile(null);
     setUploadedImage(null);
@@ -55,7 +59,7 @@ function ImageUpload({ onClose }) {
 
   return (
     <div className="text-center">
-      {!selectedFile && (
+      {!selectedFile && !isAnalyzing && (
         <div className="upload-text-container">
           <p className="font-gray set-line">
             수동으로 파일을 첨부하여, 분석한 결과를 저장할 수 있습니다.
@@ -65,31 +69,64 @@ function ImageUpload({ onClose }) {
           </p>
         </div>
       )}
-      {uploadedImage && (
+      {uploadedImage && !isAnalyzing && (
         <div>
           <div style={{ width: "100%" }}>
             <img src={uploadedImage} alt="Uploaded" className="modal-img" />
           </div>
         </div>
       )}
-      <label htmlFor="upload-button">
-        <input
-          type="file"
-          id="upload-button"
-          style={inputStyle}
-          onChange={handleFileChange}
-        />
-        <Button
-          component="span"
-          variant="contained"
-          size="small"
-          style={{ ...buttonStyleUpload, ...customButtonStyle }}
-        >
-          파일첨부
-        </Button>
-      </label>
+      {!selectedFile && !isAnalyzing && (
+        <label htmlFor="upload-button">
+          <input
+            type="file"
+            id="upload-button"
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+          <Button
+            component="span"
+            variant="contained"
+            size="small"
+            style={{
+              margin: "0 10px",
+              backgroundColor: "#4452a0",
+              color: "#fff",
+              padding: "5px 20px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            파일첨부
+          </Button>
+        </label>
+      )}
 
-      {uploadedImage && (
+      {selectedFile && !isAnalyzing && (
+        <div>
+          <div className="divider"></div>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            style={{
+              margin: "0 10px",
+              backgroundColor: "#4452a0",
+              color: "#fff",
+              padding: "5px 20px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onClick={handleAnalyzing}
+          >
+            분석하기
+          </Button>
+        </div>
+      )}
+
+      {isAnalyzing && selectedFile && (
         <div>
           <div className="divider"></div>
           <div className="button-container">
