@@ -31,8 +31,21 @@ function ImageUpload({ onClose }) {
   };
 
   const handleAnalyzing = () => {
-    setIsAnalyzing(true);
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+
+    axios
+      .post("/v1/object-detection/yolov5", formData)
+      .then((response) => {
+        // 분석 결과를 받아와서 처리하는 로직 작성
+        console.log("분석 결과:", response.data);
+        setIsAnalyzing(true);
+      })
+      .catch((error) => {
+        console.error("전송 실패:", error);
+      });
   };
+
   const handleCancel = () => {
     setSelectedFile(null);
     setUploadedImage(null);
