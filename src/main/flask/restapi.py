@@ -11,8 +11,10 @@ from PIL import Image
 
 import torch
 from flask import Flask, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 DETECTION_URL = "/v1/object-detection/yolov5"
 
