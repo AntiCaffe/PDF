@@ -9,6 +9,31 @@ function ImageUpload({ onClose }) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [detectedBoxes, setDetectedBoxes] = useState([]);
 
+  const colors = {
+    "Normal MultiScrew1": "#80ff00",
+    "Normal MultiScrew2": "#40ff00",
+    "Normal Screw": "#00ff80",
+    "Normal Connector1": "#00ffff",
+    "Normal Connector2": "#00bfff",
+    "Normal Connector3": "#2e9afe",
+    "Normal Connector4": "#58acfa",
+    "Normal Support1": "#d0fa58",
+    "Normal Support2": "#bef781",
+    "Normal Support3": "#81f7be",
+    "Normal Support4": "#81f7d8",
+    "Defect MultiScrew1": "#FA5858",
+    "Defect MultiScrew2": "#FF0000",
+    "Defect Screw": "#FF4000",
+    "Defect Connector1": "#FF8000",
+    "Defect Connector2": "#FFBF00",
+    "Defect Connector3": "#DBA901",
+    "Defect Connector4": "#FE2E9A",
+    "Defect Support1": "#FF00FF",
+    "Defect Support2": "#F7819F",
+    "Defect Support3": "#CC2EFA",
+    "Defect Support4": "#8000FF",
+  };
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -83,78 +108,7 @@ function ImageUpload({ onClose }) {
       return detectedBoxes.map((box, index) => {
         const { xmin, ymin, xmax, ymax, name } = box;
 
-        let color;
-        switch (name) {
-          case "Normal MultiScrew1":
-            color = "#80ff00"; // 빨간색
-            break;
-          case "Normal MultiScrew2":
-            color = "#40ff00"; // 초록색
-            break;
-          case "Normal Screw":
-            color = "#00ff80"; // 파란색
-            break;
-          case "Normal Connector1":
-            color = "#00ffff"; // 빨간색
-            break;
-          case "Normal Connector2":
-            color = "#00bfff"; // 초록색
-            break;
-          case " Normal Connector3":
-            color = "#2e9afe"; // 파란색
-            break;
-          case "Normal Connector4":
-            color = "#58acfa"; // 빨간색
-            break;
-          case "Normal Support1":
-            color = "#d0fa58"; // 초록색
-            break;
-          case " Normal Support2":
-            color = "#bef781"; // 파란색
-            break;
-          case "Normal Support3":
-            color = "#81f7be"; // 빨간색
-            break;
-          case "Normal Support4":
-            color = "#81f7d8"; // 초록색
-            break;
-          case "Defect MultiScrew1":
-            color = "#FA5858"; // 파란색
-            break;
-          case "Defect MultiScrew2":
-            color = "#FF0000"; // 빨간색
-            break;
-          case "Defect Screw":
-            color = "#FF4000"; // 초록색
-            break;
-          case "Defect Connector1":
-            color = "#FF8000"; // 파란색
-            break;
-          case "Defect Connector2":
-            color = "#FFBF00"; // 빨간색
-            break;
-          case "Defect Connector3":
-            color = "#DBA901"; // 초록색
-            break;
-          case "Defect Connector4":
-            color = "#FE2E9A"; // 파란색
-            break;
-          case "Defect Support1":
-            color = "#FF00FF"; // 빨간색
-            break;
-          case "Defect Support2":
-            color = "#F7819F"; // 초록색
-            break;
-          case "Defect Support3":
-            color = "#CC2EFA"; // 파란색
-            break;
-          case "Defect Support4":
-            color = "#8000FF"; // 파란색
-            break;
-          default:
-            color = "white";
-            break;
-        }
+        const color = colors[name] || "white";
 
         const style = {
           position: "absolute",
