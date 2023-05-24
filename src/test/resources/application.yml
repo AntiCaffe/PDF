@@ -33,6 +33,31 @@ spring:
       hibernate:
         #show_sql:true
         format_sql: true
-
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
 logging.level:
   org.hibernate.SQL: debug
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA6HRD45KFYSD7ASTU
+      secretKey: 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
+    s3:
+      bucket: pdfresource
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
+
+file:
+  dir: /Users/kimyuseong/Documents

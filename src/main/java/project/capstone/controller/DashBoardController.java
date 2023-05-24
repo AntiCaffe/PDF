@@ -5,21 +5,32 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.capstone.controller.dto.DashboardDto;
 import project.capstone.controller.dto.NewItemDto;
 import project.capstone.controller.dto.ProfileDto;
+import project.capstone.entity.Item;
+import project.capstone.repository.ItemRepository;
 import project.capstone.service.ItemService;
 import project.capstone.service.ProfileService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
 public class DashBoardController {
 
+    private final ItemRepository itemRepository;
     private final ItemService itemService;
     private final ProfileService profileService;
+
+    @ResponseBody
+    @GetMapping("/items")
+    public List<DashboardDto> responseItemList() {
+        return itemService.itemList();
+    }
 
     @ResponseBody
     @GetMapping("/profile/{nickname}")

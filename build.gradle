@@ -30,6 +30,7 @@ dependencies {
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
 
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
@@ -107,6 +108,6 @@ compileQuerydsl {
 
 //querydsl 추가 끝
 
- test.onlyIf {
- 	!project.hasProperty('test')
- }
+// test.onlyIf {
+// 	!project.hasProperty('test')
+// }

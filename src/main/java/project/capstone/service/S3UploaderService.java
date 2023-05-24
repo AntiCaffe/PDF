@@ -33,11 +33,11 @@ public class S3UploaderService {
         return upload(uploadFile, dirName);
     }
 
-    private String upload(File uploadFile, String dirName) {
+    public String upload(File uploadFile, String dirName) {
         String fileName = dirName + "/" + uploadFile.getName();
         String uploadImageUrl = putS3(uploadFile, fileName);
 
-        removeNewFile(uploadFile);
+//        removeNewFile(uploadFile);
 
         return uploadImageUrl;
     }

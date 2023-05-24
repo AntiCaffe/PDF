@@ -21,6 +21,7 @@ public class Item extends BaseEntity{
     @Column(name = "item_id")
     private Long id;
 
+    private String name;
     private String identifier;
     private String imSize;
     private String imDate;  // 사진 찍힌 날짜
@@ -42,22 +43,24 @@ public class Item extends BaseEntity{
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Box> boxes = new ArrayList<>();
 
-    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    private ItemFile itemFile;
-
     @Builder
-    public Item(String identifier, String imSize, String imDate, String imageUrl, String resolution, String depth, AdminCheck adCheck, ItemType itemType, ItemDefect defect) {
+    public Item(String name, String identifier, String imSize, String imDate, String resolution, String depth, ItemType itemType) {
+        this.name = name;
         this.identifier = identifier;
         this.imSize = imSize;
         this.imDate = imDate;
         this.resolution = resolution;
         this.depth = depth;
-        this.adCheck = adCheck;
         this.itemType = itemType;
-        this.defect = defect;
+        this.adCheck = AdminCheck.NOT_CHECK;
+        this.defect = ItemDefect.NON;
     }
 
     public void setImageUrl(String url) {
         this.imageUrl = url;
+    }
+
+    public void setItemName(String name) {
+        this.name = name;
     }
 }
