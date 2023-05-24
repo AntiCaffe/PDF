@@ -108,6 +108,6 @@ compileQuerydsl {
 
 //querydsl 추가 끝
 
-// test.onlyIf {
-// 	!project.hasProperty('test')
-// }
+ test.onlyIf {
+ 	!project.hasProperty('test')
+ }
