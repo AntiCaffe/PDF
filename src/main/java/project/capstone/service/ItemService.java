@@ -76,12 +76,13 @@ public class ItemService {
                     .resolution(item.getResolution())
                     .depth(item.getDepth())
                     .imageUrl(item.getImageUrl())
+                    .defective(item.getDefective())
                     .build();
             List<Box> boxes = item.getBoxes();
             for (Box box : boxes) {
                 dto.addBox(BoxDto.builder()
                         .xmin(box.getXmin())
-                        .ymin(box.getXmin())
+                        .ymin(box.getYmin())
                         .xmax(box.getXmax())
                         .ymax(box.getYmax())
                         .confidence(box.getConfidence())

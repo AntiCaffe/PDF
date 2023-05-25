@@ -104,12 +104,17 @@ public class InitDB {
             for (Item item : items) {
                 List<Box> boxes = parsingJsonFile(item.getName());
                 for (Box box : boxes) {
+                    if (box.getTypeName().substring(0, 6).equals("Defect")) {
+                        box.changeDefect();
+                        if(!item.getDefective())
+                            item.changeDefective();
+                    }
                     box.setItem(item);
-                    log.info("result={}", box.getXmax());
                     boxRepository.save(box);
                 }
             }
         }
+
         public List<Box> parsingJsonFile(String itemName) throws IOException, ParseException {
             File[] files = new File(jsonPath).listFiles();
             JSONParser parser = new JSONParser();

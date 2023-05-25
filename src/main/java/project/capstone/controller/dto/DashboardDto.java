@@ -19,10 +19,11 @@ public class DashboardDto {
     private String resolution;
     private String depth;
     private String imageUrl;
+    private Boolean defective;
     private List<BoxDto> boxes = new ArrayList<>();
 
     @Builder
-    public DashboardDto(String name, String identifier, String imSize, String imDate, String resolution, String depth, String imageUrl) {
+    public DashboardDto(String name, String identifier, String imSize, String imDate, String resolution, String depth, String imageUrl, Boolean defective) {
         this.name = name;
         this.identifier = identifier;
         this.imSize = imSize;
@@ -30,6 +31,7 @@ public class DashboardDto {
         this.resolution = resolution;
         this.depth = depth;
         this.imageUrl = imageUrl;
+        this.defective = defective;
     }
 
     public void addBox(BoxDto boxDto) {

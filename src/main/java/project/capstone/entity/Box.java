@@ -27,6 +27,7 @@ public class Box extends BaseEntity{
     private String confidence;
     private Integer typeClass;
     private String typeName;
+    private Boolean defect;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
@@ -40,10 +41,15 @@ public class Box extends BaseEntity{
         this.confidence = confidence;
         this.typeClass = typeClass;
         this.typeName = typeName;
+        this.defect = false;
     }
 
     public void setItem(Item item) {
         this.item = item;
         item.getBoxes().add(this);
+    }
+
+    public void changeDefect() {
+        this.defect = true;
     }
 }

@@ -33,8 +33,7 @@ public class Item extends BaseEntity{
     private AdminCheck adCheck;
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
-    @Enumerated(EnumType.STRING)
-    private ItemDefect defect;
+    private Boolean defective;
 
 
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
@@ -53,7 +52,7 @@ public class Item extends BaseEntity{
         this.depth = depth;
         this.itemType = itemType;
         this.adCheck = AdminCheck.NOT_CHECK;
-        this.defect = ItemDefect.NON;
+        this.defective = false;
     }
 
     public void setImageUrl(String url) {
@@ -62,5 +61,9 @@ public class Item extends BaseEntity{
 
     public void setItemName(String name) {
         this.name = name;
+    }
+
+    public void changeDefective() {
+        this.defective = true;
     }
 }
