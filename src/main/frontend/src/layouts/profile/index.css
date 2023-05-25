@@ -53,6 +53,21 @@
   margin-right: 5vw;
 }
 
+.edit-container {
+  max-width: 700px;
+  min-width: 300px;
+  width: 70%;
+  height: 500px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.edit-container > * {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
 .title-container {
   max-width: 700px;
   min-width: 300px;
@@ -157,5 +172,5 @@
 .font-title {
   font-weight: bold;
   font-size: large;
-  width: 100px; /* 시작점을 일정하게 유지하기 위한 너비 설정 */
+  width: 120px; /* 시작점을 일정하게 유지하기 위한 너비 설정 */
 }
