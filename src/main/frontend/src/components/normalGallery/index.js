@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from "react";
-import fault from "src/assets/images/no_img.jpg";
-import "./index.css";
+import axios from "axios";
 
-function App() {
-  const imageList = ["image1.jpg", "image2.jpg", "image3.jpg"]; // 이미지 파일 목록
-  const [selectedImage, setSelectedImage] = useState(null); // 선택된 이미지
+const Dashboard = () => {
+  const [names, setNames] = useState([]);
 
-  const handleImageClick = (imageName) => {
-    setSelectedImage(imageName);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/dashboard/items"
+      );
+      const data = response.data;
+      const nameList = data.map((item) => item.name);
+      setNames(nameList);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div>
-      <h2 className="disable-select">정상품목</h2>
-      <div className="centered-div">
-        {selectedImage ? (
-          <img
-            src={require(`src/assets/images/${selectedImage}`).default}
-            alt={selectedImage}
-          />
-        ) : (
-          <img src={fault} alt="No Image" />
-        )}
-      </div>
+      <h1>Names</h1>
+      <ul>
+        {names.map((name, index) => (
+          <li key={index}>{name}</li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
-export default App;
+export default Dashboard;
