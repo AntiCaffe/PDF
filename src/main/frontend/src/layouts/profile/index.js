@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 import axios from "axios";
 import bgImage from "src/assets/images/wave-blue-1.png";
-import { TextField, Grid, Box, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Button } from "@mui/material";
 import { AuthContext } from "src/contexts/AuthContext";
@@ -57,6 +56,12 @@ const ProfilePage = () => {
     setShowFullNumber(!showFullNumber);
   };
 
+  const [showEditForm, setShowEdit] = useState(true);
+
+  const profileEditToggle = () => {
+    setShowEdit(!showEditForm);
+  };
+
   return (
     <div className="set-maxheight">
       <div>
@@ -105,49 +110,99 @@ const ProfilePage = () => {
             <h2>안녕하세요 !</h2>
           </div>
         </div>
-        <div className="top profile-container">
-          <div className="typo-container">
-            <div className="info-text">
-              <p className="font-title">아이디</p>
-              <p className="font-body">{id}</p>
-            </div>
-            <div className="divider"></div>
-            <div className="info-text">
-              <p className="font-title">이메일</p>
-              <p className="font-body">{email}</p>
-            </div>
-            <div className="divider"></div>
-            <div className="info-text">
-              <p className="font-title">전화번호</p>
-              <p className="font-body">
-                {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
-              </p>
-            </div>
-            <div className="divider"></div>
-            <div className="info-text">
-              <p className="font-title">관리자 번호</p>
-              <p className="font-body">
-                {showFullNumber
-                  ? adminId
-                  : adminId.substr(0, 4) +
-                    (adminId.length > 4
-                      ? "*".repeat(adminId.length - 4)
-                      : "no admin id")}
-              </p>
+        {showEditForm ? (
+          <div className="top profile-container">
+            <div className="typo-container">
+              <div className="info-text">
+                <p className="font-title">아이디</p>
+                <p className="font-body">{id}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">이메일</p>
+                <p className="font-body">{email}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">전화번호</p>
+                <p className="font-body">
+                  {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
+                </p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">관리자 번호</p>
+                <p className="font-body">
+                  {showFullNumber
+                    ? adminId
+                    : adminId.substr(0, 4) +
+                      (adminId.length > 4
+                        ? "*".repeat(adminId.length - 4)
+                        : "no admin id")}
+                </p>
 
-              <span
-                style={{ float: "right", cursor: "pointer", color: "gray" }}
-                onClick={handleToggleVisibility}
-              >
-                {showFullNumber ? <VisibilityOff /> : <Visibility />}
-              </span>
+                <span
+                  style={{ float: "right", cursor: "pointer", color: "gray" }}
+                  onClick={handleToggleVisibility}
+                >
+                  {showFullNumber ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </div>
+              <div className="divider"></div>
             </div>
-            <div className="divider"></div>
+            <div className="set-to-center set-to-bottom">
+              <Button variant="outlined" onClick={profileEditToggle}>
+                회원정보 수정
+              </Button>
+            </div>
           </div>
-          <div className="set-to-center set-to-bottom">
-            <Button variant="outlined">회원정보 수정</Button>
+        ) : (
+          <div className="top profile-container">
+            <div className="typo-container">
+              <div className="info-text">
+                <p className="font-title">아이디?</p>
+                <p className="font-body">{id}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">이메일?</p>
+                <p className="font-body">{email}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">전화번호</p>
+                <p className="font-body">
+                  {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
+                </p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">관리자 번호</p>
+                <p className="font-body">
+                  {showFullNumber
+                    ? adminId
+                    : adminId.substr(0, 4) +
+                      (adminId.length > 4
+                        ? "*".repeat(adminId.length - 4)
+                        : "no admin id")}
+                </p>
+
+                <span
+                  style={{ float: "right", cursor: "pointer", color: "gray" }}
+                  onClick={handleToggleVisibility}
+                >
+                  {showFullNumber ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </div>
+              <div className="divider"></div>
+            </div>
+            <div className="set-to-center set-to-bottom">
+              <Button variant="outlined" onClick={profileEditToggle}>
+                회원정보 수정
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
