@@ -5,9 +5,10 @@ import "./index.css";
 import axios from "axios";
 import bgImage from "src/assets/images/wave-blue-1.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { IconButton, Button } from "@mui/material";
+import { IconButton, Button, TextField } from "@mui/material";
 import { AuthContext } from "src/contexts/AuthContext";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 function handleLogout() {
   // 로그아웃 기능 구현
   // 필요한 로직을 추가해야 합니다.
@@ -157,48 +158,85 @@ const ProfilePage = () => {
             </div>
           </div>
         ) : (
-          <div className="top profile-container">
+          <div className="top edit-container">
             <div className="typo-container">
               <div className="info-text">
-                <p className="font-title">아이디?</p>
-                <p className="font-body">{id}</p>
+                <p className="font-title">아이디</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={id}
+                  fullWidth
+                  disabled
+                />
               </div>
               <div className="divider"></div>
               <div className="info-text">
-                <p className="font-title">이메일?</p>
-                <p className="font-body">{email}</p>
+                <p className="font-title">비밀번호</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  fullWidth
+                  type="password"
+                />
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">이메일</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={email}
+                  fullWidth
+                />
               </div>
               <div className="divider"></div>
               <div className="info-text">
                 <p className="font-title">전화번호</p>
-                <p className="font-body">
-                  {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
-                </p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={phone}
+                  fullWidth
+                />
               </div>
               <div className="divider"></div>
               <div className="info-text">
                 <p className="font-title">관리자 번호</p>
-                <p className="font-body">
-                  {showFullNumber
-                    ? adminId
-                    : adminId.substr(0, 4) +
-                      (adminId.length > 4
-                        ? "*".repeat(adminId.length - 4)
-                        : "no admin id")}
-                </p>
-
-                <span
-                  style={{ float: "right", cursor: "pointer", color: "gray" }}
-                  onClick={handleToggleVisibility}
-                >
-                  {showFullNumber ? <VisibilityOff /> : <Visibility />}
-                </span>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={adminId}
+                  fullWidth
+                  disabled
+                />
               </div>
               <div className="divider"></div>
             </div>
             <div className="set-to-center set-to-bottom">
-              <Button variant="outlined" onClick={profileEditToggle}>
-                회원정보 수정
+              <Button
+                variant="outlined"
+                size="small"
+                sx={{ margin: "0 1vw 0 1vw" }}
+              >
+                비밀번호 수정
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={profileEditToggle}
+                size="small"
+                sx={{ margin: "0 1vw 0 1vw" }}
+              >
+                변경내용 저장
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                size="small"
+                onClick={profileEditToggle}
+                sx={{ margin: "0 1vw 0 1vw" }}
+              >
+                회원탈퇴
               </Button>
             </div>
           </div>
