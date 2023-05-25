@@ -6,6 +6,7 @@ import LockIcon from "@mui/icons-material/Lock";
 function ToglePasswordField({ onChange }) {
   const [showPassword, setShowPassword] = useState(false);
   const [su_pw, setSignupPw] = useState("");
+  const [error, setError] = useState(false);
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -13,7 +14,10 @@ function ToglePasswordField({ onChange }) {
 
   const handleChangePassword = (event) => {
     const value = event.target.value;
+    const isValid = value.length >= 10 && /^[a-zA-Z0-9]+$/.test(value);
+
     setSignupPw(value);
+    setError(!isValid);
     onChange(value);
   };
 
@@ -41,6 +45,10 @@ function ToglePasswordField({ onChange }) {
           </InputAdornment>
         ),
       }}
+      error={error}
+      helperText={
+        error ? "비밀번호는 10자리 이상의 영어와 숫자만 입력해주세요." : ""
+      }
     />
   );
 }
