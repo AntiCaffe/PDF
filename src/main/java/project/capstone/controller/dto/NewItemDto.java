@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.capstone.entity.AdminCheck;
 import project.capstone.entity.Box;
-import project.capstone.entity.ItemDefect;
 import project.capstone.entity.ItemType;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class NewItemDto {
     private String depth;
     private AdminCheck adminCheck;
     private ItemType itemType;
-    private ItemDefect defect;
+    private Boolean defect;
     private List<Box> boxes;
 
     @Builder

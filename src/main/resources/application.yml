@@ -1,9 +1,51 @@
-# local
+##local mysql 서버 환경
+#spring:
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
 #
-
+#  datasource:
+#    url: jdbc:mariadb://localhost:3306/capstone?createDatabaseIfNotExist=true&characterEncoding=utf8
+#    username: root
+#    password: 1234
+#    driver-class-name: org.mariadb.jdbc.Driver
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    hibernate:
+#      ddl-auto: none
+#    properties:
+#      hibernate:
+#        #show_sql:true
+#        format_sql: true
+#logging.level:
+#  org.hibernate.SQL: debug
+#
+#cloud:
+#  aws:
+#    credentials:
+#      accessKey: AKIA6HRD45KFYSD7ASTU
+#      secretKey: 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
+#    s3:
+#      bucket: pdfresource
+#    region:
+#      static: ap-northeast-2
+#    stack:
+#      auto: false
+#
+#logging:
+#  level:
+#    com:
+#      amazonaws:
+#        util:
+#          EC2MetadataUtils: error
 
 #aws 서버 환경
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   datasource:
     url: jdbc:mariadb://52.79.78.43:3306/capstone?createDatabaseIfNotExist=true&characterEncoding=utf8
     username: root
@@ -44,5 +86,4 @@ logging:
         util:
           EC2MetadataUtils: error
 
-file:
-  dir: /Users/kimyuseong/Documents
+
