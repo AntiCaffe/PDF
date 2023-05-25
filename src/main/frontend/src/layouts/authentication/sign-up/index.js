@@ -18,6 +18,7 @@ export default function SignUp() {
   const [su_email, setSignupEm] = useState("");
   const [su_ad, setSignupAdid] = useState("");
   const [su_phone, setSignupPh] = useState("");
+  const [id_error, setIdError] = useState(false);
 
   const movePage = useNavigate();
 
@@ -80,6 +81,14 @@ export default function SignUp() {
     setSignupEm(value);
   };
 
+  const handleID = (e) => {
+    const value = e.target.value;
+    const isValid = /^[a-zA-Z0-9]{1,10}$/.test(value); // 정규식을 사용하여 유효성 검사
+
+    setSignupId(value);
+    setIdError(!isValid);
+  };
+
   return (
     <div style={{ marginTop: "20px" }}>
       <h2 className="response-header">관리자 계정을 만들어주세요!</h2>
@@ -88,7 +97,7 @@ export default function SignUp() {
           id="setID"
           label="ID"
           value={su_id}
-          onChange={(e) => setSignupId(e.target.value)}
+          onChange={handleID}
           variant="standard"
           margin="normal"
           InputProps={{
@@ -98,6 +107,10 @@ export default function SignUp() {
               </InputAdornment>
             ),
           }}
+          error={id_error}
+          helperText={
+            id_error ? "10자리 이하의 영어와 숫자만 입력해주세요." : ""
+          }
           sx={{ width: "80%", marginBottom: "1vh" }}
         />
 
