@@ -24,6 +24,10 @@ export default function App() {
               path={"/authentication/sign-in"}
               element={<SignIn />}
             ></Route>
+            <Route
+              path="/dashboard"
+              element={<Navigate to="/dashboard/main-page" />}
+            />
             <Route path={"/dashboard/main-page"} element={<MainPage />}></Route>
             <Route path={"/profile"} element={<ProfilePage />}></Route>
           </Routes>
