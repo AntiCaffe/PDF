@@ -10,9 +10,7 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/dashboard/items"
-      );
+      const response = await axios.get("http://localhost:8080/dashboard/items");
       const data = response.data;
       const nameList = data.map((item) => item.name);
       setNames(nameList);
