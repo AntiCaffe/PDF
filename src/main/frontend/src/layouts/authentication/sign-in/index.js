@@ -35,6 +35,7 @@ export default function SignIn() {
           alert("입력하신 비밀번호 가 일치하지 않습니다.");
         } else if (res.data.nickname === id) {
           sessionStorage.setItem("user_id", id); // sessionStorage에 id를 user_id라는 key 값으로 저장
+
           movePage("/dashboard/main-page");
         }
       })
