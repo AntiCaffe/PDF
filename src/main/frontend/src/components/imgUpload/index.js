@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import "./index.css";
-
+import renderDetectedBoxes from "src/components/detectBox/index.js";
 function ImageUpload({ onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -104,6 +104,7 @@ function ImageUpload({ onClose }) {
       const img = new Image();
       img.src = uploadedImage;
       const { naturalWidth, naturalHeight } = img;
+      console.log(naturalHeight, naturalWidth);
 
       return detectedBoxes.map((box, index) => {
         const { xmin, ymin, xmax, ymax, name } = box;
@@ -116,7 +117,7 @@ function ImageUpload({ onClose }) {
           top: `${(ymin * 100) / naturalHeight}%`,
           width: `${((xmax - xmin) * 100) / naturalWidth}%`,
           height: `${((ymax - ymin) * 100) / naturalHeight}%`,
-          border: `2px solid ${color}`,
+          border: `1px solid ${color}`,
         };
 
         return (
