@@ -117,7 +117,7 @@ const Dashboard = () => {
               >
                 {filteredNames.map((name, index) => (
                   <ListItem key={index} onClick={() => handleImageClick(name)}>
-                    <ListItemText primary={name} />
+                    <ListItemText primary={name} sx={{ zIndex: "-99" }} />
                   </ListItem>
                 ))}
               </div>

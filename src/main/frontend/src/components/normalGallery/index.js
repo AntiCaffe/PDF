@@ -7,6 +7,7 @@ import {
   ListItemText,
   InputAdornment,
   TextField,
+  ListItemButton,
 } from "@mui/material";
 import "./index.css";
 import no_img from "src/assets/images/no_img.jpg";
@@ -94,35 +95,41 @@ const Dashboard = () => {
         <h1>정상품목</h1>
         <div className="content">
           <div className="normal-list scrollableList">
-            <TextField
-              type="text"
-              size="small"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="검색어를 입력하세요"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
+            <div
+              style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1,
+                backgroundColor: "#fff",
               }}
-              sx={{ margin: "5px" }}
-            />
-            <List>
-              <div
-                style={{
-                  justifyContent: "center",
+            >
+              <TextField
+                type="text"
+                size="small"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="검색어를 입력하세요"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                 }}
-              >
-                {filteredNames.map((name, index) => (
-                  <ListItem key={index} onClick={() => handleImageClick(name)}>
-                    <ListItemText primary={name} />
-                  </ListItem>
-                ))}
-              </div>
+                sx={{ margin: "5px" }}
+              />
+            </div>
+            <List>
+              {filteredNames.map((name, index) => (
+                <ListItem key={index} component="div" disablePadding>
+                  <ListItemButton onClick={() => handleImageClick(name)}>
+                    <ListItemText primary={name} sx={{ zIndex: "-99" }} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
             </List>
           </div>
+
           <div className="imageContainer">
             {selectedImage !== "no_img" ? (
               <img

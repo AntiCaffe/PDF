@@ -126,7 +126,6 @@ function Dashboard() {
               업로드
             </Button>
             <Modal open={open} onClose={handleClose}>
-              {/* 모달 내용을 여기에 작성하세요 */}
               <div className="modal-container">
                 <div className="modal-header">
                   <h3 className="modal-title">새 PCB 이미지 파일 첨부</h3>

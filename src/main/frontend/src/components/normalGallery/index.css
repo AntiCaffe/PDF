@@ -33,10 +33,12 @@
 }
 
 .normal-img {
-  width: 30vw;
-  min-width: 350px;
+  width: 95%;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 1px solid #8b8b8b;
 }
 
 .content {
@@ -47,30 +49,18 @@
 }
 
 .normal-list {
-  width: 30vw;
-  min-width: 350px;
-  height: 20vw;
-  min-height: 250px;
+  height: 330px;
+  width: 500px;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .imageContainer {
   display: flex; /* 이미지 컨테이너를 flex로 설정하여 가운데 정렬 적용 */
   align-items: center;
   justify-content: center;
-}
-
-@media (max-width: 900px) {
-  .normal-list {
-    width: 100%; /* 799px 이하에서는 한 줄에 하나의 요소만 표시하도록 전체 너비를 100%로 설정 */
-  }
-  .normal-img {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
 }
 
 .search-bar {
