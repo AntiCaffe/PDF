@@ -3,12 +3,6 @@
   justify-content: space-between;
 }
 
-.image-list {
-  flex: 1;
-  height: 300px;
-  overflow-y: scroll;
-}
-
 .image-item {
   padding: 10px;
   cursor: pointer;
@@ -32,9 +26,10 @@
 }
 
 .scrollableList {
-  overflow: scroll;
+  overflow-y: auto;
   width: 40%;
   height: 250px;
+  border: 1px solid #dee2e6;
 }
 
 .normal-img {
@@ -58,7 +53,6 @@
   min-height: 250px;
   margin-top: 10px;
   margin-bottom: 10px;
-  background-color: rgba(211, 211, 211, 0.4);
 }
 
 .imageContainer {
@@ -77,4 +71,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
+
+.search-bar {
+  width: 30%;
 }
