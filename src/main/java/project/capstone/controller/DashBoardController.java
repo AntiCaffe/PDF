@@ -27,11 +27,6 @@ public class DashBoardController {
     private final ItemService itemService;
     private final ProfileService profileService;
 
-//    @GetMapping("/main-page")
-//    public String redirect() {
-//        return "redirect:/dashboard";
-//    }
-
     @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러")
     @ResponseBody
     @GetMapping("/items")
@@ -58,5 +53,6 @@ public class DashBoardController {
         System.out.println(dto);
         return itemService.saveItem(dto, image);
     }
+
 
 }
