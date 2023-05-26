@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.capstone.controller.dto.DashboardDto;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/dashboard")
 @RequiredArgsConstructor
 public class DashBoardController {
@@ -26,7 +27,13 @@ public class DashBoardController {
     private final ItemService itemService;
     private final ProfileService profileService;
 
+//    @GetMapping("/main-page")
+//    public String redirect() {
+//        return "redirect:/dashboard";
+//    }
+
     @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러")
+    @ResponseBody
     @GetMapping("/items")
     public List<DashboardDto> responseItemList() {
         return itemService.itemList();
@@ -34,6 +41,7 @@ public class DashBoardController {
 
 
     @ApiOperation(value = "사용자 정보 조회 컨트롤러")
+    @ResponseBody
     @GetMapping("/profile/{nickname}")
     public ProfileDto profile(@PathVariable("nickname") String nickname) {
         ProfileDto profileDto = profileService.searchProfile(nickname);
@@ -42,6 +50,7 @@ public class DashBoardController {
     }
 
     @ApiOperation(value = "아이템 저장 컨트롤러 (수정 필요)")
+    @ResponseBody
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Long saveItem(HttpServletRequest request, @RequestParam(value = "image") MultipartFile image, NewItemDto dto) throws IOException {
         System.out.println("saveItemController");
