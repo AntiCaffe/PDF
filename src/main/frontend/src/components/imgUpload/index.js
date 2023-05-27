@@ -94,6 +94,8 @@ function ImageUpload({ onClose }) {
       );
       console.log("전송 성공:", response.data);
       // 전송에 성공한 후에 처리할 로직 작성
+      alert("파일이 업로드 되었습니다!");
+      onClose(); // 모달 창 닫기
     } catch (error) {
       console.error("전송 실패:", error);
     }

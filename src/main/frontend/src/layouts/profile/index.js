@@ -35,7 +35,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/dashboard/profile/${id}`);
+        const response = await axios.get(`/profile/${id}`);
         const { data } = response;
 
         console.log(data); // 서버의 response 확인
