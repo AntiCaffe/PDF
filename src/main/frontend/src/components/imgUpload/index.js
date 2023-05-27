@@ -82,15 +82,14 @@ function ImageUpload({ onClose }) {
   };
 
   const handleUpload = async () => {
-    const requestData = {
-      image: selectedFile,
-      data: detectedBoxes,
-    };
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    formData.append("data", JSON.stringify(detectedBoxes));
 
     try {
       const response = await axios.post(
         "http://localhost:8080/dashboard/upload",
-        requestData
+        formData
       );
       console.log("전송 성공:", response.data);
       // 전송에 성공한 후에 처리할 로직 작성
