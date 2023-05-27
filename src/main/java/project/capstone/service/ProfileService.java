@@ -38,4 +38,27 @@ public class ProfileService {
                 .comments(commentDtos)
                 .build();
     }
+
+    public ProfileDto updatePW(String memberId, String pw) {
+        Member member = memberRepository.findById(Long.parseLong(memberId)).get();
+        member.changePW(pw);
+        List<Comment> comments = member.getComments();
+        List<CommentDto> commentDtos = new ArrayList<>();
+        for (Comment comment : comments) {
+            commentDtos.add(CommentDto.builder()
+                    .content(comment.getContent())
+                    .itemId(comment.getItem().getId())
+                    .build());
+        }
+        return ProfileDto.builder()
+                .memberId(member.getId().toString())
+                .name(member.getName())
+                .nickname(member.getNickname())
+                .pw(member.getPassword())
+                .phone(member.getPhone())
+                .email(member.getEmail())
+                .adminId(member.getAdmin().getAdminId())
+                .comments(commentDtos)
+                .build();
+    }
 }

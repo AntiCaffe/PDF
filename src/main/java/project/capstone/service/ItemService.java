@@ -26,20 +26,38 @@ public class ItemService {
     private final BoxRepository boxRepository;
 
     @Transactional
-    public Long saveItem(NewItemDto newItemDto, MultipartFile file) throws IOException {
+    public Long saveItem(List<BoxDto> boxes, MultipartFile file) throws IOException {
         Item item = Item.builder()
-                .identifier(newItemDto.getIdentifier())
-                .imSize(newItemDto.getImSize())
-                .imDate(newItemDto.getImDate())
-                .resolution(newItemDto.getResolution())
-                .depth(newItemDto.getDepth())
-                .itemType(newItemDto.getItemType())
+                .name(file.getName().substring(0,file.getName().lastIndexOf(".")))
+                .identifier("test_identifier")
+                .imSize("test_imSize")
+                .imDate("test_imDate")
+                .resolution("test_resolution")
+                .depth("test_depth")
                 .build();
+        Item savedItem = itemRepository.save(item);
+        Boolean defective = item.getDefective();
+        for (BoxDto dto : boxes) {
+            Box box = Box.builder()
+                    .xmin(dto.getXmin())
+                    .ymin(dto.getYmin())
+                    .xmax(dto.getXmax())
+                    .ymax(dto.getYmax())
+                    .confidence(dto.getConfidence())
+                    .typeClass(dto.getTypeClass())
+                    .typeName(dto.getTypeName())
+                    .build();
+            if (box.getTypeName().substring(0, 6).equals("Defect")) {
+                box.changeDefect();
+                if(defective) item.changeDefective();
+            }
+            box.setItem(item);
+            boxRepository.save(box);
+        }
         if (!file.isEmpty()) {
             String savedFileName = s3UploaderService.upload(file, "images");
             item.setImageUrl(savedFileName);
         }
-        Item savedItem = itemRepository.save(item);
         return savedItem.getId();
     }
 

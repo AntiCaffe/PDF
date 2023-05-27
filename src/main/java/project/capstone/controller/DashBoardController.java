@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.capstone.controller.dto.BoxDto;
 import project.capstone.controller.dto.DashboardDto;
 import project.capstone.controller.dto.NewItemDto;
 import project.capstone.controller.dto.ProfileDto;
@@ -27,7 +28,6 @@ public class DashBoardController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
-    private final ProfileService profileService;
 
     @GetMapping("/main-page")
     public String redirect() {
@@ -50,23 +50,16 @@ public class DashBoardController {
         return itemService.findOneItem(name);
     }
 
-    @ApiOperation(value = "사용자 정보 조회 컨트롤러")
-    @ResponseBody
-    @GetMapping("/profile/{nickname}")
-    public ProfileDto profile(@PathVariable("nickname") String nickname) {
-        ProfileDto profileDto = profileService.searchProfile(nickname);
-        System.out.println("profileDto = " + profileDto);
-        return profileDto;
-    }
 
     @ApiOperation(value = "아이템 저장 컨트롤러 (수정 필요)")
     @ResponseBody
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Long saveItem(HttpServletRequest request, @RequestParam(value = "image") MultipartFile image, NewItemDto dto) throws IOException {
+    public Long saveItem(@RequestParam(value = "image") MultipartFile image, String data ) throws IOException {
         System.out.println("saveItemController");
         System.out.println(image);
-        System.out.println(dto);
-        return itemService.saveItem(dto, image);
+        System.out.println(data);
+//        return itemService.saveItem(dto, image);
+        return null;
     }
 
 
