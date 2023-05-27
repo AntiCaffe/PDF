@@ -36,4 +36,9 @@ public class ProfileController {
     public ProfileDto updateMember(@RequestBody UpdateMemberVo vo) {
         return profileService.updateMember(vo);
     }
+
+    @GetMapping("/delete/{nickname}")
+    public void deleteMember(@PathVariable("nickname") String nickname) {
+        profileService.deleteMember(nickname);
+    }
 }
