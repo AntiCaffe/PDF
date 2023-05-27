@@ -107,6 +107,19 @@ const ProfilePage = () => {
       alert("비밀번호가 일치하지 않습니다");
     }
   };
+
+  const handleMemberWithdrawal = async () => {
+    try {
+      const response = await axios.get(`/delete/${id}`);
+      alert(
+        "탈퇴가 완료되었습니다. 확인을 누르시면 로그인 페이지로 돌아갑니다."
+      );
+      movePage("/authentication/sign-in");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="set-maxheight">
       <div>
@@ -247,7 +260,6 @@ const ProfilePage = () => {
                   fullWidth
                   defaultValue={phone}
                   value={phoneField}
-                  ㅅ
                   onChange={(e) => setPhoneField(e.target.value)}
                 />
               </div>
@@ -285,7 +297,7 @@ const ProfilePage = () => {
                 variant="outlined"
                 color="error"
                 size="small"
-                onClick={profileEditToggle}
+                onClick={handleMemberWithdrawal}
                 sx={{ margin: "0 1vw 0 1vw" }}
               >
                 회원탈퇴
