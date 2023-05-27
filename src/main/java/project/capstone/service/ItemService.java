@@ -1,6 +1,10 @@
 package project.capstone.service;
 
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,9 +30,9 @@ public class ItemService {
     private final BoxRepository boxRepository;
 
     @Transactional
-    public Long saveItem(List<BoxDto> boxes, MultipartFile file) throws IOException {
+    public Long saveItem(String data, MultipartFile file) throws IOException, ParseException {
         Item item = Item.builder()
-                .name(file.getName().substring(0,file.getName().lastIndexOf(".")))
+                .name(file.getOriginalFilename().substring(0,file.getOriginalFilename().lastIndexOf(".")))
                 .identifier("test_identifier")
                 .imSize("test_imSize")
                 .imDate("test_imDate")
@@ -37,6 +41,7 @@ public class ItemService {
                 .build();
         Item savedItem = itemRepository.save(item);
         Boolean defective = item.getDefective();
+        List<BoxDto> boxes = parsingStringFile(data);
         for (BoxDto dto : boxes) {
             Box box = Box.builder()
                     .xmin(dto.getXmin())
@@ -49,7 +54,7 @@ public class ItemService {
                     .build();
             if (box.getTypeName().substring(0, 6).equals("Defect")) {
                 box.changeDefect();
-                if(defective) item.changeDefective();
+                if(!defective) item.changeDefective();
             }
             box.setItem(item);
             boxRepository.save(box);
@@ -137,6 +142,25 @@ public class ItemService {
                     .confidence(box.getConfidence())
                     .typeClass(box.getTypeClass())
                     .typeName(box.getTypeName())
+                    .build());
+        }
+        return result;
+    }
+
+    private List<BoxDto> parsingStringFile(String data) throws ParseException {
+        List<BoxDto> result = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        JSONArray array = (JSONArray) parser.parse(data);
+        for (Object o : array) {
+            JSONObject object = (JSONObject) o;
+            result.add(BoxDto.builder()
+                    .xmin(object.get("xmin").toString())
+                    .ymin(object.get("ymin").toString())
+                    .xmax(object.get("xmax").toString())
+                    .ymax(object.get("ymax").toString())
+                    .confidence(object.get("confidence").toString())
+                    .typeClass(Integer.parseInt(String.valueOf(object.get("class"))))
+                    .typeName(object.get("name").toString())
                     .build());
         }
         return result;

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.parser.ParseException;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -54,12 +55,11 @@ public class DashBoardController {
     @ApiOperation(value = "아이템 저장 컨트롤러 (수정 필요)")
     @ResponseBody
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Long saveItem(@RequestParam(value = "image") MultipartFile image, String data ) throws IOException {
+    public Long saveItem(@RequestParam(value = "image") MultipartFile image, @RequestParam(value = "data") String data) throws IOException, ParseException {
         System.out.println("saveItemController");
         System.out.println(image);
         System.out.println(data);
-//        return itemService.saveItem(dto, image);
-        return null;
+        return itemService.saveItem(data, image);
     }
 
 

@@ -53,4 +53,9 @@ public class Member extends BaseEntity{
     public void changePW(String pw) {
         this.password = pw;
     }
+
+    public void changeInfo(String email, String phone) {
+        this.email = email;
+        this.phone = phone;
+    }
 }
