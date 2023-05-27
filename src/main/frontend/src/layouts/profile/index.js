@@ -16,11 +16,14 @@ function handleLogout() {
 
 const ProfilePage = () => {
   // 프로필 정보
-  const { id, password } = useContext(AuthContext);
+  const { id, password, setPassword } = useContext(AuthContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [adminId, setIsAdmin] = useState("");
+
+  const [passwordField, setPasswordField] = useState("");
 
   const movePage = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -61,6 +64,25 @@ const ProfilePage = () => {
 
   const profileEditToggle = () => {
     setShowEdit(!showEditForm);
+  };
+
+  const handlePasswordUpdate = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/profile/updatePW",
+        {
+          pw: passwordField,
+          memberId: id,
+        }
+      );
+      const { pw } = response.data;
+
+      setPassword(pw);
+      setPasswordField("");
+      alert("비밀번호가 성공적으로 변경되었습니다!");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -178,6 +200,8 @@ const ProfilePage = () => {
                   size="small"
                   fullWidth
                   type="password"
+                  value={passwordField}
+                  onChange={(e) => setPasswordField(e.target.value)}
                 />
               </div>
               <div className="divider"></div>
@@ -218,6 +242,7 @@ const ProfilePage = () => {
                 variant="outlined"
                 size="small"
                 sx={{ margin: "0 1vw 0 1vw" }}
+                onClick={handlePasswordUpdate}
               >
                 비밀번호 수정
               </Button>
