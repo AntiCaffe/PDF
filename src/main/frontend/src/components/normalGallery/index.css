@@ -46,7 +46,7 @@
   margin: 10px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 870px) {
   .normal-img {
     width: 85vw;
     height: auto;
@@ -58,7 +58,7 @@
   }
 }
 
-@media (min-width: 801px) {
+@media (min-width: 81px) {
   .normal-img {
     height: 30vw;
     width: auto;
