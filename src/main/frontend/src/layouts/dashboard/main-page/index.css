@@ -97,13 +97,28 @@
 }
 
 .number {
-  font-size: 1.9em;
+  font-size: 2.3em;
   font-weight: 500;
+}
+
+.fontup {
+  font-size: 1.3em;
+}
+
+@media (max-width: 500px) {
+  .number {
+    font-size: 1.5em;
+    font-weight: 400;
+  }
+
+  .fontup {
+    font-size: 1em;
+  }
 }
 
 .text-box {
   flex: auto;
-  max-width: 22%;
+  max-width: 25%;
 }
 
 .text-center {
@@ -169,6 +184,7 @@
   background-color: #f1f1f1;
   padding: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 .menu-set {

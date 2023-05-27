@@ -3,12 +3,6 @@
   justify-content: space-between;
 }
 
-.image-list {
-  flex: 1;
-  height: 300px;
-  overflow-y: scroll;
-}
-
 .image-item {
   padding: 10px;
   cursor: pointer;
@@ -31,19 +25,6 @@
   background-color: gray;
 }
 
-.scrollableList {
-  overflow: scroll;
-  width: 40%;
-  height: 250px;
-}
-
-.normal-img {
-  width: 30vw;
-  min-width: 350px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .content {
   display: flex;
   align-items: center;
@@ -51,14 +32,42 @@
   flex-wrap: wrap;
 }
 
+.scrollableList {
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+}
+
+.normal-img {
+  margin: 10px;
+  border: 1px solid #8b8b8b;
+}
+
 .normal-list {
-  width: 30vw;
-  min-width: 350px;
-  height: 20vw;
-  min-height: 250px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: rgba(211, 211, 211, 0.4);
+  margin: 10px;
+}
+
+@media (max-width: 800px) {
+  .normal-img {
+    width: 85vw;
+    height: auto;
+  }
+
+  .normal-list {
+    width: 85vw;
+    height: 150px;
+  }
+}
+
+@media (min-width: 801px) {
+  .normal-img {
+    height: 30vw;
+    width: auto;
+  }
+
+  .normal-list {
+    height: 30vw;
+    width: 30vw;
+  }
 }
 
 .imageContainer {
@@ -67,14 +76,6 @@
   justify-content: center;
 }
 
-@media (max-width: 900px) {
-  .normal-list {
-    width: 100%; /* 799px 이하에서는 한 줄에 하나의 요소만 표시하도록 전체 너비를 100%로 설정 */
-  }
-  .normal-img {
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+.search-bar {
+  width: 30%;
 }

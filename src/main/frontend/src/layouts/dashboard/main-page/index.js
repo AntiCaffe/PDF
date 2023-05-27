@@ -14,11 +14,16 @@ function handleLogout() {
   // 필요한 로직을 추가해야 합니다.
 }
 
-function Dashboard() {
-  const [total, setTotal] = useState(0);
-  const [normal, setNormal] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [imageList, setImageList] = useState([]);
+const Dashboard = () => {
+  const [externalNormalLength, setExternalNormalLength] = useState(0);
+  const [externalDefectLength, setExternalDefectLength] = useState(0);
+
+  const handleNormalLengthChange = (length) => {
+    setExternalNormalLength(length);
+  };
+  const handleDefectLengthChange = (length) => {
+    setExternalDefectLength(length);
+  };
 
   //for modal
   const [open, setOpen] = useState(false);
@@ -126,7 +131,6 @@ function Dashboard() {
               업로드
             </Button>
             <Modal open={open} onClose={handleClose}>
-              {/* 모달 내용을 여기에 작성하세요 */}
               <div className="modal-container">
                 <div className="modal-header">
                   <h3 className="modal-title">새 PCB 이미지 파일 첨부</h3>
@@ -142,16 +146,18 @@ function Dashboard() {
         <h2 className="disable-select">상태 현황</h2>
         <div className="row">
           <div className="text-box text-center">
-            <p className="number">50,000</p>
-            <p className="disable-select">Total</p>
+            <p className="number">
+              {externalNormalLength + externalDefectLength}
+            </p>
+            <p className="disable-select fontup">Total</p>
           </div>
           <div className="text-box text-center">
-            <p className="number red">7</p>
-            <p className="disable-select">Defect</p>
+            <p className="number red">{externalDefectLength}</p>
+            <p className="disable-select fontup">Defect</p>
           </div>
           <div className="text-box text-center">
-            <p className="number green">49,993</p>
-            <p className="disable-select">Normal</p>
+            <p className="number green">{externalNormalLength}</p>
+            <p className="disable-select fontup">Normal</p>
           </div>
         </div>
       </div>
@@ -165,14 +171,14 @@ function Dashboard() {
         </div>
       </div>
       <div ref={normalRef}>
-        <NormalImageGallery />
+        <NormalImageGallery normalLengthChange={handleNormalLengthChange} />
       </div>
 
       <div ref={defectRef}>
-        <DefectImageGallery />
+        <DefectImageGallery defectLengthChange={handleDefectLengthChange} />
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

@@ -1,22 +1,54 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  InputAdornment,
+  TextField,
+  ListItemButton,
+} from "@mui/material";
 import "./index.css";
 import no_img from "src/assets/images/no_img.jpg";
+import SearchIcon from "@mui/icons-material/Search";
 
-const Dashboard = () => {
+export const NormalImageGallery = ({ normalLengthChange }) => {
   const [names, setNames] = useState([]);
   const [selectedImage, setSelectedImage] = useState("no_img"); // 선택한 이미지의 URL
+  const [searchTerm, setSearchTerm] = useState("");
+  const [namesLength, setNamesLength] = useState(0); // names 배열의 길이를 저장하는 변수
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setNamesLength(names.length);
+  }, [names]);
+
+  /* //길이 확인용
+  useEffect(() => {
+    console.log("len : ", namesLength);
+  }, [namesLength]);
+  */
+
+  useEffect(() => {
+    setNamesLength(names.length);
+    normalLengthChange(names.length); // 부모 컴포넌트로 namesLength 값 전달
+  }, [names, normalLengthChange]);
+
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:8080/dashboard/items");
       const data = response.data;
-      const nameList = data.map((item) => item.name);
+      console.log(response);
+
+      // null인 데이터를 필터링하여 nameList 생성
+      const nameList = data
+        .filter((item) => item.name !== null && item.defective === true)
+        .map((item) => item.name);
+
       setNames(nameList);
     } catch (error) {
       console.error(error);
@@ -34,29 +66,61 @@ const Dashboard = () => {
     }
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredNames = names.filter((name) =>
+    name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <div className="container">
         <h1>정상품목</h1>
         <div className="content">
           <div className="normal-list scrollableList">
-            <List
-              sx={{
-                backgroundColor: "#4452a0",
-                borderRadius: "5px 5px 0 0",
+            <div
+              style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1, //리스트 item 보다는 위에, 메뉴항목보다는 아래에 위치
+                backgroundColor: "#fff",
               }}
             >
-              <div
-                style={{
-                  justifyContent: "center",
+              <TextField
+                type="text"
+                size="small"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="검색어를 입력하세요"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                 }}
-              >
-                {names.map((name, index) => (
-                  <ListItem key={index} onClick={() => handleImageClick(name)}>
-                    <ListItemText primary={name} />
+                sx={{ margin: "5px" }}
+              />
+            </div>
+            <List>
+              {filteredNames.length === 0 ? (
+                <ListItem>
+                  <ListItemText
+                    primary="해당 항목이 없습니다."
+                    sx={{ color: "grey" }}
+                  />
+                </ListItem>
+              ) : (
+                filteredNames.map((name, index) => (
+                  <ListItem key={index} component="div">
+                    <ListItemButton onClick={() => handleImageClick(name)}>
+                      <ListItemText primary={name} sx={{ zIndex: "-99" }} />
+                    </ListItemButton>
                   </ListItem>
-                ))}
-              </div>
+                ))
+              )}
             </List>
           </div>
           <div className="imageContainer">
@@ -75,5 +139,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
+export default NormalImageGallery;

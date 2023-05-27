@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import "./index.css";
@@ -116,7 +116,7 @@ function ImageUpload({ onClose }) {
           top: `${(ymin * 100) / naturalHeight}%`,
           width: `${((xmax - xmin) * 100) / naturalWidth}%`,
           height: `${((ymax - ymin) * 100) / naturalHeight}%`,
-          border: `2px solid ${color}`,
+          border: `1px solid ${color}`,
         };
 
         return (
@@ -148,7 +148,6 @@ function ImageUpload({ onClose }) {
         <div>
           <div style={{ width: "100%" }}>
             <img src={uploadedImage} alt="Uploaded" className="modal-img" />
-            {renderDetectedBoxes()}
           </div>
         </div>
       )}
