@@ -57,7 +57,11 @@ export const NormalImageGallery = ({ normalLengthChange }) => {
 
   const handleImageClick = async (name) => {
     try {
-      const response = await axios.get("http://localhost:8080/dashboard/items");
+      const response = await axios.get("http://localhost:8080/dashboard/item", {
+        params: {
+          name: name,
+        },
+      });
       const data = response.data;
       const imageUrl = data.find((item) => item.name === name)?.imageUrl;
       setSelectedImage(imageUrl);
