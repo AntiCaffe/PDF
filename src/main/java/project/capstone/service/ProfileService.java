@@ -42,7 +42,6 @@ public class ProfileService {
                 .build();
     }
 
-
     public ProfileDto updatePW(String nickname, String pw) {
         List<Member> byNickname = memberRepository.findByNickname(nickname);
         Member member = byNickname.get(0);
@@ -88,5 +87,10 @@ public class ProfileService {
                 .adminId(member.getAdmin().getAdminId())
                 .comments(commentDtos)
                 .build();
+    }
+
+    public void deleteMember(String nickname) {
+        Member member = memberRepository.findByNickname(nickname).get(0);
+        memberRepository.delete(member);
     }
 }
