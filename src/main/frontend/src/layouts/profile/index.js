@@ -17,7 +17,7 @@ function handleLogout() {
 
 const ProfilePage = () => {
   // 프로필 정보
-  const { id, password, setPassword } = useContext(AuthContext);
+  const { id, password, setPassword, logout } = useContext(AuthContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -168,6 +168,13 @@ const ProfilePage = () => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email); // 정규식 패턴에 일치하는지 확인
   };
+
+  function handleLogout() {
+    // context에서 id와 password를 초기화하는 작업 수행
+    logout();
+    // 인증/로그인 페이지로 이동
+    movePage("/authentication/sign-in");
+  }
 
   return (
     <div className="set-maxheight">

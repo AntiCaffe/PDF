@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "src/assets/images/logo.png";
 import ImageUpload from "src/components/imgUpload";
@@ -8,13 +8,10 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { animateScroll as scroll } from "react-scroll";
 import NormalImageGallery from "src/components/normalGallery";
 import DefectImageGallery from "src/components/defectGallery";
-
-function handleLogout() {
-  // 로그아웃 기능 구현
-  // 필요한 로직을 추가해야 합니다.
-}
+import { AuthContext } from "src/contexts/AuthContext";
 
 const Dashboard = () => {
+  const { logout } = useContext(AuthContext);
   const [externalNormalLength, setExternalNormalLength] = useState(0);
   const [externalDefectLength, setExternalDefectLength] = useState(0);
 
@@ -95,6 +92,13 @@ const Dashboard = () => {
 
     return <p className={`number ${className}`}>{Math.ceil(count)}</p>;
   };
+
+  function handleLogout() {
+    // context에서 id와 password를 초기화하는 작업 수행
+    logout();
+    // 인증/로그인 페이지로 이동
+    movePage("/authentication/sign-in");
+  }
 
   return (
     <div className="main-page">
