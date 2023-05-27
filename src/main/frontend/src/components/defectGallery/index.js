@@ -7,26 +7,46 @@ import {
   ListItemText,
   InputAdornment,
   TextField,
+  ListItemButton,
 } from "@mui/material";
 import "./index.css";
 import no_img from "src/assets/images/no_img.jpg";
 import SearchIcon from "@mui/icons-material/Search";
-import { Margin } from "@mui/icons-material";
 
-const Dashboard = () => {
+export const NormalImageGallery = ({ defectLengthChange }) => {
   const [names, setNames] = useState([]);
   const [selectedImage, setSelectedImage] = useState("no_img"); // 선택한 이미지의 URL
+  const [searchTerm, setSearchTerm] = useState("");
+  const [namesLength, setNamesLength] = useState(0); // names 배열의 길이를 저장하는 변수
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  /*
+  useEffect(() => {
+    setNamesLength(names.length);
+  }, [names]);
+
+  useEffect(() => {
+    console.log("len : ", namesLength);
+  }, [namesLength]);
+
+  useEffect(() => {
+    setNamesLength(names.length);
+    defectLengthChange(names.length); // 부모 컴포넌트로 namesLength 값 전달
+  }, [names, defectLengthChange]);
+
   const fetchData = async () => {
     try {
       const response = await axios.get("http://localhost:8080/dashboard/items");
       const data = response.data;
-      const nameList = data.map((item) => item.name);
+      console.log(response);
+
+      // null인 데이터를 필터링하여 nameList 생성
+      const nameList = data
+        .filter((item) => item.name !== null && item.defective === false)
+        .map((item) => item.name);
+
       setNames(nameList);
     } catch (error) {
       console.error(error);
@@ -43,42 +63,6 @@ const Dashboard = () => {
       console.error(error);
     }
   };
-  */
-  const fetchData = async () => {
-    try {
-      const tempData = [
-        { name: "photo 1", imageUrl: "http://example.com/image1.jpg" },
-        { name: "photo 2", imageUrl: "http://example.com/image2.jpg" },
-        { name: "photo 3", imageUrl: "http://example.com/image3.jpg" },
-        { name: "photo 4", imageUrl: "http://example.com/image1.jpg" },
-        { name: "Image 5", imageUrl: "http://example.com/image2.jpg" },
-        { name: "Image 6", imageUrl: "http://example.com/image3.jpg" },
-        { name: "Image 7", imageUrl: "http://example.com/image1.jpg" },
-        { name: "Image 8", imageUrl: "http://example.com/image2.jpg" },
-        { name: "Image 9", imageUrl: "http://example.com/image3.jpg" },
-      ];
-      const nameList = tempData.map((item) => item.name);
-      setNames(nameList);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleImageClick = async (name) => {
-    try {
-      const tempData = [
-        { name: "Image 1", imageUrl: "http://example.com/image1.jpg" },
-        { name: "Image 2", imageUrl: "http://example.com/image2.jpg" },
-        { name: "Image 3", imageUrl: "http://example.com/image3.jpg" },
-      ];
-      const imageUrl = tempData.find((item) => item.name === name)?.imageUrl;
-      setSelectedImage(imageUrl);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -91,36 +75,50 @@ const Dashboard = () => {
   return (
     <div>
       <div className="container">
-        <h1>정상품목</h1>
+        <h1>결함품목</h1>
         <div className="content">
           <div className="normal-list scrollableList">
-            <TextField
-              type="text"
-              size="small"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="검색어를 입력하세요"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
+            <div
+              style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 1, //리스트 item 보다는 위에, 메뉴항목보다는 아래에 위치
+                backgroundColor: "#fff",
               }}
-              sx={{ margin: "5px" }}
-            />
-            <List>
-              <div
-                style={{
-                  justifyContent: "center",
+            >
+              <TextField
+                type="text"
+                size="small"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                placeholder="검색어를 입력하세요"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
                 }}
-              >
-                {filteredNames.map((name, index) => (
-                  <ListItem key={index} onClick={() => handleImageClick(name)}>
-                    <ListItemText primary={name} sx={{ zIndex: "-99" }} />
+                sx={{ margin: "5px" }}
+              />
+            </div>
+            <List>
+              {filteredNames.length === 0 ? (
+                <ListItem>
+                  <ListItemText
+                    primary="해당 결함품이 없습니다."
+                    sx={{ color: "grey" }}
+                  />
+                </ListItem>
+              ) : (
+                filteredNames.map((name, index) => (
+                  <ListItem key={index} component="div">
+                    <ListItemButton onClick={() => handleImageClick(name)}>
+                      <ListItemText primary={name} sx={{ zIndex: "-99" }} />
+                    </ListItemButton>
                   </ListItem>
-                ))}
-              </div>
+                ))
+              )}
             </List>
           </div>
           <div className="imageContainer">
@@ -139,5 +137,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
+export default NormalImageGallery;
