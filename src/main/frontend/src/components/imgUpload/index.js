@@ -81,22 +81,21 @@ function ImageUpload({ onClose }) {
     onClose(); // 모달 창 닫기
   };
 
-  const handleUpload = () => {
-    // 이미지와 JSON 정보를 서버로 보내는 로직 작성
+  const handleUpload = async () => {
     const formData = new FormData();
     formData.append("image", selectedFile);
-    // JSON 정보를 formData에 추가하는 로직 작성
+    formData.append("data", JSON.stringify(detectedBoxes));
 
-    axios
-      .post("http://example.com/upload", formData)
-      .then((response) => {
-        // 전송 성공 시 처리할 로직 작성
-        console.log("전송 성공!");
-      })
-      .catch((error) => {
-        // 전송 실패 시 처리할 로직 작성
-        console.error("전송 실패:", error);
-      });
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/dashboard/upload",
+        formData
+      );
+      console.log("전송 성공:", response.data);
+      // 전송에 성공한 후에 처리할 로직 작성
+    } catch (error) {
+      console.error("전송 실패:", error);
+    }
   };
 
   const renderDetectedBoxes = () => {
