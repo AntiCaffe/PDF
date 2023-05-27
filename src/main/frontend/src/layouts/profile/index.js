@@ -24,6 +24,8 @@ const ProfilePage = () => {
   const [adminId, setIsAdmin] = useState("");
 
   const [passwordField, setPasswordField] = useState("");
+  const [emailField, setEmailField] = useState("");
+  const [phoneField, setPhoneField] = useState("");
 
   const movePage = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
@@ -85,6 +87,26 @@ const ProfilePage = () => {
     }
   };
 
+  const handleMemberUpdate = async () => {
+    if (password === passwordField) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/profile/updateMember",
+          {
+            nickname: id,
+            email: emailField,
+            phone: phoneField,
+          }
+        );
+        alert("회원정보가 성공적으로 변경되었습니다!");
+        profileEditToggle();
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다");
+    }
+  };
   return (
     <div className="set-maxheight">
       <div>
@@ -210,8 +232,10 @@ const ProfilePage = () => {
                 <TextField
                   variant="standard"
                   size="small"
-                  defaultValue={email}
                   fullWidth
+                  defaultValue={email}
+                  value={emailField}
+                  onChange={(e) => setEmailField(e.target.value)}
                 />
               </div>
               <div className="divider"></div>
@@ -220,8 +244,11 @@ const ProfilePage = () => {
                 <TextField
                   variant="standard"
                   size="small"
-                  defaultValue={phone}
                   fullWidth
+                  defaultValue={phone}
+                  value={phoneField}
+                  ㅅ
+                  onChange={(e) => setPhoneField(e.target.value)}
                 />
               </div>
               <div className="divider"></div>
@@ -248,7 +275,7 @@ const ProfilePage = () => {
               </Button>
               <Button
                 variant="outlined"
-                onClick={profileEditToggle}
+                onClick={handleMemberUpdate}
                 size="small"
                 sx={{ margin: "0 1vw 0 1vw" }}
               >

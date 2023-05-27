@@ -35,7 +35,6 @@ const Dashboard = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
   // for modal end
 
   const movePage = useNavigate();
