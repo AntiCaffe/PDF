@@ -72,7 +72,7 @@ const ProfilePage = () => {
         "http://localhost:8080/profile/updatePW",
         {
           pw: passwordField,
-          memberId: id,
+          nickname: id,
         }
       );
       const { pw } = response.data;
