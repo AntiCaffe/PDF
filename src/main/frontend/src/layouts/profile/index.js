@@ -5,9 +5,10 @@ import "./index.css";
 import axios from "axios";
 import bgImage from "src/assets/images/wave-blue-1.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { IconButton, Button, TextField } from "@mui/material";
+import { IconButton, Button, TextField, InputAdornment } from "@mui/material";
 import { AuthContext } from "src/contexts/AuthContext";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 
 function handleLogout() {
   // 로그아웃 기능 구현
@@ -24,14 +25,22 @@ const ProfilePage = () => {
   const [adminId, setIsAdmin] = useState("");
 
   const [passwordField, setPasswordField] = useState("");
-  const [emailField, setEmailField] = useState("");
-  const [phoneField, setPhoneField] = useState("");
+  const [emailField, setEmailField] = useState(email);
+  const [phoneField, setPhoneField] = useState(phone);
+
+  const [error, setError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const movePage = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
     movePage("/dashboard/main-page/");
+  };
+
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   useEffect(() => {
@@ -49,6 +58,9 @@ const ProfilePage = () => {
         setEmail(email);
         setPhone(phone);
         setIsAdmin(adminId);
+
+        setEmailField(email);
+        setPhoneField(phone);
       } catch (error) {
         console.log(error);
       }
@@ -98,6 +110,13 @@ const ProfilePage = () => {
             phone: phoneField,
           }
         );
+
+        const { email, phone } = response.data;
+
+        // 클라이언트의 email과 phone 상태를 업데이트
+        setEmail(email);
+        setPhone(phone);
+
         alert("회원정보가 성공적으로 변경되었습니다!");
         profileEditToggle();
       } catch (error) {
@@ -109,15 +128,45 @@ const ProfilePage = () => {
   };
 
   const handleMemberWithdrawal = async () => {
-    try {
-      const response = await axios.get(`/delete/${id}`);
-      alert(
-        "탈퇴가 완료되었습니다. 확인을 누르시면 로그인 페이지로 돌아갑니다."
-      );
-      movePage("/authentication/sign-in");
-    } catch (error) {
-      console.log(error);
+    if (password === passwordField) {
+      try {
+        const response = await axios.get(`/delete/${id}`);
+        alert(
+          "탈퇴가 완료되었습니다. 확인을 누르시면 로그인 페이지로 돌아갑니다."
+        );
+        movePage("/authentication/sign-in");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다");
     }
+  };
+
+  function validatePassword(password) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/;
+    return regex.test(password);
+  }
+
+  function handlePasswordChange(e) {
+    const password = e.target.value;
+    setPasswordField(password);
+    const isValid = validatePassword(password);
+    setError(!isValid);
+    console.log("Is valid password:", isValid);
+  }
+
+  const handleEmailChange = (e) => {
+    const email = e.target.value;
+    setEmailField(email);
+    setEmailError(!validateEmail(email)); // 이메일 유효성 검사 결과에 따라 에러 상태 업데이트
+  };
+
+  // 이메일 주소의 유효성을 검사하는 함수
+  const validateEmail = (email) => {
+    // 이메일 주소에 대한 정규식 패턴
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email); // 정규식 패턴에 일치하는지 확인
   };
 
   return (
@@ -216,6 +265,21 @@ const ProfilePage = () => {
           </div>
         ) : (
           <div className="top edit-container">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <IconButton
+                onClick={profileEditToggle}
+                sx={{
+                  left: "5.5vw", // 현재 위치에서 오른쪽으로 이동시키는 속성
+                }}
+              >
+                <Close />
+              </IconButton>
+            </div>
             <div className="typo-container">
               <div className="info-text">
                 <p className="font-title">아이디</p>
@@ -234,9 +298,24 @@ const ProfilePage = () => {
                   variant="standard"
                   size="small"
                   fullWidth
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={passwordField}
-                  onChange={(e) => setPasswordField(e.target.value)}
+                  onChange={handlePasswordChange}
+                  error={error}
+                  helperText={
+                    error
+                      ? "비밀번호는 10자리 이상의 영어와 숫자만 입력해주세요."
+                      : ""
+                  }
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handlePasswordVisibility}>
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="divider"></div>
@@ -246,9 +325,12 @@ const ProfilePage = () => {
                   variant="standard"
                   size="small"
                   fullWidth
-                  defaultValue={email}
                   value={emailField}
-                  onChange={(e) => setEmailField(e.target.value)}
+                  onChange={handleEmailChange}
+                  error={emailError}
+                  helperText={
+                    emailError ? "유효한 이메일 주소를 입력하세요." : ""
+                  }
                 />
               </div>
               <div className="divider"></div>
@@ -258,7 +340,6 @@ const ProfilePage = () => {
                   variant="standard"
                   size="small"
                   fullWidth
-                  defaultValue={phone}
                   value={phoneField}
                   onChange={(e) => setPhoneField(e.target.value)}
                 />
