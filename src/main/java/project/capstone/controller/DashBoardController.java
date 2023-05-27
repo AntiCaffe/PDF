@@ -1,7 +1,9 @@
 package project.capstone.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,13 +29,26 @@ public class DashBoardController {
     private final ItemService itemService;
     private final ProfileService profileService;
 
-    @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러")
+    @GetMapping("/main-page")
+    public String redirect() {
+        return "redirect:/";
+    }
+
+    @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러",
+            response = DashboardDto.class)
     @ResponseBody
     @GetMapping("/items")
     public List<DashboardDto> responseItemList() {
         return itemService.itemList();
     }
 
+    @ApiOperation(value = "아이템 하나 컨트롤러",
+            response = DashboardDto.class)
+    @ResponseBody
+    @GetMapping("/item")
+    public DashboardDto responseItem(@RequestParam(value = "name") String name) {
+        return itemService.findOneItem(name);
+    }
 
     @ApiOperation(value = "사용자 정보 조회 컨트롤러")
     @ResponseBody

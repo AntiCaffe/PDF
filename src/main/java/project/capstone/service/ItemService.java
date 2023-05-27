@@ -94,4 +94,33 @@ public class ItemService {
         }
         return result;
     }
+
+    public DashboardDto findOneItem(String name) {
+        Item item = itemRepository.findByName(name);
+
+        DashboardDto result = DashboardDto.builder()
+                .name(item.getName())
+                .identifier(item.getIdentifier())
+                .imSize(item.getImSize())
+                .imDate(item.getImDate())
+                .resolution(item.getResolution())
+                .depth(item.getDepth())
+                .imageUrl(item.getImageUrl())
+                .defective(item.getDefective())
+                .build();
+
+        List<Box> boxes = item.getBoxes();
+        for (Box box : boxes) {
+            result.addBox(BoxDto.builder()
+                    .xmin(box.getXmin())
+                    .ymin(box.getYmin())
+                    .xmax(box.getXmax())
+                    .ymax(box.getYmax())
+                    .confidence(box.getConfidence())
+                    .typeClass(box.getTypeClass())
+                    .typeName(box.getTypeName())
+                    .build());
+        }
+        return result;
+    }
 }
