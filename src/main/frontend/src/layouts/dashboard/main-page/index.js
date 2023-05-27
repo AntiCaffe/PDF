@@ -68,6 +68,35 @@ const Dashboard = () => {
     },
   };
 
+  const CounterAnimation = ({ max, className }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCount((prevCount) => {
+          if (prevCount === max) {
+            clearInterval(interval);
+            return prevCount;
+          }
+
+          // 증가되는 값이 계속해서 작아지도록 계산
+          const step = (max - prevCount) / 10;
+
+          // 값을 적용시키면서 다음 차례에 영향을 끼침
+          const nextCount = prevCount + step;
+
+          return nextCount > max ? max : nextCount;
+        });
+      }, 50);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }, [max]);
+
+    return <p className={`number ${className}`}>{Math.ceil(count)}</p>;
+  };
+
   return (
     <div className="main-page">
       <div className="menu-bar">
@@ -146,17 +175,17 @@ const Dashboard = () => {
         <h2 className="disable-select">상태 현황</h2>
         <div className="row">
           <div className="text-box text-center">
-            <p className="number">
-              {externalNormalLength + externalDefectLength}
-            </p>
+            <CounterAnimation
+              max={externalNormalLength + externalDefectLength}
+            />
             <p className="disable-select fontup">Total</p>
           </div>
           <div className="text-box text-center">
-            <p className="number red">{externalDefectLength}</p>
+            <CounterAnimation className="red" max={externalDefectLength} />
             <p className="disable-select fontup">Defect</p>
           </div>
           <div className="text-box text-center">
-            <p className="number green">{externalNormalLength}</p>
+            <CounterAnimation className="green" max={externalNormalLength} />
             <p className="disable-select fontup">Normal</p>
           </div>
         </div>
