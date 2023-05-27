@@ -46,7 +46,7 @@ export const NormalImageGallery = ({ normalLengthChange }) => {
 
       // null인 데이터를 필터링하여 nameList 생성
       const nameList = data
-        .filter((item) => item.name !== null && item.defective === true)
+        .filter((item) => item.name !== null && item.defective === false)
         .map((item) => item.name);
 
       setNames(nameList);
@@ -63,7 +63,7 @@ export const NormalImageGallery = ({ normalLengthChange }) => {
         },
       });
       const data = response.data;
-      const imageUrl = data.find((item) => item.name === name)?.imageUrl;
+      const imageUrl = data.imageUrl;
       setSelectedImage(imageUrl);
     } catch (error) {
       console.error(error);
