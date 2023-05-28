@@ -10,6 +10,10 @@
   padding: 10px;
 }
 
+.top-padding {
+  margin-top: 100px;
+}
+
 .bottom-padding {
   margin-bottom: 50px;
 }
