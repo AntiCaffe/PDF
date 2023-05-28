@@ -10,28 +10,28 @@ function ImageUpload({ onClose }) {
   const [detectedBoxes, setDetectedBoxes] = useState([]);
 
   const colors = {
-    "Normal MultiScrew1": "#80ff00",
-    "Normal MultiScrew2": "#40ff00",
-    "Normal Screw": "#00ff80",
-    "Normal Connector1": "#00ffff",
-    "Normal Connector2": "#00bfff",
-    "Normal Connector3": "#2e9afe",
-    "Normal Connector4": "#58acfa",
-    "Normal Support1": "#d0fa58",
-    "Normal Support2": "#bef781",
-    "Normal Support3": "#81f7be",
-    "Normal Support4": "#81f7d8",
-    "Defect MultiScrew1": "#FA5858",
-    "Defect MultiScrew2": "#FF0000",
-    "Defect Screw": "#FF4000",
-    "Defect Connector1": "#FF8000",
-    "Defect Connector2": "#FFBF00",
-    "Defect Connector3": "#DBA901",
-    "Defect Connector4": "#FE2E9A",
-    "Defect Support1": "#FF00FF",
-    "Defect Support2": "#F7819F",
-    "Defect Support3": "#CC2EFA",
-    "Defect Support4": "#8000FF",
+    "Normal MultiScrew1": "#00FF00",
+    "Normal MultiScrew2": "#00FF11",
+    "Normal Screw": "#00FF22",
+    "Normal Connector1": "#00FF33",
+    "Normal Connector2": "#00FF44",
+    "Normal Connector3": "#00FF55",
+    "Normal Connector4": "#00FF66",
+    "Normal Support1": "#00FF77",
+    "Normal Support2": "#00FF88",
+    "Normal Support3": "#00FF99",
+    "Normal Support4": "#00FFAA",
+    "Defect MultiScrew1": "#FF0000",
+    "Defect MultiScrew2": "#FF1100",
+    "Defect Screw": "#FF2200",
+    "Defect Connector1": "#FF3300",
+    "Defect Connector2": "#FF4400",
+    "Defect Connector3": "#FF5500",
+    "Defect Connector4": "#FF6600",
+    "Defect Support1": "#FF7700",
+    "Defect Support2": "#FF8800",
+    "Defect Support3": "#FF9900",
+    "Defect Support4": "#FFAA00",
   };
 
   const handleFileChange = (event) => {
@@ -122,9 +122,7 @@ function ImageUpload({ onClose }) {
 
         return (
           <div key={index} style={style}>
-            <div className="part-name" style={{ color: color }}>
-              {name}
-            </div>
+            <div style={{ color: color }}>{name}</div>
           </div>
         );
       });
