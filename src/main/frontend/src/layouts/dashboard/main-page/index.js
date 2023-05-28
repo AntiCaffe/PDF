@@ -14,6 +14,8 @@ const Dashboard = () => {
   const { logout } = useContext(AuthContext);
   const [externalNormalLength, setExternalNormalLength] = useState(0);
   const [externalDefectLength, setExternalDefectLength] = useState(0);
+  const [refresh, setRefresh] = useState(false); // refresh 상태 값 추가
+  const [lastUpdated, setLastUpdated] = useState(new Date()); // 초기값을 현재 시간으로 설정
 
   const handleNormalLengthChange = (length) => {
     setExternalNormalLength(length);
@@ -100,15 +102,20 @@ const Dashboard = () => {
     movePage("/authentication/sign-in");
   }
 
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+    setLastUpdated(new Date()); // 현재 시간으로 업데이트
+  };
+
   return (
     <div className="main-page">
       <div className="menu-bar">
         <div className="menu-set">
           <a className="menu-item" onClick={handleScrollToNormal}>
-            정상항목
+            정상품
           </a>
           <a className="menu-item" onClick={handleScrollToDefect}>
-            결함항목
+            결함품
           </a>
         </div>
       </div>
@@ -145,8 +152,8 @@ const Dashboard = () => {
       <div className="container">
         <p className="color-set text-center">
           <span className="last-updated ">
-            마지막 업데이트: 2023. 5. 16 오전 09:40
-            <IconButton>
+            마지막 업데이트: {lastUpdated.toLocaleString()}
+            <IconButton onClick={handleRefresh}>
               <RefreshIcon className="refresh-icon" />
             </IconButton>
           </span>
@@ -193,21 +200,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="alert-top">
-        <div className="container">
-          <div className="new-feature">
-            <div class="alert alert-defect disable-select">
-              신규 발견 결함품: +2
-            </div>
-          </div>
-        </div>
-      </div>
       <div ref={normalRef}>
-        <NormalImageGallery normalLengthChange={handleNormalLengthChange} />
+        <NormalImageGallery
+          key={refresh ? "refresh" : "normal"}
+          normalLengthChange={handleNormalLengthChange}
+        />
       </div>
 
       <div ref={defectRef}>
-        <DefectImageGallery defectLengthChange={handleDefectLengthChange} />
+        <DefectImageGallery
+          key={refresh ? "refresh" : "defect"}
+          defectLengthChange={handleDefectLengthChange}
+        />
       </div>
     </div>
   );
