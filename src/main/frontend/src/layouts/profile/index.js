@@ -203,7 +203,7 @@ const ProfilePage = () => {
             }}
             onClick={handleLogout}
           >
-            logout
+            로그아웃
           </Button>
         </div>
       </div>

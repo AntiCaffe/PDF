@@ -74,7 +74,7 @@
   margin-bottom: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #cecece;
 }
 
 .container {
@@ -210,8 +210,8 @@
 .divider {
   width: 100%;
   height: 1px;
-  background-color: #dadada;
-  margin: 100px 0 0 0;
+  background-color: #e1e1e1;
+  margin: 20px 0;
 }
 
 .modal-container {

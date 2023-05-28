@@ -151,7 +151,7 @@ export const NormalImageGallery = ({ defectLengthChange }) => {
 
   return (
     <div>
-      <div className="divider"></div>
+      <div className="divider top-padding"></div>
       <div className="container">
         <h1>결함품목</h1>
         <div className="content">
@@ -224,7 +224,7 @@ export const NormalImageGallery = ({ defectLengthChange }) => {
         </div>
       </div>
 
-      <div className="divider bottom-padding"></div>
+      <div className="divider top-padding bottom-padding"></div>
     </div>
   );
 };
