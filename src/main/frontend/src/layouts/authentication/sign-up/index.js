@@ -144,7 +144,7 @@ export default function SignUp() {
           <Grid item xs={6}>
             <TextField
               id="setName"
-              label="Name"
+              label="이름"
               value={su_name}
               onChange={(e) => setSignupName(e.target.value)}
               variant="standard"

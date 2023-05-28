@@ -112,10 +112,10 @@ const Dashboard = () => {
       <div className="menu-bar">
         <div className="menu-set">
           <a className="menu-item" onClick={handleScrollToNormal}>
-            정상품
+            정상품목
           </a>
           <a className="menu-item" onClick={handleScrollToDefect}>
-            결함품
+            결함품목
           </a>
         </div>
       </div>
@@ -133,7 +133,7 @@ const Dashboard = () => {
             style={buttonStyle}
             onClick={handleLogout}
           >
-            logout
+            로그아웃
           </Button>
           <Button
             variant="outlined"
@@ -141,7 +141,7 @@ const Dashboard = () => {
             style={buttonStyle}
             onClick={() => movePage("/profile")} //있으면 로그인으로 돌아가도록
           >
-            profile
+            회원정보
           </Button>
         </div>
       </div>
@@ -188,15 +188,15 @@ const Dashboard = () => {
             <CounterAnimation
               max={externalNormalLength + externalDefectLength}
             />
-            <p className="disable-select fontup">Total</p>
+            <p className="disable-select fontup">전체 수량</p>
           </div>
           <div className="text-box text-center">
             <CounterAnimation className="red" max={externalDefectLength} />
-            <p className="disable-select fontup">Defect</p>
+            <p className="disable-select fontup">결함품 수량</p>
           </div>
           <div className="text-box text-center">
             <CounterAnimation className="green" max={externalNormalLength} />
-            <p className="disable-select fontup">Normal</p>
+            <p className="disable-select fontup">정상품 수량</p>
           </div>
         </div>
       </div>
