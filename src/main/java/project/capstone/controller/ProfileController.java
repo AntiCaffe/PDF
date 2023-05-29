@@ -37,6 +37,7 @@ public class ProfileController {
         return profileService.updateMember(vo);
     }
 
+    @ResponseBody
     @GetMapping("/delete/{nickname}")
     public void deleteMember(@PathVariable("nickname") String nickname) {
         profileService.deleteMember(nickname);

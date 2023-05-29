@@ -39,4 +39,7 @@ public class Admin extends BaseEntity{
     public void setSigned() {
         this.signCheck = SignCheck.SIGNED;
     }
+    public void setUnsigned() {
+        this.signCheck = SignCheck.AVAILABLE;
+    }
 }
