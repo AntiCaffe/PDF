@@ -217,184 +217,183 @@ const ProfilePage = () => {
           ></img>
         </div>
       </div>
-      <div className="set-maxheight">
-        <div className="set-top">
-          <div className="title-container">
-            <div className="name-id-text">
-              <h1>{name}님</h1>
-              <h2>안녕하세요 !</h2>
+
+      <div className="set-top">
+        <div className="title-container">
+          <div className="name-id-text">
+            <h1>{name}님</h1>
+            <h2>안녕하세요 !</h2>
+          </div>
+        </div>
+        {showEditForm ? (
+          <div className="top profile-container">
+            <div className="typo-container">
+              <div className="info-text">
+                <p className="font-title">아이디</p>
+                <p className="font-body">{id}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">이메일</p>
+                <p className="font-body">{email}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">전화번호</p>
+                <p className="font-body">
+                  {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
+                </p>
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">관리자 번호</p>
+                <p className="font-body">
+                  {showFullNumber
+                    ? adminId
+                    : adminId.substr(0, 4) +
+                      (adminId.length > 4
+                        ? "*".repeat(adminId.length - 4)
+                        : "no admin id")}
+                </p>
+
+                <span
+                  style={{ float: "right", cursor: "pointer", color: "gray" }}
+                  onClick={handleToggleVisibility}
+                >
+                  {showFullNumber ? <VisibilityOff /> : <Visibility />}
+                </span>
+              </div>
+              <div className="divider"></div>
+            </div>
+            <div className="set-to-center set-to-bottom">
+              <Button variant="outlined" onClick={profileEditToggle}>
+                회원정보 수정
+              </Button>
             </div>
           </div>
-          {showEditForm ? (
-            <div className="top profile-container">
-              <div className="typo-container">
-                <div className="info-text">
-                  <p className="font-title">아이디</p>
-                  <p className="font-body">{id}</p>
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">이메일</p>
-                  <p className="font-body">{email}</p>
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">전화번호</p>
-                  <p className="font-body">
-                    {phone.slice(0, 3)}-{phone.slice(3, 7)}-{phone.slice(7)}
-                  </p>
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">관리자 번호</p>
-                  <p className="font-body">
-                    {showFullNumber
-                      ? adminId
-                      : adminId.substr(0, 4) +
-                        (adminId.length > 4
-                          ? "*".repeat(adminId.length - 4)
-                          : "no admin id")}
-                  </p>
-
-                  <span
-                    style={{ float: "right", cursor: "pointer", color: "gray" }}
-                    onClick={handleToggleVisibility}
-                  >
-                    {showFullNumber ? <VisibilityOff /> : <Visibility />}
-                  </span>
-                </div>
-                <div className="divider"></div>
-              </div>
-              <div className="set-to-center set-to-bottom">
-                <Button variant="outlined" onClick={profileEditToggle}>
-                  회원정보 수정
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <div className="top edit-container">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
+        ) : (
+          <div className="top edit-container">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <IconButton
+                onClick={profileEditToggle}
+                sx={{
+                  left: "5.5vw", // 현재 위치에서 오른쪽으로 이동시키는 속성
                 }}
               >
-                <IconButton
-                  onClick={profileEditToggle}
-                  sx={{
-                    left: "5.5vw", // 현재 위치에서 오른쪽으로 이동시키는 속성
-                  }}
-                >
-                  <Close />
-                </IconButton>
-              </div>
-              <div className="typo-container">
-                <div className="info-text">
-                  <p className="font-title">아이디</p>
-                  <TextField
-                    variant="standard"
-                    size="small"
-                    defaultValue={id}
-                    fullWidth
-                    disabled
-                  />
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">비밀번호</p>
-                  <TextField
-                    variant="standard"
-                    size="small"
-                    fullWidth
-                    type={showPassword ? "text" : "password"}
-                    value={passwordField}
-                    onChange={handlePasswordChange}
-                    error={error}
-                    helperText={
-                      error
-                        ? "비밀번호는 10자리 이상의 영어와 숫자만 입력해주세요."
-                        : ""
-                    }
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton onClick={handlePasswordVisibility}>
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">이메일</p>
-                  <TextField
-                    variant="standard"
-                    size="small"
-                    fullWidth
-                    value={emailField}
-                    onChange={handleEmailChange}
-                    error={emailError}
-                    helperText={
-                      emailError ? "유효한 이메일 주소를 입력하세요." : ""
-                    }
-                  />
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">전화번호</p>
-                  <TextField
-                    variant="standard"
-                    size="small"
-                    fullWidth
-                    value={phoneField}
-                    onChange={(e) => setPhoneField(e.target.value)}
-                  />
-                </div>
-                <div className="divider"></div>
-                <div className="info-text">
-                  <p className="font-title">관리자 번호</p>
-                  <TextField
-                    variant="standard"
-                    size="small"
-                    defaultValue={adminId}
-                    fullWidth
-                    disabled
-                  />
-                </div>
-                <div className="divider"></div>
-              </div>
-              <div className="set-to-center set-to-bottom">
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ margin: "0 1vw 0 1vw" }}
-                  onClick={handlePasswordUpdate}
-                >
-                  비밀번호 수정
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={handleMemberUpdate}
-                  size="small"
-                  sx={{ margin: "0 1vw 0 1vw" }}
-                >
-                  변경내용 저장
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  size="small"
-                  onClick={handleMemberWithdrawal}
-                  sx={{ margin: "0 1vw 0 1vw" }}
-                >
-                  회원탈퇴
-                </Button>
-              </div>
+                <Close />
+              </IconButton>
             </div>
-          )}
-        </div>
+            <div className="typo-container">
+              <div className="info-text">
+                <p className="font-title">아이디</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={id}
+                  fullWidth
+                  disabled
+                />
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">비밀번호</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  fullWidth
+                  type={showPassword ? "text" : "password"}
+                  value={passwordField}
+                  onChange={handlePasswordChange}
+                  error={error}
+                  helperText={
+                    error
+                      ? "비밀번호는 10자리 이상의 영어와 숫자만 입력해주세요."
+                      : ""
+                  }
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handlePasswordVisibility}>
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">이메일</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  fullWidth
+                  value={emailField}
+                  onChange={handleEmailChange}
+                  error={emailError}
+                  helperText={
+                    emailError ? "유효한 이메일 주소를 입력하세요." : ""
+                  }
+                />
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">전화번호</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  fullWidth
+                  value={phoneField}
+                  onChange={(e) => setPhoneField(e.target.value)}
+                />
+              </div>
+              <div className="divider"></div>
+              <div className="info-text">
+                <p className="font-title">관리자 번호</p>
+                <TextField
+                  variant="standard"
+                  size="small"
+                  defaultValue={adminId}
+                  fullWidth
+                  disabled
+                />
+              </div>
+              <div className="divider"></div>
+            </div>
+            <div className="set-to-center set-to-bottom">
+              <Button
+                variant="outlined"
+                size="small"
+                sx={{ margin: "0 1vw 0 1vw" }}
+                onClick={handlePasswordUpdate}
+              >
+                비밀번호 수정
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={handleMemberUpdate}
+                size="small"
+                sx={{ margin: "0 1vw 0 1vw" }}
+              >
+                변경내용 저장
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                size="small"
+                onClick={handleMemberWithdrawal}
+                sx={{ margin: "0 1vw 0 1vw" }}
+              >
+                회원탈퇴
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
