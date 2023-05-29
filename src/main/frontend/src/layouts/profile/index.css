@@ -85,10 +85,7 @@
 }
 
 .set-top {
-  top: 41%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
+  position: relative;
   width: 100%;
 }
 
@@ -143,7 +140,7 @@
 }
 
 .typo-container {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .set-to-center {
@@ -181,4 +178,8 @@
   font-weight: bold;
   font-size: large;
   width: 120px; /* 시작점을 일정하게 유지하기 위한 너비 설정 */
+}
+
+.set-back {
+  position: absolute;
 }
