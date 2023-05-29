@@ -224,7 +224,7 @@ export const NormalImageGallery = ({ defectLengthChange }) => {
         </div>
       </div>
 
-      <div className="divider top-padding bottom-padding"></div>
+      <div className="main-background-hero top-padding"></div>
     </div>
   );
 };

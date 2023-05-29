@@ -80,24 +80,25 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: -120px;
   color: white;
   font-size: x-large;
 }
 
 .set-top {
-  top: 45%;
+  top: 41%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
   width: 100%;
 }
+
 .set-top h2 {
   margin-top: 4px;
 }
 
 .set-maxheight {
-  max-height: 500px;
+  min-height: 200px;
+  overflow: auto;
 }
 
 .name-id-text {
