@@ -178,11 +178,22 @@ const ProfilePage = () => {
 
   return (
     <div className="set-maxheight">
-      <div>
+      <div className="set-back">
+        <div className="background-hero"></div>
+        <div className="image-container">
+          <img
+            className="background-img disable-select"
+            src={bgImage}
+            alt="Background Image"
+          ></img>
+        </div>
+      </div>
+
+      <div className="set-top">
         <div className="icon-container">
           <IconButton
             aria-label="back"
-            sx={{ color: "white" }}
+            sx={{ color: "white", marginTop: "10px" }}
             onClick={handleClick}
           >
             <ArrowBackIcon />
@@ -206,19 +217,7 @@ const ProfilePage = () => {
             로그아웃
           </Button>
         </div>
-      </div>
-      <div>
-        <div className="background-hero"></div>
-        <div className="image-container">
-          <img
-            className="background-img disable-select"
-            src={bgImage}
-            alt="Background Image"
-          ></img>
-        </div>
-      </div>
 
-      <div className="set-top">
         <div className="title-container">
           <div className="name-id-text">
             <h1>{name}님</h1>
