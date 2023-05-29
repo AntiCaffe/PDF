@@ -34,7 +34,7 @@
 
 .scrollableList {
   overflow-y: auto;
-  border: 1px solid #dee2e6;
+  border: 1px solid #cfcfcf;
 }
 
 .normal-img {
@@ -58,7 +58,7 @@
   }
 }
 
-@media (min-width: 81px) {
+@media (min-width: 871px) {
   .normal-img {
     height: 30vw;
     width: auto;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "src/assets/images/logo.png";
 import ImageUpload from "src/components/imgUpload";
@@ -8,15 +8,14 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import { animateScroll as scroll } from "react-scroll";
 import NormalImageGallery from "src/components/normalGallery";
 import DefectImageGallery from "src/components/defectGallery";
-
-function handleLogout() {
-  // 로그아웃 기능 구현
-  // 필요한 로직을 추가해야 합니다.
-}
+import { AuthContext } from "src/contexts/AuthContext";
 
 const Dashboard = () => {
+  const { logout } = useContext(AuthContext);
   const [externalNormalLength, setExternalNormalLength] = useState(0);
   const [externalDefectLength, setExternalDefectLength] = useState(0);
+  const [refresh, setRefresh] = useState(false); // refresh 상태 값 추가
+  const [lastUpdated, setLastUpdated] = useState(new Date()); // 초기값을 현재 시간으로 설정
 
   const handleNormalLengthChange = (length) => {
     setExternalNormalLength(length);
@@ -96,15 +95,27 @@ const Dashboard = () => {
     return <p className={`number ${className}`}>{Math.ceil(count)}</p>;
   };
 
+  function handleLogout() {
+    // context에서 id와 password를 초기화하는 작업 수행
+    logout();
+    // 인증/로그인 페이지로 이동
+    movePage("/authentication/sign-in");
+  }
+
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+    setLastUpdated(new Date()); // 현재 시간으로 업데이트
+  };
+
   return (
     <div className="main-page">
       <div className="menu-bar">
         <div className="menu-set">
           <a className="menu-item" onClick={handleScrollToNormal}>
-            정상항목
+            정상품목
           </a>
           <a className="menu-item" onClick={handleScrollToDefect}>
-            결함항목
+            결함품목
           </a>
         </div>
       </div>
@@ -122,7 +133,7 @@ const Dashboard = () => {
             style={buttonStyle}
             onClick={handleLogout}
           >
-            logout
+            로그아웃
           </Button>
           <Button
             variant="outlined"
@@ -130,7 +141,7 @@ const Dashboard = () => {
             style={buttonStyle}
             onClick={() => movePage("/profile")} //있으면 로그인으로 돌아가도록
           >
-            profile
+            회원정보
           </Button>
         </div>
       </div>
@@ -141,8 +152,8 @@ const Dashboard = () => {
       <div className="container">
         <p className="color-set text-center">
           <span className="last-updated ">
-            마지막 업데이트: 2023. 5. 16 오전 09:40
-            <IconButton>
+            마지막 업데이트: {lastUpdated.toLocaleString()}
+            <IconButton onClick={handleRefresh}>
               <RefreshIcon className="refresh-icon" />
             </IconButton>
           </span>
@@ -177,33 +188,30 @@ const Dashboard = () => {
             <CounterAnimation
               max={externalNormalLength + externalDefectLength}
             />
-            <p className="disable-select fontup">Total</p>
+            <p className="disable-select fontup">전체 수량</p>
           </div>
           <div className="text-box text-center">
             <CounterAnimation className="red" max={externalDefectLength} />
-            <p className="disable-select fontup">Defect</p>
+            <p className="disable-select fontup">결함품 수량</p>
           </div>
           <div className="text-box text-center">
             <CounterAnimation className="green" max={externalNormalLength} />
-            <p className="disable-select fontup">Normal</p>
-          </div>
-        </div>
-      </div>
-      <div className="alert-top">
-        <div className="container">
-          <div className="new-feature">
-            <div class="alert alert-defect disable-select">
-              신규 발견 결함품: +2
-            </div>
+            <p className="disable-select fontup">정상품 수량</p>
           </div>
         </div>
       </div>
       <div ref={normalRef}>
-        <NormalImageGallery normalLengthChange={handleNormalLengthChange} />
+        <NormalImageGallery
+          key={refresh ? "refresh" : "normal"}
+          normalLengthChange={handleNormalLengthChange}
+        />
       </div>
 
       <div ref={defectRef}>
-        <DefectImageGallery defectLengthChange={handleDefectLengthChange} />
+        <DefectImageGallery
+          key={refresh ? "refresh" : "defect"}
+          defectLengthChange={handleDefectLengthChange}
+        />
       </div>
     </div>
   );
