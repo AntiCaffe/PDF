@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.capstone.controller.dto.CommentDto;
 import project.capstone.controller.dto.ProfileDto;
 import project.capstone.controller.vo.UpdateMemberVo;
+import project.capstone.entity.Admin;
 import project.capstone.entity.Comment;
 import project.capstone.entity.Member;
 import project.capstone.repository.MemberRepository;
@@ -91,6 +92,8 @@ public class ProfileService {
 
     public void deleteMember(String nickname) {
         Member member = memberRepository.findByNickname(nickname).get(0);
+        Admin admin = member.getAdmin();
+        admin.setUnsigned();
         memberRepository.delete(member);
     }
 }
