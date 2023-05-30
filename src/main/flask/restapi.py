@@ -28,8 +28,20 @@ def predict():
         image_file = request.files["image"]
         image_bytes = image_file.read()
         img = Image.open(io.BytesIO(image_bytes))
-        results = model(img, size=640) # reduce size=320 for faster inference
-        return results.pandas().xyxy[0].to_json(orient="records")
+
+        xwidth, yheight = img.size
+
+        # image reshape to 512x512
+        img = img.resize((512, 512), Image.LANCZOS)
+
+        results = model(img, size=640)  # reduce size=320 for faster inference
+        pan = results.pandas().xyxy[0]
+        pan.loc[:, ['xmin', 'ymin', 'xmax', 'ymax']] /= 512
+
+        pan.loc[:, ['xmin', 'xmax']] *= xwidth
+        pan.loc[:, ['ymin', 'ymax']] *= yheight
+
+        return pan.to_json(orient="records")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flask api exposing yolov5 model")
