@@ -41,6 +41,8 @@ def predict():
         pan.loc[:, ['xmin', 'xmax']] *= xwidth
         pan.loc[:, ['ymin', 'ymax']] *= yheight
 
+        pan = pan.replace("Nomral Support2","Normal Support2")
+
         return pan.to_json(orient="records")
 
 if __name__ == "__main__":
