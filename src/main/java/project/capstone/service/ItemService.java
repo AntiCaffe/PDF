@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import project.capstone.controller.dto.BoxDto;
 import project.capstone.controller.dto.DashboardDto;
+import project.capstone.controller.dto.ItemListDto;
 import project.capstone.controller.dto.NewItemDto;
 import project.capstone.entity.Box;
 import project.capstone.entity.Item;
@@ -159,6 +160,17 @@ public class ItemService {
         return result;
     }
 
+    public List<ItemListDto> itemListV3() {
+        List<Item> items = itemRepository.findAll();
+        List<ItemListDto> result = new ArrayList<>();
+        for (Item item : items) {
+            result.add(ItemListDto.builder()
+                    .name(item.getName())
+                    .defective(item.getDefective())
+                    .build());
+        }
+        return result;
+    }
     public DashboardDto findOneItem(String name) {
         Item item = itemRepository.findByName(name);
 

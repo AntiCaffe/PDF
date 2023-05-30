@@ -10,10 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import project.capstone.controller.dto.BoxDto;
-import project.capstone.controller.dto.DashboardDto;
-import project.capstone.controller.dto.NewItemDto;
-import project.capstone.controller.dto.ProfileDto;
+import project.capstone.controller.dto.*;
 import project.capstone.repository.ItemRepository;
 import project.capstone.service.ItemService;
 import project.capstone.service.ProfileService;
@@ -35,14 +32,19 @@ public class DashBoardController {
         return "redirect:/";
     }
 
-    @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러",
-            response = DashboardDto.class)
+//    @ApiOperation(value = "대시보드 아이템 리스트 컨트롤러",
+//            response = DashboardDto.class)
+//    @ResponseBody
+//    @GetMapping("/items")
+//    public List<DashboardDto> responseItemList() {
+//        return itemService.itemListV2();
+//    }
+
     @ResponseBody
     @GetMapping("/items")
-    public List<DashboardDto> responseItemList() {
-        return itemService.itemListV2();
+    public List<ItemListDto> responseItemList() {
+        return itemService.itemListV3();
     }
-
     @ApiOperation(value = "아이템 하나 컨트롤러",
             response = DashboardDto.class)
     @ResponseBody
