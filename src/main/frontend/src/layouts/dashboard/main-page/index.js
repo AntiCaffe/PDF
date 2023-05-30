@@ -43,14 +43,14 @@ const Dashboard = () => {
 
   //const offset = window.innerHeight / 2; // 중간에 보이도록 스크롤
   const handleScrollToNormal = () => {
-    scroll.scrollTo(normalRef.current.offsetTop - 50, {
+    scroll.scrollTo(normalRef.current.offsetTop + 50, {
       duration: 500,
       smooth: true,
     });
   };
 
   const handleScrollToDefect = () => {
-    scroll.scrollTo(defectRef.current.offsetTop - 50, {
+    scroll.scrollTo(defectRef.current.offsetTop + 50, {
       duration: 500,
       smooth: true,
     });
