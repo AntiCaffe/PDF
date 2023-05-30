@@ -15,12 +15,15 @@ import project.capstone.entity.Box;
 import project.capstone.entity.Item;
 import project.capstone.repository.BoxRepository;
 import project.capstone.repository.ItemRepository;
+import project.capstone.repository.ItemRepositoryCustom;
+import project.capstone.repository.querydsl.ItemWithBoxDto;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class ItemService {
@@ -28,6 +31,7 @@ public class ItemService {
     private final S3UploaderService s3UploaderService;
     private final ItemRepository itemRepository;
     private final BoxRepository boxRepository;
+    private final ItemRepositoryCustom itemRepositoryCustom;
 
     @Transactional
     public Long saveItem(String data, MultipartFile file) throws IOException, ParseException {
@@ -114,6 +118,43 @@ public class ItemService {
                         .build());
             }
             result.add(dto);
+        }
+        return result;
+    }
+
+    public List<DashboardDto> itemListV2() {
+        List<DashboardDto> result = new ArrayList<>();
+        List<Long> itemId = new ArrayList<>();
+        List<Item> items = itemRepository.findAll();
+        for (Item item : items) {
+            itemId.add(item.getId());
+        }
+
+        for (Long id : itemId) {
+            List<ItemWithBoxDto> dtos = itemRepositoryCustom.findByItemId(id);
+            Item item = itemRepository.findById(id).get();
+            DashboardDto dashboardDto = DashboardDto.builder()
+                    .name(item.getName())
+                    .identifier(item.getIdentifier())
+                    .imSize(item.getImSize())
+                    .imDate(item.getImDate())
+                    .resolution(item.getResolution())
+                    .depth(item.getDepth())
+                    .imageUrl(item.getImageUrl())
+                    .defective(item.getDefective())
+                    .build();
+            for (ItemWithBoxDto dto : dtos) {
+                dashboardDto.addBox(BoxDto.builder()
+                        .xmin(dto.getXmin())
+                        .ymin(dto.getYmin())
+                        .xmax(dto.getXmax())
+                        .ymax(dto.getYmax())
+                        .confidence(dto.getConfidence())
+                        .typeClass(dto.getTypeClass())
+                        .typeName(dto.getTypeName())
+                        .build());
+            }
+            result.add(dashboardDto);
         }
         return result;
     }

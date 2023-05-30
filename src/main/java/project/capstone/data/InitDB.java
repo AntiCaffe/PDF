@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.capstone.controller.dto.NewItemDto;
+import project.capstone.controller.dto.SignUpRequestDto;
 import project.capstone.entity.Admin;
 import project.capstone.entity.Box;
 import project.capstone.entity.Item;
@@ -18,6 +19,7 @@ import project.capstone.repository.AdminRepository;
 import project.capstone.repository.BoxRepository;
 import project.capstone.repository.ItemRepository;
 import project.capstone.service.ItemService;
+import project.capstone.service.MemberService;
 import project.capstone.service.S3UploaderService;
 
 import javax.annotation.PostConstruct;
@@ -43,6 +45,7 @@ public class InitDB {
     @Transactional
     public void init() throws IOException, ParseException {
         initAdmin.create10AdminId();
+        initAdmin.createTempMember();
         initItem.saveImages();
         initItem.saveBoxes();
     }
@@ -51,6 +54,7 @@ public class InitDB {
     @RequiredArgsConstructor
     static class initAdmin {
         private final AdminRepository adminRepository;
+        private final MemberService memberService;
 
         public void create10AdminId() {
             for (int i = 1; i < 10; i++) {
@@ -72,6 +76,11 @@ public class InitDB {
                     .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                     .toString();
             return generatedString;
+        }
+
+        public void createTempMember() {
+            SignUpRequestDto dto = new SignUpRequestDto("test", "nickname", "1234", "test", "test", "test_admin1");
+            memberService.signUp(dto);
         }
     }
 

@@ -40,7 +40,7 @@ public class DashBoardController {
     @ResponseBody
     @GetMapping("/items")
     public List<DashboardDto> responseItemList() {
-        return itemService.itemList();
+        return itemService.itemListV2();
     }
 
     @ApiOperation(value = "아이템 하나 컨트롤러",
@@ -52,7 +52,7 @@ public class DashBoardController {
     }
 
 
-    @ApiOperation(value = "아이템 저장 컨트롤러 (수정 필요)")
+    @ApiOperation(value = "아이템 저장 컨트롤러")
     @ResponseBody
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Long saveItem(@RequestParam(value = "image") MultipartFile image, @RequestParam(value = "data") String data) throws IOException, ParseException {
