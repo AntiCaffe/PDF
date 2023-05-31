@@ -34,8 +34,6 @@ public class Member extends BaseEntity{
     private String phone;
     private String email;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
 
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "ad_id")
