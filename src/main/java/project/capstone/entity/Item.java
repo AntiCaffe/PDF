@@ -36,8 +36,7 @@ public class Item extends BaseEntity{
     private Boolean defective;
 
 
-    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    private Comment comment;
+
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<Box> boxes = new ArrayList<>();

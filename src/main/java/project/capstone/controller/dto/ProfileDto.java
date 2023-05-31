@@ -17,10 +17,9 @@ public class ProfileDto {
     private String phone;
     private String email;
     private String adminId;
-    private List<CommentDto> comments;
 
     @Builder
-    public ProfileDto(String memberId, String name, String nickname, String pw, String phone, String email, String adminId, List<CommentDto> comments) {
+    public ProfileDto(String memberId, String name, String nickname, String pw, String phone, String email, String adminId) {
         this.memberId = memberId;
         this.name = name;
         this.nickname = nickname;
@@ -28,6 +27,5 @@ public class ProfileDto {
         this.phone = phone;
         this.email = email;
         this.adminId = adminId;
-        this.comments = comments;
     }
 }

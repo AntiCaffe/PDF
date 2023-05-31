@@ -7,7 +7,6 @@ import project.capstone.controller.dto.CommentDto;
 import project.capstone.controller.dto.ProfileDto;
 import project.capstone.controller.vo.UpdateMemberVo;
 import project.capstone.entity.Admin;
-import project.capstone.entity.Comment;
 import project.capstone.entity.Member;
 import project.capstone.repository.MemberRepository;
 
@@ -23,14 +22,6 @@ public class ProfileService {
 
     public ProfileDto searchProfile(String nickname) {
         Member member = memberRepository.findByNickname(nickname).get(0);
-        List<Comment> comments = member.getComments();
-        List<CommentDto> commentDtos = new ArrayList<>();
-        for (Comment comment : comments) {
-            commentDtos.add(CommentDto.builder()
-                    .content(comment.getContent())
-                    .itemId(comment.getItem().getId())
-                    .build());
-        }
         return ProfileDto.builder()
                 .memberId(member.getId().toString())
                 .name(member.getName())
@@ -39,7 +30,6 @@ public class ProfileService {
                 .phone(member.getPhone())
                 .email(member.getEmail())
                 .adminId(member.getAdmin().getAdminId())
-                .comments(commentDtos)
                 .build();
     }
 
@@ -47,14 +37,6 @@ public class ProfileService {
         List<Member> byNickname = memberRepository.findByNickname(nickname);
         Member member = byNickname.get(0);
         member.changePW(pw);
-        List<Comment> comments = member.getComments();
-        List<CommentDto> commentDtos = new ArrayList<>();
-        for (Comment comment : comments) {
-            commentDtos.add(CommentDto.builder()
-                    .content(comment.getContent())
-                    .itemId(comment.getItem().getId())
-                    .build());
-        }
         return ProfileDto.builder()
                 .memberId(member.getId().toString())
                 .name(member.getName())
@@ -63,21 +45,12 @@ public class ProfileService {
                 .phone(member.getPhone())
                 .email(member.getEmail())
                 .adminId(member.getAdmin().getAdminId())
-                .comments(commentDtos)
                 .build();
     }
 
     public ProfileDto updateMember(UpdateMemberVo vo) {
         Member member = memberRepository.findByNickname(vo.getNickname()).get(0);
         member.changeInfo(vo.getEmail(), vo.getPhone());
-        List<Comment> comments = member.getComments();
-        List<CommentDto> commentDtos = new ArrayList<>();
-        for (Comment comment : comments) {
-            commentDtos.add(CommentDto.builder()
-                    .content(comment.getContent())
-                    .itemId(comment.getItem().getId())
-                    .build());
-        }
         return ProfileDto.builder()
                 .memberId(member.getId().toString())
                 .name(member.getName())
@@ -86,7 +59,6 @@ public class ProfileService {
                 .phone(member.getPhone())
                 .email(member.getEmail())
                 .adminId(member.getAdmin().getAdminId())
-                .comments(commentDtos)
                 .build();
     }
 
