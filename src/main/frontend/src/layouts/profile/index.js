@@ -130,7 +130,7 @@ const ProfilePage = () => {
   const handleMemberWithdrawal = async () => {
     if (password === passwordField) {
       try {
-        const response = await axios.get(`/delete/${id}`);
+        const response = await axios.get(`/profile/delete/${id}`);
         alert(
           "탈퇴가 완료되었습니다. 확인을 누르시면 로그인 페이지로 돌아갑니다."
         );
