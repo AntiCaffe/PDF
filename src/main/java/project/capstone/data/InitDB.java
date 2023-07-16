@@ -46,8 +46,8 @@ public class InitDB {
     public void init() throws IOException, ParseException {
         initAdmin.create10AdminId();
         initAdmin.createTempMember();
-        initItem.saveImages();
-        initItem.saveBoxes();
+//        initItem.saveImages();
+//        initItem.saveBoxes();
     }
 
     @Component
